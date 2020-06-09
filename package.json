@@ -31,8 +31,10 @@
 	},
 	"dependencies": {
 		"axios": "^0.19.2",
+		"babel-jest": "^26.0.1",
 		"express": "^4.17.1",
 		"if-env": "^1.0.4",
+		"jest": "^26.0.1",
 		"mongoose": "^5.9.18"
 	}
 }
