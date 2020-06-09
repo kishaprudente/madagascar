@@ -11,7 +11,10 @@
 		"seed": "node scripts/seedDB.js",
 		"install": "cd client && npm install",
 		"build": "cd client && npm run build",
-		"heroku-postbuild": "npm run build"
+		"heroku-postbuild": "npm run build",
+		"lint": "eslint **/*.js --quiet",
+		"fix": "eslint --fix .",
+		"test": "npm run lint"
 	},
 	"repository": {
 		"type": "git",
@@ -27,7 +30,11 @@
 	"devDependencies": {
 		"concurrently": "^5.2.0",
 		"create-react-app": "^3.4.1",
-		"nodemon": "^2.0.4"
+		"nodemon": "^2.0.4",
+		"eslint": "^4.19.1",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-prettier": "^2.6.2",
+		"prettier": "^1.13.7"
 	},
 	"dependencies": {
 		"axios": "^0.19.2",
