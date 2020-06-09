@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "jest": {
+    "testURL": "http://localhost:3001",
+    "modulePathIgnorePatterns": [
+      "client"
+    ]
+  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -12,9 +18,10 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "lint": "eslint **/*.js --quiet",
+    "lint": "eslint --quiet",
     "fix": "eslint --fix .",
-    "test": "npm run lint"
+    "test": "jest --watchAll=false && npm run lint",
+    "test-dev": "concurrently \"nodemon server.js\" \"jest --watchAll\""
   },
   "repository": {
     "type": "git",
@@ -30,16 +37,18 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "create-react-app": "^3.4.1",
-    "nodemon": "^2.0.4"
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "nodemon": "^2.0.4",
+    "prettier": "^1.13.7"
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-jest": "^24.9.0",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
-    "mongoose": "^5.9.18",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.2",
-    "prettier": "^1.13.7"
+    "jest": "^24.9.0",
+    "mongoose": "^5.9.18"
   }
 }
