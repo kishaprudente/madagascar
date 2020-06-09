@@ -18,7 +18,7 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "lint": "eslint **/*.js --quiet",
+    "lint": "eslint --quiet",
     "fix": "eslint --fix .",
     "test": "jest --watchAll=false && npm run lint",
     "test-dev": "concurrently \"nodemon server.js\" \"jest --watchAll\""
