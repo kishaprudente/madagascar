@@ -19,5 +19,9 @@
   "homepage": "https://github.com/kishaprudente/madagascar#readme",
   "devDependencies": {
     "create-react-app": "^3.4.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
   }
 }
