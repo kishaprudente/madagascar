@@ -2,9 +2,11 @@ const db = require('../models');
 
 // Defining methods for the postsController
 module.exports = {
+  //All post will show up and if there is a reply then it should show as well
   findAll: function(req, res) {
     db.Post
       .find(req.query)
+      .populate('reply')
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
