@@ -1,16 +1,14 @@
 language: node_js
 node_js: '12'
 branches:
-   only:
-      - master
+  only:
+    - master
 cache:
-   directories:
-      - node_modules
+  directories:
+    - node_modules
 services:
-   - mysql
-before_install:
-   - mysql -e 'CREATE DATABASE testdb;'
+  - mongodb
 script:
-   - npm start &
-   - npm test
-   - cd client && npm install && npm run test
+  - npm start &
+  - npm test
+  - cd client && npm install && npm run test
