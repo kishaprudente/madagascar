@@ -25,7 +25,9 @@
 	},
 	"homepage": "https://github.com/kishaprudente/madagascar#readme",
 	"devDependencies": {
-		"create-react-app": "^3.4.1"
+		"concurrently": "^5.2.0",
+		"create-react-app": "^3.4.1",
+		"nodemon": "^2.0.4"
 	},
 	"dependencies": {
 		"axios": "^0.19.2",
