@@ -13,6 +13,7 @@
 		"build": "cd client && npm run build",
 		"heroku-postbuild": "npm run build",
 		"lint": "eslint **/*.js --quiet",
+		"fix": "eslint --fix .",
 		"test": "npm run lint"
 	},
 	"repository": {
@@ -36,6 +37,9 @@
 		"express": "^4.17.1",
 		"if-env": "^1.0.4",
 		"mongoose": "^5.9.18",
-		"eslint": "^4.19.1"
+		"eslint": "^4.19.1",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-prettier": "^2.6.2", 
+		"prettier": "^1.13.7"
 	}
 }
