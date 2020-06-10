@@ -9,7 +9,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   sendButton: {
     background: 'rgba(255, 216, 99, 0.87)',
-    margin: "5px",
-    float: "right",
+    margin: '5px',
+    float: 'right',
   }
 }));
 
@@ -56,7 +56,7 @@ const PostCard = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [reply, setReply] = useState("");
+  const [reply, setReply] = useState('');
 
   const handleInputChange = (event) => {
     setReply(event.target.value);
@@ -81,7 +81,7 @@ const PostCard = () => {
     // close all
     setAlertOpen(false);
     setOpen(false);
-    setReply("");
+    setReply('');
   };
 
   return (
@@ -94,8 +94,8 @@ const PostCard = () => {
         <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
       </Container>
       <Modal
-        aria-labelledby="reply-modal-title"
-        aria-describedby="reply-modal-description"
+        aria-labelledby='reply-modal-title'
+        aria-describedby='reply-modal-description'
         className={classes.modal}
         open={open}
         onClose={handleClose}
@@ -108,10 +108,10 @@ const PostCard = () => {
         <Fade in={open}>
           <div className={classes.paper}>
             <TextField
-              id="reply-text"
+              id='reply-text'
               multiline
               rows={10}
-              variant="outlined"
+              variant='outlined'
               value={reply}
               onChange={handleInputChange}
               style={{ width: '100%' }}
@@ -121,7 +121,7 @@ const PostCard = () => {
         </Fade>
       </Modal>
       <Snackbar open={alertOpen} autoHideDuration={1000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="success">
+        <Alert onClose={handleCloseAlert} severity='success'>
           Sent~
         </Alert>
       </Snackbar>
