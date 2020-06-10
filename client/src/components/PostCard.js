@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Box, Button, TextField } from '@material-ui/core';
 import LayeredPages from '../assets/LayeredPages.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -51,7 +57,8 @@ const styles = {
 
 const PostCard = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,6 +67,19 @@ const PostCard = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleClickAlert = () => {
+    setAlertOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    // close all
+    setAlertOpen(false);
+  };
+
   return (
     <div>
       <Container style={styles.container}>
@@ -70,8 +90,8 @@ const PostCard = () => {
         <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
       </Container>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="reply-modal-title"
+        aria-describedby="reply-modal-description"
         className={classes.modal}
         open={open}
         onClose={handleClose}
@@ -84,16 +104,21 @@ const PostCard = () => {
         <Fade in={open}>
           <div className={classes.paper}>
             <TextField
-              id="outlined-multiline-static"
+              id="reply-text"
               multiline
               rows={10}
               variant="outlined"
               style={{ width: '100%' }}
             />
-            <Button variant='contained' className={classes.sendButton}>Send</Button>
+            <Button onClick={handleClickAlert} variant='contained' className={classes.sendButton}>Send</Button>
           </div>
         </Fade>
       </Modal>
+      <Snackbar open={alertOpen} autoHideDuration={1000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success">
+          Sent~
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
