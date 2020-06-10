@@ -1,36 +1,50 @@
 import React from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import chirpy from './chirpy.svg';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-  },
-}));
-
 export default function Login() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <Grid container style={container}>
-        <Grid item xs={3}>
-          Username
-        </Grid>
-        <Grid item xs={3}>
-          Password
-        </Grid>
+    <Grid
+      container
+      style={container}
+      justify='space-evenly'
+      alignItems='center'
+      direction='column'
+    >
+      <Grid item />
+      <Grid item>
+        <img src={chirpy} alt='chirpy the bird' />
+      </Grid>
+
+      <Grid item style={{ width: '180px' }}>
+        <TextField
+          style={{ marginBottom: '10px' }}
+          label='Username'
+          id='outlined-size-normal'
+          defaultValue='Username'
+          variant='outlined'
+        ></TextField>
+        <TextField
+          style={{ marginBottom: '10px' }}
+          label='Password'
+          id='outlined-size-normal'
+          defaultValue='Password'
+          variant='outlined'
+        ></TextField>
+      </Grid>
+
+      <Grid item>
         <Button style={buttonStyle} variant='contained' color='primary'>
           Login
         </Button>
+      </Grid>
+
+      <Grid item>
         <a href='#'>No account? Sign up!</a>
       </Grid>
-    </div>
+      <Grid item></Grid>
+    </Grid>
   );
 }
 
@@ -38,15 +52,16 @@ const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
   height: '100vh',
-  //position: 'absolute',
-  display: 'flex',
-  justify: 'center',
-  direction: 'column',
-  alignItems: 'center',
-  bottom: 0,
-  top: 0,
-  right: 0,
-  left: 0,
+  flexGrow: '1',
+};
+
+const chirpyStyle = {
+  top: '185px',
+  textAlign: 'center',
+  left: '40%',
+  right: '40%',
+  width: '4em',
+  height: '4em',
 };
 
 const buttonStyle = {
