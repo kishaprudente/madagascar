@@ -7,6 +7,7 @@ const ReplySchema = new Schema ({
     {
       type: Schema.Types.ObjectId,
       ref: 'Post'
+      //ID could come from submit button or from post
     }
 });
 
