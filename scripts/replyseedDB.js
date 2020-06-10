@@ -9,11 +9,11 @@ mongoose.connect(
 const replySeed = [
   {
     response: 'You will be ok',
-    // post:'5ee02bed1637d441934b26c4'
+    post:'5ee02bed1637d441934b26c4'
   },
   {
     response: 'You will be ok',
-    // post:'5ee02bed1637d441934b26c5'
+    post:'5ee02bed1637d441934b26c5'
   },
 ];
 

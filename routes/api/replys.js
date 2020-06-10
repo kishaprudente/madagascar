@@ -4,7 +4,7 @@ const replysController = require('../../controllers/replysController');
 // Matches with "/api/posts"
 // api/routes/id
 // api/post/id/replys
-router.route('/post/:id')
+router.route('/')
   .get(replysController.findAll)
   .post(replysController.create);
 
