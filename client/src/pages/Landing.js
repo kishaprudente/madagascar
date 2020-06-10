@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Box } from '@material-ui/core';
+import { Container, Button, Box } from '@material-ui/core';
 //import { flexbox } from '@material-ui/system';
 import chirpy from './chirpy.svg';
 
@@ -12,6 +12,9 @@ export default function Landing() {
         <h2 style={logoStyle}>chirrup!</h2>
         <img style={chirpyStyle} src={chirpy} alt='chirpy the bird' />
         <Box style={quoteStyle}>{quote}</Box>
+        <Button style={buttonStyle} variant='contained' color='primary'>
+          Let's chirp!
+        </Button>
       </Box>
     </Container>
   );
@@ -65,4 +68,16 @@ const quoteStyle = {
   fontFamily: 'Reenie Beanie',
   fontSize: '2em',
   lineHeight: '141%',
+};
+
+const buttonStyle = {
+  top: '200px',
+  color: 'black',
+  fontSize: 16,
+  padding: '6px 12px',
+  border: '1px solid',
+  lineHeight: 1.5,
+  backgroundColor: 'rgba(255, 216, 99, 0.87)',
+  fontFamily: 'Reenie Beanie',
+  margin: '7em',
 };

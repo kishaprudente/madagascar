@@ -1,10 +1,12 @@
 import React from 'react';
-import Landing from './pages/Landing';
+//import Landing from './pages/Landing';
+import Login from './pages/Login';
 
 function App() {
   return (
     <div data-testid='app'>
-      <Landing />
+      {/* <Landing /> */}
+      <Login />
     </div>
   );
 }
