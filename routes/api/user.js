@@ -28,7 +28,7 @@ module.exports = () => {
   // otherwise send back an error
   router.post('/signup', async (req, res) => {
     try {
-      const newUser = await db.User.create({
+      await db.User.create({
         username: req.body.username,
         password: req.body.password,
       });
