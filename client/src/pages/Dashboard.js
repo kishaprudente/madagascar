@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   Button,
@@ -11,7 +11,14 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import chirpy from '../assets/chirpy.svg';
 
-export default function Dashboard() {
+const Dashboard = () => {
+  const [feelsToSend, setFeelsToSend] = useState('');
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setFeelsToSend(value);
+  };
+
   return (
     <Grid
       container
@@ -36,6 +43,7 @@ export default function Dashboard() {
           multiline
           rows={4}
           variant='outlined'
+          onChange={handleInputChange}
         ></TextField>
       </Grid>
 
@@ -64,7 +72,9 @@ export default function Dashboard() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Dashboard;
 
 const container = {
   backgroundColor: '#A1D1B6',
