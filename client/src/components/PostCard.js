@@ -1,6 +1,30 @@
 import React from 'react';
-import { Container, Box, Button } from '@material-ui/core';
+import { Container, Box, Button, TextField } from '@material-ui/core';
 import LayeredPages from '../assets/LayeredPages.svg';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: '#F2F2F2',
+    // border: '2px solid #000',
+    // boxShadow: theme.shadows[5],
+    // padding: theme.spacing(2, 4, 3),
+    borderRadius: '10px',
+  },
+  sendButton: {
+    background: 'rgba(255, 216, 99, 0.87)',
+    margin: "5px",
+    float: "right",
+  }
+}));
 
 const styles = {
   svg: {
@@ -14,7 +38,7 @@ const styles = {
     maxHeight: '100px',
     left: '50px',
     bottom: '190px',
-    zIndex: '3000'
+    zIndex: '1200'
   },
   replyButton: {
     background: 'rgba(255, 216, 99, 0.87)',
@@ -26,14 +50,51 @@ const styles = {
 }
 
 const PostCard = () => {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
-    <Container style={styles.container}>
-      <Box component='img' src={LayeredPages} alt='background' style={styles.svg}/>
-      <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+    <div>
+      <Container style={styles.container}>
+        <Box component='img' src={LayeredPages} alt='background' style={styles.svg} />
+        <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
       </Box>
-      <Button variant='contained' style={styles.replyButton}>reply</Button>
-    </Container>
+        <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
+      </Container>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <TextField
+              id="outlined-multiline-static"
+              multiline
+              rows={10}
+              variant="outlined"
+              style={{ width: '100%' }}
+            />
+            <Button variant='contained' className={classes.sendButton}>Send</Button>
+          </div>
+        </Fade>
+      </Modal>
+    </div>
   );
 }
 

@@ -20,12 +20,12 @@ const styles = {
 const Reply = () => {
   return (
     <Grid container style={styles.container}>
-      <Grid item sm={4}/>
+      <Grid item sm={4} />
       <Grid item sm={4}>
         <PostCard />
         <Button variant='contained' style={styles.nextButton}>next</Button>
       </Grid>
-      <Grid item sm={4}/>
+      <Grid item sm={4} />
     </Grid>
   );
 }
