@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Grid,
+  Box,
   Button,
   TextField,
   ExpansionPanel,
@@ -36,12 +37,16 @@ const Dashboard = () => {
         </h3>
       </Grid>
 
-      <Grid item style={{ width: '180px' }}>
+      <Grid item>
         <TextField
-          style={{ marginBottom: '10px', backgroundColor: 'white' }}
+          style={{
+            marginBottom: '10px',
+            backgroundColor: 'white',
+            width: '300px',
+          }}
           id='outlined-multiline-static'
           multiline
-          rows={4}
+          rows={6}
           variant='outlined'
           onChange={handleInputChange}
         ></TextField>
@@ -56,19 +61,64 @@ const Dashboard = () => {
         </Button>
       </Grid>
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls='panel1a-content'
-            id='panel1a-header'
-          >
-            Date Time Hello
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+        <Box component='div' style={{ height: '380px' }} overflow='auto'>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls='panel1a-content'
+              id='panel1a-header'
+            >
+              Date Time Hello
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls='panel1a-content'
+              id='panel1a-header'
+            >
+              Date Time Hello
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls='panel1a-content'
+              id='panel1a-header'
+            >
+              Date Time Hello
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls='panel1a-content'
+              id='panel1a-header'
+            >
+              Date Time Hello
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        </Box>
       </Grid>
     </Grid>
   );
