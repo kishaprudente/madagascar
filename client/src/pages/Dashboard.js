@@ -12,6 +12,8 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import chirpy from '../assets/chirpy.svg';
 
+import BottomNav from '../components/BottomNav';
+
 const Dashboard = () => {
   const [feelsToSend, setFeelsToSend] = useState('');
 
@@ -24,16 +26,17 @@ const Dashboard = () => {
     <Grid
       container
       style={container}
-      justify='center'
-      alignItems='center'
-      direction='column'
+      justify="center"
+      alignItems="center"
+      direction="column"
+      position="fixed"
     >
       <Grid item />
 
       <Grid item>
         <h3>
           How are you feeling today?
-          <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
+          <img src={chirpy} alt="chirpy the bird" style={chirpyStyle} />
         </h3>
       </Grid>
 
@@ -44,29 +47,29 @@ const Dashboard = () => {
             backgroundColor: 'white',
             width: '300px',
           }}
-          id='outlined-multiline-static'
+          id="outlined-multiline-static"
           multiline
           rows={6}
-          variant='outlined'
+          variant="outlined"
           onChange={handleInputChange}
         ></TextField>
       </Grid>
 
       <Grid item style={{ marginBottom: '30px' }}>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+        <Button style={buttonStyle} variant="contained" color="primary">
           Keep
         </Button>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+        <Button style={buttonStyle} variant="contained" color="primary">
           Send
         </Button>
       </Grid>
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
-        <Box component='div' style={{ height: '380px' }} overflow='auto'>
+        <Box component="div" style={{ height: '380px' }} overflow="auto">
           <ExpansionPanel>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
               Date Time Hello
             </ExpansionPanelSummary>
@@ -79,8 +82,8 @@ const Dashboard = () => {
           <ExpansionPanel>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
               Date Time Hello
             </ExpansionPanelSummary>
@@ -93,8 +96,8 @@ const Dashboard = () => {
           <ExpansionPanel>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
               Date Time Hello
             </ExpansionPanelSummary>
@@ -107,8 +110,8 @@ const Dashboard = () => {
           <ExpansionPanel>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
               Date Time Hello
             </ExpansionPanelSummary>
@@ -120,6 +123,7 @@ const Dashboard = () => {
           </ExpansionPanel>
         </Box>
       </Grid>
+      <BottomNav style={bottomNav} />
     </Grid>
   );
 };
@@ -152,4 +156,10 @@ const buttonStyle = {
   backgroundColor: 'rgba(255, 216, 99, 0.87)',
   fontFamily: 'Reenie Beanie',
   marginLeft: '10px',
+};
+
+const bottomNav = {
+  width: '100%',
+  position: 'fixed',
+  bottom: 0,
 };
