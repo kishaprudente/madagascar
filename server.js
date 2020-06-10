@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 // Add routes, both API and view
 app.use(routes);
 
+
 app.get('*', (req, res) => {
   res.status(404).send('File not found');
 });
