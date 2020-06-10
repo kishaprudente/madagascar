@@ -59,6 +59,11 @@ const PostCard = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [reply, setReply] = useState("");
+
+  const handleInputChange = (event) => {
+    setReply(event.target.value);
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -78,6 +83,8 @@ const PostCard = () => {
     }
     // close all
     setAlertOpen(false);
+    setOpen(false);
+    setReply("");
   };
 
   return (
@@ -108,6 +115,8 @@ const PostCard = () => {
               multiline
               rows={10}
               variant="outlined"
+              value={reply}
+              onChange={handleInputChange}
               style={{ width: '100%' }}
             />
             <Button onClick={handleClickAlert} variant='contained' className={classes.sendButton}>Send</Button>
