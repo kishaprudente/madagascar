@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Button, Box } from '@material-ui/core';
 //import { flexbox } from '@material-ui/system';
-import chirpy from './chirpy.svg';
+import chirpy from '../assets/chirpy.svg';
 
 const quote = '"If you can be anything in the world, be kind."';
 
