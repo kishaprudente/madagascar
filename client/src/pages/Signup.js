@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import chirpy from './chirpy.svg';
+import chirpy from '../assets/chirpy.svg';
 
 export default function Signup() {
   return (
