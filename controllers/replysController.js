@@ -6,13 +6,13 @@ module.exports = {
   findAll: function(req, res) {
     db.Reply
       .find()
-      // .populate('post')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
     db.Reply
       .findById(req.params.id)
+      .populate('post')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

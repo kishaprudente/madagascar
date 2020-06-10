@@ -49,7 +49,7 @@ const postSeed = [
     date: new Date(Date.now()),
     sent: true,
     reply: {
-      response: 'You are not alone.'
+      response: ['You are not alone.']
     }
   },
   {
@@ -58,7 +58,7 @@ const postSeed = [
     date: new Date(Date.now()),
     sent: true,
     reply: {
-      response: 'There are thousands of people who would love to help you.'
+      response: ['There are thousands of people who would love to help you.']
     }
   },
 ];
