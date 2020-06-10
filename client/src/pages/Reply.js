@@ -13,7 +13,8 @@ const styles = {
     postion: 'relative',
     display: 'block',
     margin: '0 auto',
-    bottom: '100px'
+    bottom: '100px',
+    borderRadius: '10px'
   }
 }
 const Reply = () => {

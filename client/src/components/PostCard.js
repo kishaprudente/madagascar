@@ -21,6 +21,7 @@ const styles = {
     position: 'relative',
     left: '250px',
     bottom: '180px',
+    borderRadius: '10px',
   },
 }
 
