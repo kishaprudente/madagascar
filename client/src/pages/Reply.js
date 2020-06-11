@@ -50,7 +50,7 @@ const Reply = () => {
       const { data } = await API.getPost();
       console.log(data);
       const allPosts = data.reverse().filter((post) => {
-        return (post.sent === true && post.replyid); //FIXME: !post.replyid
+        return (post.sent === true && !post.reply); // post.sent === true && !post.reply
       });
       console.log('filtered posts', allPosts);
       setPosts(shuffleArray(allPosts));
