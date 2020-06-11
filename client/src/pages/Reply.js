@@ -38,6 +38,11 @@ const Reply = () => {
     return array;
   }
 
+  const renderRandomPost = () => {
+    const randomIndex = Math.floor(Math.random() * posts.length) || 0;
+    setPost(posts[randomIndex]);
+  }
+
   // gets all posts, filtered to include only
   // ones that are sent & ones without a response
   const filterPosts = async () => {
@@ -53,6 +58,11 @@ const Reply = () => {
     } catch(err) {
       throw err;
     }
+  }
+
+  const handleNextButtonClick = (event) => {
+    event.preventDefault();
+    renderRandomPost();
   }
 
   useEffect(() => {
