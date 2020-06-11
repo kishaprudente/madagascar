@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, TextField } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
+import API from '../utils/API';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -10,9 +11,23 @@ export default function Login() {
   });
 
   const handleInputChange = (event) => {
-    const { value } = event.target;
+    const { name, value } = event.target;
 
-    console.log(value);
+    setUser({ [name]: value });
+  };
+
+  const handleLogin = async () => {
+    try {
+      const login = await API.loginUser({
+        username: user.username,
+        password: user.password,
+      });
+      console.log(login);
+      alert('login successful');
+      // window.location.replace('/dashboard');
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
@@ -50,7 +65,12 @@ export default function Login() {
       </Grid>
 
       <Grid item>
-        <Button style={buttonStyle} variant="contained" color="primary">
+        <Button
+          style={buttonStyle}
+          variant="contained"
+          color="primary"
+          onClick={handleLogin}
+        >
           Login
         </Button>
       </Grid>
