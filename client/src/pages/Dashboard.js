@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Box,
@@ -10,33 +10,49 @@ import {
 } from '@material-ui/core';
 //import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
 
 import BottomNav from '../components/BottomNav';
 
 const Dashboard = () => {
-  const [feelsToSend, setFeelsToSend] = useState('');
+  const [post, setPost] = useState('');
+  const [posts, setPosts] = useState([]);
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setFeelsToSend(value);
+    setPost(value);
   };
+
+  const loadPosts = async () => {
+    try {
+      const allPosts = await API.getPost();
+      setPosts(allPosts.data);
+      console.log(allPosts.data);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    loadPosts();
+  }, [posts]);
 
   return (
     <Grid
       container
       style={container}
-      justify="center"
-      alignItems="center"
-      direction="column"
-      position="fixed"
+      justify='center'
+      alignItems='center'
+      direction='column'
+      position='fixed'
     >
       <Grid item />
 
       <Grid item>
         <h3>
           How are you feeling today?
-          <img src={chirpy} alt="chirpy the bird" style={chirpyStyle} />
+          <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
         </h3>
       </Grid>
 
@@ -47,81 +63,46 @@ const Dashboard = () => {
             backgroundColor: 'white',
             width: '300px',
           }}
-          id="outlined-multiline-static"
+          id='outlined-multiline-static'
           multiline
           rows={6}
-          variant="outlined"
+          variant='outlined'
           onChange={handleInputChange}
         ></TextField>
       </Grid>
 
       <Grid item style={{ marginBottom: '30px' }}>
-        <Button style={buttonStyle} variant="contained" color="primary">
+        <Button style={buttonStyle} variant='contained' color='primary'>
           Keep
         </Button>
-        <Button style={buttonStyle} variant="contained" color="primary">
+        <Button style={buttonStyle} variant='contained' color='primary'>
           Send
         </Button>
       </Grid>
+
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
-        <Box component="div" style={{ height: '380px' }} overflow="auto">
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              Date Time Hello
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              Date Time Hello
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              Date Time Hello
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              Date Time Hello
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        </Box>
+        {posts.length ? (
+          <Box component='div' style={{ height: '380px' }} overflow='auto'>
+            {posts.map((post) => {
+              return (
+                <ExpansionPanel>
+                  <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls='panel1a-content'
+                    id='panel1a-header'
+                    key={post.id}
+                  >
+                    {post.date}
+                    {post.mood}
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>{post.post}</ExpansionPanelDetails>
+                </ExpansionPanel>
+              );
+            })}
+          </Box>
+        ) : (
+          <h3>You don't have any posts yet!</h3>
+        )}
       </Grid>
       <BottomNav />
     </Grid>
@@ -140,10 +121,6 @@ const container = {
 };
 
 const chirpyStyle = {
-  //top: '185px',
-  //textAlign: 'center',
-  //left: '40%',
-  //right: '40%',
   width: '1em',
   height: '1em',
 };
