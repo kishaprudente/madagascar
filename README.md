@@ -1,6 +1,6 @@
-# chirrup!  
+# chirrup! <img src='./client/src/assets/chirpy.svg' alt='Chirpy' width='35' height='30'> 
 
-![Chirpy](./client/src/assets/chirpy.svg) chirrup! provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
+chirrup! provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
 
 ## Build Status
 
