@@ -12,7 +12,11 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
-
+import happy from '../assets/happy.svg';
+import angry from '../assets/angry.svg';
+import anxious from '../assets/anxious.svg';
+import loved from '../assets/loved.svg';
+import sad from '../assets/sad.svg';
 import BottomNav from '../components/BottomNav';
 
 const Dashboard = () => {
@@ -75,6 +79,22 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item>
+        <Button>
+          <img src={happy} />
+        </Button>
+        <Button>
+          <img src={angry} />
+        </Button>
+        <Button>
+          <img src={anxious} />
+        </Button>
+        <Button>
+          <img src={loved} />
+        </Button>
+        <Button>
+          <img src={sad} />
+        </Button>
+        <Grid item />
         <TextField
           style={{
             marginBottom: '10px',
@@ -90,7 +110,7 @@ const Dashboard = () => {
         ></TextField>
       </Grid>
 
-      <Grid item style={{ marginBottom: '30px' }}>
+      <Grid item style={{ marginBottom: '15px' }}>
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
@@ -111,7 +131,7 @@ const Dashboard = () => {
 
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
         {posts.length ? (
-          <Box component='div' style={{ height: '380px' }} overflow='auto'>
+          <Box component='div' style={{ height: '330px' }} overflow='auto'>
             {posts.map((post) => {
               return (
                 <ExpansionPanel key={post._id}>
@@ -132,6 +152,7 @@ const Dashboard = () => {
           <h3>You don't have any posts yet!</h3>
         )}
       </Grid>
+      <Grid item style={{ margin: '5px' }}></Grid>
       <BottomNav />
     </Grid>
   );
@@ -160,7 +181,8 @@ const buttonStyle = {
   lineHeight: 1.5,
   backgroundColor: 'rgba(255, 216, 99, 0.87)',
   fontFamily: 'Reenie Beanie',
-  marginLeft: '10px',
+  marginLeft: '5px',
+  marginRight: '5px',
 };
 
 const bottomNav = {

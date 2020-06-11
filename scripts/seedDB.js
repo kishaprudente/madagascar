@@ -33,20 +33,32 @@ const postSeed = [
     mood: 'Happy',
     post: 'I feel energetic.',
     date: new Date(Date.now()),
+<<<<<<< HEAD
     sent: false,
+=======
+    sent: true
+>>>>>>> master
   },
   {
     mood: 'Strong',
     post: 'I feel confident.',
     date: new Date(Date.now()),
+<<<<<<< HEAD
     sent: false,
+=======
+    sent: true
+>>>>>>> master
   },
   {
     mood: 'Lonely',
     post: 'I feel alone.',
     date: new Date(Date.now()),
     sent: true,
+<<<<<<< HEAD
     reply: '5ee19956e8f55c23a6f7eb2c'
+=======
+    reply: mongoose.Types.ObjectId('5ee27130a90b1edeed22fbd9')
+>>>>>>> master
   }
 ];
 
