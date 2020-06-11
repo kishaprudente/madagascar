@@ -1,14 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Reply from './pages/Reply';
 import Dashboard from './pages/Dashboard';
 // import BottomNav from './components/BottomNav';
-
 
 function App() {
   return (
