@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Reply from './pages/Reply';
 import Dashboard from './pages/Dashboard';
+import Inbox from './pages/Inbox'
 // import BottomNav from './components/BottomNav';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/reply" component={Reply} />
+          <Route exact path="/inbox" component={Inbox} />
         </Switch>
       </Router>
     </div>
