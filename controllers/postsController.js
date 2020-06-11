@@ -5,14 +5,15 @@ module.exports = {
   //All post will show up and if there is a reply then it should show as well
   findAll: function(req, res) {
     db.Post
-      .find()
+      .find({})
+      .populate('reply')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
     db.Post
       .findById(req.params.id)
-      .populate('replies')
+      // .populate('replyid')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -48,7 +48,7 @@ const postSeed = [
     post: 'I feel alone.',
     date: new Date(Date.now()),
     sent: true,
-    replyid: '5ee19d6dded797bbd9887063'
+    reply: mongoose.Types.ObjectId('5ee27130a90b1edeed22fbd9')
   }
 ];
 
