@@ -111,7 +111,7 @@ const Dashboard = () => {
 
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
         {posts.length ? (
-          <Box component='div' style={{ height: '380px' }} overflow='auto'>
+          <Box component='div' style={{ height: '350px' }} overflow='auto'>
             {posts.map((post) => {
               return (
                 <ExpansionPanel key={post._id}>
@@ -132,6 +132,7 @@ const Dashboard = () => {
           <h3>You don't have any posts yet!</h3>
         )}
       </Grid>
+      <Grid item style={{ margin: '10px' }}></Grid>
       <BottomNav />
     </Grid>
   );
