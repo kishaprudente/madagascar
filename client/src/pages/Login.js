@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, TextField } from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core/styles';
 import chirpy from '../assets/chirpy.svg';
 
 export default function Login() {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+
   return (
     <Grid
       container
@@ -23,14 +28,14 @@ export default function Login() {
           style={{ marginBottom: '10px' }}
           label="Username"
           id="outlined-size-normal"
-          defaultValue="Username"
+          placeholder="Username"
           variant="outlined"
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
           label="Password"
           id="outlined-size-normal"
-          defaultValue="Password"
+          placeholder="Password"
           variant="outlined"
         ></TextField>
       </Grid>
