@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Button, Box, List, ListItem, ListItemText, Divider } from '@material-ui/core';
+import API from '../utils/API';
 
 const Inbox = () => {
+  const [replies, setReplies] = useState([]);
+  const [latestReply, setLatestReply] = useState("");
+
+  const getReplies = async () => {
+    try {
+      const { data } = await API.getReplies();
+      const reversedOrder = [...data.reverse()];
+      setReplies(reversedOrder);
+      setLatestReply(reversedOrder[0].response);
+    }
+    catch (err) {
+      throw err;
+    }
+  }
+
+  useEffect(() => {
+    getReplies();
+  }, []);
+
   return (
     <Grid container direction='column' alignItems='center' style={{ background: '#A1D1B6', height: '100vh' }}>
       <Grid item>
@@ -9,11 +29,12 @@ const Inbox = () => {
       </Grid>
       <Grid item>
         <Paper elevation={3} style={{ borderRadius: '10px' }}>
-          <Box component='div' overflow='auto' style={{ padding: '10px', height: '300px', width: '250px' }}>
-            <p>
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-            </p>
+          <Box component='div' overflow='auto' style={{ padding: '20px', height: '300px', width: '250px' }}>
+            {latestReply.length ? (
+              <p>{latestReply}</p>
+            ) : (
+              <p>You have not received any responses yet!</p>
+            )}
           </Box>
         </Paper>
       </Grid>
@@ -23,13 +44,17 @@ const Inbox = () => {
       <Grid item >
         <div style={{ maxHeight: '250px', width: '350px', background: '#F2F2F2', marginTop: '30px', borderRadius: '10px' }}>
           <List component='nav' aria-label='inbox'>
-            <ListItem button>
-              <ListItemText primary='Response 1' />
-            </ListItem>
-            <Divider />
-            <ListItem button>
-              <ListItemText primary='Response 2' />
-            </ListItem>
+            {replies.length ?
+              (replies.map((reply) => (
+                <ListItem button key={reply._id}>
+                  <ListItemText inset primary={reply.response} />
+                </ListItem>
+              ))
+              ) : (
+                <ListItem>
+                  <ListItemText inset primary='Nothing to show!' />
+                </ListItem>
+              )}
           </List>
         </div>
       </Grid>
