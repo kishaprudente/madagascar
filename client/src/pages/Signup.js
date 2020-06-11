@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, TextField } from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core/styles';
 import chirpy from '../assets/chirpy.svg';
 
 export default function Signup() {
@@ -9,47 +8,47 @@ export default function Signup() {
     <Grid
       container
       style={container}
-      justify="space-evenly"
-      alignItems="center"
-      direction="column"
+      justify='space-evenly'
+      alignItems='center'
+      direction='column'
     >
       <Grid item />
       <Grid item>
-        <img src={chirpy} alt="chirpy the bird" />
+        <img src={chirpy} alt='chirpy the bird' />
       </Grid>
 
       <Grid item style={{ width: '180px' }}>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Username"
-          id="outlined-size-normal"
-          defaultValue="Username"
-          variant="outlined"
+          label='Username'
+          id='outlined-size-normal'
+          defaultValue='Username'
+          variant='outlined'
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Password"
-          id="outlined-size-normal"
-          defaultValue="Password"
-          variant="outlined"
+          label='Password'
+          id='outlined-size-normal'
+          defaultValue='Password'
+          variant='outlined'
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Confirm Password"
-          id="outlined-size-normal"
-          defaultValue="Password"
-          variant="outlined"
+          label='Confirm Password'
+          id='outlined-size-normal'
+          defaultValue='Password'
+          variant='outlined'
         ></TextField>
       </Grid>
 
       <Grid item>
-        <Button style={buttonStyle} variant="contained" color="primary">
+        <Button style={buttonStyle} variant='contained' color='primary'>
           Sign Up
         </Button>
       </Grid>
 
       <Grid item>
-        Already have an account? <Link to="/login">Login</Link>
+        Already have an account? <Link to='/login'>Login</Link>
       </Grid>
       <Grid item></Grid>
     </Grid>
@@ -62,15 +61,6 @@ const container = {
   height: '100vh',
   flexGrow: '1',
 };
-
-// const chirpyStyle = {
-//   top: '185px',
-//   textAlign: 'center',
-//   left: '40%',
-//   right: '40%',
-//   width: '4em',
-//   height: '4em',
-// };
 
 const buttonStyle = {
   color: 'black',
