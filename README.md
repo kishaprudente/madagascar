@@ -1,8 +1,12 @@
-# Chirrup
+# chirrup! <img src='./client/src/assets/chirpy.svg' alt='Chirpy' width='35' height='30'> 
 
-## Description
+chirrup! provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
 
-Chirrup provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
+## Build Status
+
+Travis CI:  
+  
+[![Build Status](https://travis-ci.com/kishaprudente/madagascar.svg?branch=master)](https://travis-ci.com/kishaprudente/madagascar)
 
 ## Table of Contents
 
@@ -19,7 +23,7 @@ To install the development env, clone the repo, then run `npm install` and `npm 
 
 ## Usage
 
-- Chirrup is a progressive web app (PWA) deployed on Heroku.
+- chirrup! is a progressive web app (PWA) deployed on Heroku.
 - Deployed: https://chirrup-app.herokuapp.com/
 
 Create a user account to get started.
@@ -30,7 +34,7 @@ To contribute to the project, please contact the team.
 
 ## Tests
 
-Tests are currently not implemented. Coming soon.
+To run development tests, run `npm run test`.
 
 ## Authors
 
