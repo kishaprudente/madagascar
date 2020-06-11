@@ -34,6 +34,7 @@ export default function Login() {
         <TextField
           style={{ marginBottom: '10px' }}
           label='Password'
+          type='password'
           id='outlined-size-normal'
           placeholder='Password'
           variant='outlined'
@@ -56,6 +57,7 @@ export default function Login() {
 
 const container = {
   backgroundColor: '#A1D1B6',
+  fontFamily: 'Reenie Beanie',
   width: '100vw',
   height: '100vh',
   flexGrow: '1',
