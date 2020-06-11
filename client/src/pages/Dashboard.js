@@ -21,14 +21,32 @@ const Dashboard = () => {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setPost(value);
+    setPost(value); //mood will be changed once implememted in textfield
+  };
+
+  const handleSendPost = (event) => {
+    event.preventDefault();
+
+    API.createPost({ post: post, mood: 'Happy', sent: true })
+      .then((res) => alert('Post sent!'))
+      .then(() => setPost(''))
+      .catch((err) => console.log(err));
+  };
+
+  const handleKeepPost = (event) => {
+    event.preventDefault();
+
+    API.createPost({ post: post, mood: 'Happy', sent: false })
+      .then((res) => alert('Post saved!'))
+      .then(() => setPost(''))
+      .catch((err) => console.log(err));
   };
 
   const loadPosts = async () => {
     try {
       const allPosts = await API.getPost();
-      setPosts(allPosts.data);
-      console.log(allPosts.data);
+      setPosts(allPosts.data.reverse());
+      //console.log(allPosts.data);
     } catch (err) {
       throw err;
     }
@@ -68,14 +86,25 @@ const Dashboard = () => {
           rows={6}
           variant='outlined'
           onChange={handleInputChange}
+          value={post}
         ></TextField>
       </Grid>
 
       <Grid item style={{ marginBottom: '30px' }}>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+        <Button
+          onClick={handleKeepPost}
+          style={buttonStyle}
+          variant='contained'
+          color='primary'
+        >
           Keep
         </Button>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+        <Button
+          onClick={handleSendPost}
+          style={buttonStyle}
+          variant='contained'
+          color='primary'
+        >
           Send
         </Button>
       </Grid>
@@ -85,12 +114,11 @@ const Dashboard = () => {
           <Box component='div' style={{ height: '380px' }} overflow='auto'>
             {posts.map((post) => {
               return (
-                <ExpansionPanel>
+                <ExpansionPanel key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1a-content'
                     id='panel1a-header'
-                    key={post.id}
                   >
                     {post.date}
                     {post.mood}
