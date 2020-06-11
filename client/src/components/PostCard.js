@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, TextField } from '@material-ui/core';
 import LayeredPages from '../assets/LayeredPages.svg';
 import { makeStyles } from '@material-ui/core/styles';
@@ -52,11 +52,15 @@ const styles = {
   },
 }
 
-const PostCard = () => {
+const PostCard = ({post, renderRandomPost}) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [reply, setReply] = useState('');
+
+  useEffect(() => {
+    renderRandomPost();
+  });
 
   const handleInputChange = (event) => {
     setReply(event.target.value);
@@ -89,7 +93,11 @@ const PostCard = () => {
       <Container style={styles.container}>
         <Box component='img' src={LayeredPages} alt='background' style={styles.svg} />
         <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+          {post ? (
+            post.post 
+          ) : (
+            'There are currently no posts. Check back later!'
+          )}
       </Box>
         <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
       </Container>
