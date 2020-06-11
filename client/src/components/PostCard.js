@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, TextField } from '@material-ui/core';
 import LayeredPages from '../assets/LayeredPages.svg';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import API from '../utils/API';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -37,8 +38,8 @@ const styles = {
   paper: {
     background: '#F2F2F2',
     position: 'relative',
-    maxWidth: '290px',
-    maxHeight: '100px',
+    width: '290px',
+    height: '100px',
     left: '50px',
     bottom: '190px',
     zIndex: '1200'
@@ -52,14 +53,18 @@ const styles = {
   },
 }
 
-const PostCard = () => {
+const PostCard = ({ post, renderRandomPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [reply, setReply] = useState('');
+  const [reply, setReply] = useState({});
+
+  useEffect(() => {
+    renderRandomPost();
+  });
 
   const handleInputChange = (event) => {
-    setReply(event.target.value);
+    setReply({ response: event.target.value, post: post._id });
   };
 
   const handleOpen = () => {
@@ -70,9 +75,9 @@ const PostCard = () => {
     setOpen(false);
   };
 
-  const handleClickAlert = () => {
-    setAlertOpen(true);
-  };
+  // const handleClickAlert = () => {
+  //   setAlertOpen(true);
+  // };
 
   const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
@@ -81,16 +86,36 @@ const PostCard = () => {
     // close all
     setAlertOpen(false);
     setOpen(false);
-    setReply('');
+    setReply({});
+    renderRandomPost();
   };
+
+  const handleSendReply = async () => {
+    try {
+      // send reply to db
+      const { data } = await API.replyPost(reply);
+      // create new post object with reply id
+      const newPost = {...post, reply: data._id }
+      // update post with reply id
+      await API.updatePostResponse(post._id, newPost);
+      // open success alert
+      setAlertOpen(true);
+    } catch (err) {
+      throw err;
+    }
+  }
 
   return (
     <div>
       <Container style={styles.container}>
         <Box component='img' src={LayeredPages} alt='background' style={styles.svg} />
         <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      </Box>
+          {post ? (
+            post.post
+          ) : (
+              'There are currently no posts. Check back later!'
+            )}
+        </Box>
         <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
       </Container>
       <Modal
@@ -112,11 +137,11 @@ const PostCard = () => {
               multiline
               rows={10}
               variant='outlined'
-              value={reply}
+              value={reply.response}
               onChange={handleInputChange}
               style={{ width: '100%' }}
             />
-            <Button onClick={handleClickAlert} variant='contained' className={classes.sendButton}>Send</Button>
+            <Button onClick={handleSendReply} variant='contained' className={classes.sendButton}>Send</Button>
           </div>
         </Fade>
       </Modal>
