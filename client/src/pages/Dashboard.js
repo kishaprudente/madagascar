@@ -8,7 +8,6 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from '@material-ui/core';
-//import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
@@ -50,7 +49,6 @@ const Dashboard = () => {
     try {
       const allPosts = await API.getPost();
       setPosts(allPosts.data.reverse());
-      //console.log(allPosts.data);
     } catch (err) {
       throw err;
     }
@@ -79,20 +77,20 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item>
-        <Button>
-          <img src={happy} />
+        <Button value='happy'>
+          <img src={happy} alt='happy emoji' />
         </Button>
-        <Button>
-          <img src={angry} />
+        <Button value='angry'>
+          <img src={angry} alt='angry emoji' />
         </Button>
-        <Button>
-          <img src={anxious} />
+        <Button value='anxious'>
+          <img src={anxious} alt='anxious emoji' />
         </Button>
-        <Button>
-          <img src={loved} />
+        <Button value='loved'>
+          <img src={loved} alt='loved emoji' />
         </Button>
-        <Button>
-          <img src={sad} />
+        <Button value='sad'>
+          <img src={sad} alt='sad emoji' />
         </Button>
         <Grid item />
         <TextField
@@ -183,10 +181,4 @@ const buttonStyle = {
   fontFamily: 'Reenie Beanie',
   marginLeft: '5px',
   marginRight: '5px',
-};
-
-const bottomNav = {
-  width: '100%',
-  position: 'fixed',
-  bottom: 0,
 };
