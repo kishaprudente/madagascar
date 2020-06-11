@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import PostCard from '../components/PostCard';
+import API from '../utils/API';
 
 const styles = {
   container: {
@@ -18,6 +19,11 @@ const styles = {
   }
 }
 const Reply = () => {
+  // post is single rendered post
+  const [post, setPost] = useState({});
+  // posts is all posts from db (filtered)
+  const [posts, setPosts] = useState([]);
+
   return (
     <Grid container style={styles.container}>
       <Grid item sm={4} />
