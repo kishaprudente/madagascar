@@ -16,8 +16,8 @@ const useStyles = makeStyles({
   },
 });
 
-
 const BottomNav = () => {
+
   const classes = useStyles();
   const [value, setValue] = React.useState('mood')
 
