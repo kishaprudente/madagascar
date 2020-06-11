@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import PostCard from '../components/PostCard';
 import API from '../utils/API';
@@ -37,6 +37,27 @@ const Reply = () => {
     console.log(array);
     return array;
   }
+
+  // gets all posts, filtered to include only
+  // ones that are sent & ones without a response
+  const filterPosts = async () => {
+    try{
+      const { data } = await API.getPost();
+      console.log(data);
+      const allPosts = data.reverse().filter((post) => {
+        return (post.sent === true && post.replyid); //FIXME: !post.replyid
+      });
+      console.log('filtered posts', allPosts);
+      setPosts(shuffleArray(allPosts));
+      renderRandomPost();
+    } catch(err) {
+      throw err;
+    }
+  }
+
+  useEffect(() => {
+    filterPosts();
+  },[]);
 
   return (
     <Grid container style={styles.container}>
