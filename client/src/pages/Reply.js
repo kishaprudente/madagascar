@@ -73,8 +73,8 @@ const Reply = () => {
     <Grid container style={styles.container}>
       <Grid item sm={4} />
       <Grid item sm={4}>
-        <PostCard />
-        <Button variant='contained' style={styles.nextButton}>next</Button>
+        <PostCard post={post} renderRandomPost={renderRandomPost}/>
+        <Button variant='contained' onClick={handleNextButtonClick} style={styles.nextButton}>next</Button>
       </Grid>
       <Grid item sm={4} />
     </Grid>
