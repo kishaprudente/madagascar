@@ -1,25 +1,25 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Chirrup App",
+  "name": "Chirrup App",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "madagascar/chirpy.png",
+      "type": "image/png",
+      "sizes": "366x315"
     },
     {
-      "src": "logo192.png",
+      "src": "madagascar/chirpy@2x.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "238x203"
     },
     {
-      "src": "logo512.png",
+      "src": "madagascar/chirpy@3x.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "357x304"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#A1D1B6"
 }
