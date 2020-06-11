@@ -35,20 +35,20 @@ const postSeed = [
     mood: 'Happy',
     post: 'I feel energetic.',
     date: new Date(Date.now()),
-    sent: false
+    sent: true
   },
   {
     mood: 'Strong',
     post: 'I feel confident.',
     date: new Date(Date.now()),
-    sent: false
+    sent: true
   },
   {
     mood: 'Lonely',
     post: 'I feel alone.',
     date: new Date(Date.now()),
     sent: true,
-    replyid: '5ee19d6dded797bbd9887063'
+    reply: mongoose.Types.ObjectId('5ee27130a90b1edeed22fbd9')
   }
 ];
 
