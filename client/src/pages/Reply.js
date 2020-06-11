@@ -26,6 +26,18 @@ const Reply = () => {
 
   const noPost = { post: 'No more posts at this time. Check back later!' }
 
+  // function to shuffle array values
+  const shuffleArray = (array) => {
+    for(let i = array.length-1; i > 0; i--){
+      const j = Math.floor(Math.random() * i);
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    console.log(array);
+    return array;
+  }
+
   return (
     <Grid container style={styles.container}>
       <Grid item sm={4} />
