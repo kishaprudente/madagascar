@@ -1,8 +1,12 @@
-# Chirrup
+# Chirrup  
 
-## Description
+![Chirpy](./client/src/assets/chirpy.svg) Chirrup provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
 
-Chirrup provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
+## Build Status
+
+Travis CI:  
+  
+[![Build Status](https://travis-ci.com/kishaprudente/madagascar.svg?branch=master)](https://travis-ci.com/kishaprudente/madagascar)
 
 ## Table of Contents
 
@@ -30,7 +34,7 @@ To contribute to the project, please contact the team.
 
 ## Tests
 
-Tests are currently not implemented. Coming soon.
+To run development tests, run `npm run test`.
 
 ## Authors
 
