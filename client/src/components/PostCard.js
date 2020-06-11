@@ -37,8 +37,8 @@ const styles = {
   paper: {
     background: '#F2F2F2',
     position: 'relative',
-    maxWidth: '290px',
-    maxHeight: '100px',
+    width: '290px',
+    height: '100px',
     left: '50px',
     bottom: '190px',
     zIndex: '1200'
