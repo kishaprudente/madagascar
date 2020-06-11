@@ -13,6 +13,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
 
+import BottomNav from '../components/BottomNav';
+
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
@@ -43,6 +45,7 @@ const Dashboard = () => {
       justify='center'
       alignItems='center'
       direction='column'
+      position='fixed'
     >
       <Grid item />
 
@@ -101,6 +104,7 @@ const Dashboard = () => {
           <h3>You don't have any posts yet!</h3>
         )}
       </Grid>
+      <BottomNav />
     </Grid>
   );
 };
@@ -129,4 +133,10 @@ const buttonStyle = {
   backgroundColor: 'rgba(255, 216, 99, 0.87)',
   fontFamily: 'Reenie Beanie',
   marginLeft: '10px',
+};
+
+const bottomNav = {
+  width: '100%',
+  position: 'fixed',
+  bottom: 0,
 };

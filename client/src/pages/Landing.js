@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Button, Box } from '@material-ui/core';
 //import { flexbox } from '@material-ui/system';
 import chirpy from '../assets/chirpy.svg';
@@ -7,13 +8,13 @@ const quote = '"If you can be anything in the world, be kind."';
 
 export default function Landing() {
   return (
-    <Container fluid maxWidth='sm'>
+    <Container fluid maxWidth="sm">
       <Box style={container}>
         <h2 style={logoStyle}>chirrup!</h2>
-        <img style={chirpyStyle} src={chirpy} alt='chirpy the bird' />
+        <img style={chirpyStyle} src={chirpy} alt="chirpy the bird" />
         <Box style={quoteStyle}>{quote}</Box>
-        <Button style={buttonStyle} variant='contained' color='primary'>
-          Let's chirp!
+        <Button style={buttonStyle} variant="contained" color="primary">
+          <Link to="/login">Let's chirp!</Link>
         </Button>
       </Box>
     </Container>
