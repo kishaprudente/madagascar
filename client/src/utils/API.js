@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-  // Get all post 
+  // POST ROUTES
   getPost: function() {
     return axios.get('/api/posts');
   },
@@ -17,12 +17,19 @@ export default {
   deletePost: function(id) {
     return axios.delete('/api/posts/' + id);
   },
+
+  // REPLY ROUTES
+  // Get replies from database
+  getReplies: function() {
+    return axios.get('api/replies');
+  },
   // Saves a reply to the database
   replyPost: function(replyData) {
     return axios.post('/api/replies', replyData);
   },
-  // Get replies from database
-  getReplies: function() {
-    return axios.get('api/replies');
-  }
+
+  // USER ROUTES
+  createUser: function(userData) {
+    return axios.post('api/signup', userData);
+  },
 };

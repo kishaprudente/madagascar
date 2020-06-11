@@ -1,35 +1,32 @@
 const mongoose = require('mongoose');
 const db = require('../models');
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-    'mongodb://localhost/madagascardb'
-);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/madagascardb');
 
 const postSeed = [
   {
     mood: 'Sad',
     post: 'I feel lonely.',
     date: new Date(Date.now()),
-    sent: false
+    sent: false,
   },
   {
     mood: 'Calm',
     post: 'I feel peaceful',
     date: new Date(Date.now()),
-    sent: false
+    sent: false,
   },
   {
     mood: 'Mad',
     post: 'I feel annoyed.',
     date: new Date(Date.now()),
-    sent: false
+    sent: false,
   },
   {
     mood: 'Scared',
     post: 'I feel helpless.',
     date: new Date(Date.now()),
-    sent: false
+    sent: false,
   },
   {
     mood: 'Happy',
@@ -48,18 +45,17 @@ const postSeed = [
     post: 'I feel alone.',
     date: new Date(Date.now()),
     sent: true,
-    reply: mongoose.Types.ObjectId('5ee27130a90b1edeed22fbd9')
+    reply: '5ee19956e8f55c23a6f7eb2c'
   }
 ];
 
-db.Post
-  .remove({})
+db.Post.remove({})
   .then(() => db.Post.collection.insertMany(postSeed))
-  .then(data => {
+  .then((data) => {
     console.log(data.result.n + ' records inserted!');
     process.exit(0);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
     process.exit(1);
   });
