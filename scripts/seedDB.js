@@ -33,13 +33,14 @@ const postSeed = [
     mood: 'Happy',
     post: 'I feel energetic.',
     date: new Date(Date.now()),
-    sent: false,
+    sent: true
   },
   {
     mood: 'Strong',
     post: 'I feel confident.',
     date: new Date(Date.now()),
-    sent: false,
+    sent: true
+
   },
   {
     mood: 'Lonely',
