@@ -13,6 +13,7 @@ const useStyles = makeStyles({
   root: {
     width: '100vw',
     bottom: 0,
+    fontFamily: 'Reenie Beanie',
   },
 });
 
@@ -23,12 +24,12 @@ const BottomNav = () => {
     <BottomNavigation showLabels className={classes.root}>
       <BottomNavigationAction
         component={Link}
-        to="/reply"
-        label="Send"
+        to='/reply'
+        label='Send'
         icon={<SendIcon />}
       />
-      <BottomNavigationAction label="Mood" icon={<MoodIcon />} />
-      <BottomNavigationAction label="Inbox" icon={<InboxIcon />} />
+      <BottomNavigationAction label='Mood' icon={<MoodIcon />} />
+      <BottomNavigationAction label='Inbox' icon={<InboxIcon />} />
     </BottomNavigation>
   );
 };
