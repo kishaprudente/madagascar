@@ -48,19 +48,17 @@ const postSeed = [
     post: 'I feel alone.',
     date: new Date(Date.now()),
     sent: true,
-    reply: {
-      response: ['You are not alone.']
-    }
-  },
-  {
-    mood: 'Scared',
-    post: 'I feel helpless.',
-    date: new Date(Date.now()),
-    sent: true,
-    reply: {
-      response: ['There are thousands of people who would love to help you.']
-    }
-  },
+    replyid: '5ee157eb87f4e6a14e866e70'
+  }
+  // {
+  //   mood: 'Scared',
+  //   post: 'I feel helpless.',
+  //   date: new Date(Date.now()),
+  //   sent: true,
+  //   reply: {
+  //     response: ['There are thousands of people who would love to help you.']
+  //   }
+  // },
 ];
 
 db.Post

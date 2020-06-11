@@ -10,10 +10,10 @@ const PostSchema = new Schema({
   date: { type: Date, default: Date.now },
   //sent means sending post
   sent: {type: Boolean, default: false},
-  reply: [{
+  reply: {
     type: Schema.Types.ObjectId,
     ref: 'Reply'
-  }]
+  }
 });
 
 const Post = mongoose.model('Post', PostSchema);
