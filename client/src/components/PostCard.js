@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import API from '../utils/API';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -56,14 +57,14 @@ const PostCard = ({ post, renderRandomPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [reply, setReply] = useState('');
+  const [reply, setReply] = useState({});
 
   useEffect(() => {
     renderRandomPost();
   });
 
   const handleInputChange = (event) => {
-    setReply(event.target.value);
+    setReply({ response: event.target.value, post: post._id });
   };
 
   const handleOpen = () => {
@@ -74,9 +75,9 @@ const PostCard = ({ post, renderRandomPost }) => {
     setOpen(false);
   };
 
-  const handleClickAlert = () => {
-    setAlertOpen(true);
-  };
+  // const handleClickAlert = () => {
+  //   setAlertOpen(true);
+  // };
 
   const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
@@ -85,8 +86,24 @@ const PostCard = ({ post, renderRandomPost }) => {
     // close all
     setAlertOpen(false);
     setOpen(false);
-    setReply('');
+    setReply({});
+    renderRandomPost();
   };
+
+  const handleSendReply = async () => {
+    try {
+      // send reply to db
+      const { data } = await API.replyPost(reply);
+      // create new post object with reply id
+      const newPost = {...post, reply: data._id }
+      // update post with reply id
+      await API.updatePostResponse(post._id, newPost);
+      // open success alert
+      setAlertOpen(true);
+    } catch (err) {
+      throw err;
+    }
+  }
 
   return (
     <div>
@@ -120,11 +137,11 @@ const PostCard = ({ post, renderRandomPost }) => {
               multiline
               rows={10}
               variant='outlined'
-              value={reply}
+              value={reply.response}
               onChange={handleInputChange}
               style={{ width: '100%' }}
             />
-            <Button onClick={handleClickAlert} variant='contained' className={classes.sendButton}>Send</Button>
+            <Button onClick={handleSendReply} variant='contained' className={classes.sendButton}>Send</Button>
           </div>
         </Fade>
       </Modal>
