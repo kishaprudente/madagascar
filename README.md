@@ -1,6 +1,6 @@
-# Chirrup  
+# chirrup!  
 
-![Chirpy](./client/src/assets/chirpy.svg) Chirrup provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
+![Chirpy](./client/src/assets/chirpy.svg) chirrup! provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
 
 ## Build Status
 
@@ -23,7 +23,7 @@ To install the development env, clone the repo, then run `npm install` and `npm 
 
 ## Usage
 
-- Chirrup is a progressive web app (PWA) deployed on Heroku.
+- chirrup! is a progressive web app (PWA) deployed on Heroku.
 - Deployed: https://chirrup-app.herokuapp.com/
 
 Create a user account to get started.
