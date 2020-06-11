@@ -26,6 +26,7 @@ const Dashboard = () => {
     try {
       const allPosts = await API.getPost();
       setPosts(allPosts.data);
+      console.log(allPosts.data);
     } catch (err) {
       throw err;
     }
