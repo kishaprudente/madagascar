@@ -123,7 +123,7 @@ const Dashboard = () => {
           </ExpansionPanel>
         </Box>
       </Grid>
-      <BottomNav style={bottomNav} />
+      <BottomNav />
     </Grid>
   );
 };
