@@ -52,7 +52,7 @@ const styles = {
   },
 }
 
-const PostCard = ({post, renderRandomPost}) => {
+const PostCard = ({ post, renderRandomPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -94,11 +94,11 @@ const PostCard = ({post, renderRandomPost}) => {
         <Box component='img' src={LayeredPages} alt='background' style={styles.svg} />
         <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
           {post ? (
-            post.post 
+            post.post
           ) : (
-            'There are currently no posts. Check back later!'
-          )}
-      </Box>
+              'There are currently no posts. Check back later!'
+            )}
+        </Box>
         <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
       </Container>
       <Modal
