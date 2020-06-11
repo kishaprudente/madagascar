@@ -16,19 +16,29 @@ import chirpy from '../assets/chirpy.svg';
 import BottomNav from '../components/BottomNav';
 
 const Dashboard = () => {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setPost({ post: value, mood: 'Happy' }); //mood will be changed once implememted in textfield
+    setPost(value); //mood will be changed once implememted in textfield
   };
 
-  const handleSavePost = (event) => {
+  const handleSendPost = (event) => {
     event.preventDefault();
 
-    API.createPost(post)
+    API.createPost({ post: post, mood: 'Happy', sent: true })
+      .then((res) => alert('Post sent!'))
+      .then(() => setPost(''))
+      .catch((err) => console.log(err));
+  };
+
+  const handleKeepPost = (event) => {
+    event.preventDefault();
+
+    API.createPost({ post: post, mood: 'Happy', sent: false })
       .then((res) => alert('Post saved!'))
+      .then(() => setPost(''))
       .catch((err) => console.log(err));
   };
 
@@ -76,12 +86,13 @@ const Dashboard = () => {
           rows={6}
           variant='outlined'
           onChange={handleInputChange}
+          value={post}
         ></TextField>
       </Grid>
 
       <Grid item style={{ marginBottom: '30px' }}>
         <Button
-          onClick={handleSavePost}
+          onClick={handleKeepPost}
           style={buttonStyle}
           variant='contained'
           color='primary'
@@ -89,7 +100,7 @@ const Dashboard = () => {
           Keep
         </Button>
         <Button
-          onClick={handleSavePost}
+          onClick={handleSendPost}
           style={buttonStyle}
           variant='contained'
           color='primary'
