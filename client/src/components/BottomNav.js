@@ -27,9 +27,19 @@ const BottomNav = () => {
         label="Send"
         icon={<SendIcon />}
       />
-      <BottomNavigationAction label="Mood" icon={<MoodIcon />} />
-      <BottomNavigationAction label="Inbox" icon={<InboxIcon />} />
-    </BottomNavigation>
+      <BottomNavigationAction
+        component={Link}
+        to="/dashboard"
+        label="Mood"
+        icon={<MoodIcon />}
+        />
+      <BottomNavigationAction
+        component={Link}
+        to="/inbox"
+        label="Send"
+        icon={<InboxIcon />}
+      />
+      </BottomNavigation>
   );
 };
 
