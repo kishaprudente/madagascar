@@ -16,19 +16,27 @@ import chirpy from '../assets/chirpy.svg';
 import BottomNav from '../components/BottomNav';
 
 const Dashboard = () => {
-  const [post, setPost] = useState('');
+  const [post, setPost] = useState({});
   const [posts, setPosts] = useState([]);
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setPost(value);
+    setPost({ post: value, mood: 'Happy' }); //mood will be changed once implememted in textfield
+  };
+
+  const handleSavePost = (event) => {
+    event.preventDefault();
+
+    API.createPost(post)
+      .then((res) => alert('Post saved!'))
+      .catch((err) => console.log(err));
   };
 
   const loadPosts = async () => {
     try {
       const allPosts = await API.getPost();
-      setPosts(allPosts.data);
-      console.log(allPosts.data);
+      setPosts(allPosts.data.reverse());
+      //console.log(allPosts.data);
     } catch (err) {
       throw err;
     }
@@ -72,10 +80,20 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item style={{ marginBottom: '30px' }}>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+        <Button
+          onClick={handleSavePost}
+          style={buttonStyle}
+          variant='contained'
+          color='primary'
+        >
           Keep
         </Button>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+        <Button
+          onClick={handleSavePost}
+          style={buttonStyle}
+          variant='contained'
+          color='primary'
+        >
           Send
         </Button>
       </Grid>
@@ -85,12 +103,11 @@ const Dashboard = () => {
           <Box component='div' style={{ height: '380px' }} overflow='auto'>
             {posts.map((post) => {
               return (
-                <ExpansionPanel>
+                <ExpansionPanel key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1a-content'
                     id='panel1a-header'
-                    key={post.id}
                   >
                     {post.date}
                     {post.mood}
