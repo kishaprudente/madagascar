@@ -24,6 +24,8 @@ const Reply = () => {
   // posts is all posts from db (filtered)
   const [posts, setPosts] = useState([]);
 
+  const noPost = { post: 'No more posts at this time. Check back later!' }
+
   return (
     <Grid container style={styles.container}>
       <Grid item sm={4} />
