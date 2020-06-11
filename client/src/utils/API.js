@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-  // Get all post 
+  // POST ROUTES
   getPost: function() {
     return axios.get('/api/posts');
   },
@@ -16,7 +16,14 @@ export default {
   replyPost: function(replyData) {
     return axios.post('/api/replys', replyData);
   },
+
+  // REPLY ROUTES
   getReplies: function() {
     return axios.get('api/replys');
-  }
+  },
+
+  // USER ROUTES
+  createUser: function(userData) {
+    return axios.post('api/signup', userData);
+  },
 };

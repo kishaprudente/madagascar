@@ -4,11 +4,16 @@ import { Grid, Button, TextField } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
 
 export default function Login() {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
 
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+
+    console.log(value);
+  };
 
   return (
     <Grid
@@ -27,16 +32,20 @@ export default function Login() {
         <TextField
           style={{ marginBottom: '10px' }}
           label="Username"
+          name="username"
           id="outlined-size-normal"
           placeholder="Username"
           variant="outlined"
+          onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
           label="Password"
+          name="password"
           id="outlined-size-normal"
           placeholder="Password"
           variant="outlined"
+          onChange={(e) => handleInputChange(e)}
         ></TextField>
       </Grid>
 

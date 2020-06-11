@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, TextField } from '@material-ui/core';
 // import { makeStyles } from '@material-ui/core/styles';
 import chirpy from '../assets/chirpy.svg';
+import API from '../utils/API';
 
 export default function Signup() {
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmitUser = async () => {
+    try {
+      if (user.password !== user.confirm) {
+        throw new Error('Confirm Password must match Password');
+      } else {
+        const newUser = await API.createUser({
+          username: user.username,
+          password: user.password,
+        });
+        console.log(newUser.config.data);
+        window.location.replace('/dashboard');
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
   return (
     <Grid
       container
@@ -22,28 +53,39 @@ export default function Signup() {
         <TextField
           style={{ marginBottom: '10px' }}
           label="Username"
+          name="username"
           id="outlined-size-normal"
-          defaultValue="Username"
+          placeholder="Username"
           variant="outlined"
+          onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
           label="Password"
+          name="password"
           id="outlined-size-normal"
-          defaultValue="Password"
+          placeholder="Password"
           variant="outlined"
+          onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
           label="Confirm Password"
+          name="confirm"
           id="outlined-size-normal"
-          defaultValue="Password"
+          placeholder="Confirm Password"
           variant="outlined"
+          onChange={(e) => handleInputChange(e)}
         ></TextField>
       </Grid>
 
       <Grid item>
-        <Button style={buttonStyle} variant="contained" color="primary">
+        <Button
+          style={buttonStyle}
+          variant="contained"
+          color="primary"
+          onClick={handleSubmitUser}
+        >
           Sign Up
         </Button>
       </Grid>
