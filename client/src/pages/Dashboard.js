@@ -21,6 +21,7 @@ import BottomNav from '../components/BottomNav';
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
+  const [mood, setMood] = useState('');
 
   const handleInputChange = (event) => {
     const { value } = event.target;
@@ -30,7 +31,7 @@ const Dashboard = () => {
   const handleSendPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: 'Happy', sent: true })
+    API.createPost({ post: post, mood: mood, sent: true })
       .then((res) => alert('Post sent!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
@@ -39,10 +40,14 @@ const Dashboard = () => {
   const handleKeepPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: 'Happy', sent: false })
+    API.createPost({ post: post, mood: mood, sent: false })
       .then((res) => alert('Post saved!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
+  };
+
+  const handleMoodClick = (event) => {
+    setMood(event.target.value);
   };
 
   const loadPosts = async () => {
@@ -77,19 +82,19 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item>
-        <Button value='happy'>
+        <Button value='happy' onClick={handleMoodClick}>
           <img src={happy} alt='happy emoji' />
         </Button>
-        <Button value='angry'>
+        <Button value='angry' onClick={handleMoodClick}>
           <img src={angry} alt='angry emoji' />
         </Button>
-        <Button value='anxious'>
+        <Button value='anxious' onClick={handleMoodClick}>
           <img src={anxious} alt='anxious emoji' />
         </Button>
-        <Button value='loved'>
+        <Button value='loved' onClick={handleMoodClick}>
           <img src={loved} alt='loved emoji' />
         </Button>
-        <Button value='sad'>
+        <Button value='sad' onClick={handleMoodClick}>
           <img src={sad} alt='sad emoji' />
         </Button>
         <Grid item />
