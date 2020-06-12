@@ -63,17 +63,17 @@ const Dashboard = () => {
     <Grid
       container
       style={container}
-      justify="center"
-      alignItems="center"
-      direction="column"
-      position="fixed"
+      justify='center'
+      alignItems='center'
+      direction='column'
+      position='fixed'
     >
       <Grid item />
 
       <Grid item>
         <h3>
           How are you feeling today?
-          <img src={chirpy} alt="chirpy the bird" style={chirpyStyle} />
+          <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
         </h3>
       </Grid>
 
@@ -90,7 +90,7 @@ const Dashboard = () => {
         <Button onClick={() => setMood('Loved')}>
           <img src={loved} alt='loved emoji' />
         </Button>
-        <Button onClick={() => setMood('Happy')}>
+        <Button onClick={() => setMood('Sad')}>
           <img src={sad} alt='sad emoji' />
         </Button>
         <Grid item />
@@ -100,10 +100,10 @@ const Dashboard = () => {
             backgroundColor: 'white',
             width: '300px',
           }}
-          id="outlined-multiline-static"
+          id='outlined-multiline-static'
           multiline
           rows={6}
-          variant="outlined"
+          variant='outlined'
           onChange={handleInputChange}
           value={post}
         ></TextField>
@@ -113,16 +113,16 @@ const Dashboard = () => {
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
         >
           Keep
         </Button>
         <Button
           onClick={handleSendPost}
           style={buttonStyle}
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
         >
           Send
         </Button>
@@ -130,14 +130,14 @@ const Dashboard = () => {
 
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
         {posts.length ? (
-          <Box component="div" style={{ height: '330px' }} overflow="auto">
+          <Box component='div' style={{ height: '330px' }} overflow='auto'>
             {posts.map((post) => {
               return (
                 <ExpansionPanel key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
+                    aria-controls='panel1a-content'
+                    id='panel1a-header'
                   >
                     {post.date}
                     {post.mood}
