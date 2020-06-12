@@ -38,19 +38,19 @@ describe('API Routes', () => {
         console.log(status);
       });
     });
-    describe('POST Endpoints', () => {
-      it('should create a new post', async ()=> {
-        const { status } = await axios.post('/api/post',
-          {
-            mood: 'Test Jest Post',
-            post:'5ee1a85254d653c1078a5932',
-            date: '2020-06-11 23:35:10.588Z',
-            sent: 'false'
-          });
-        expect(status).toBe(200);
-        console.log(status);
-      });
-    });
+    // describe('POST Endpoints', () => {
+    //   it('should create a new post', async ()=> {
+    //     const { status } = await axios.post('/api/post',
+    //       {
+    //         mood: 'Test Jest Post',
+    //         post:'5ee1a85254d653c1078a5932',
+    //         date: '2020-06-11 23:35:10.588Z',
+    //         sent: 'false'
+    //       });
+    //     expect(status).toBe(200);
+    //     console.log(status);
+    //   });
+    // });
   });
 
 });
