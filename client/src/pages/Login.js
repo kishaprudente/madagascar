@@ -34,32 +34,33 @@ export default function Login() {
     <Grid
       container
       style={container}
-      justify="space-evenly"
-      alignItems="center"
-      direction="column"
+      justify='space-evenly'
+      alignItems='center'
+      direction='column'
     >
       <Grid item />
       <Grid item>
-        <img src={chirpy} alt="chirpy the bird" />
+        <img src={chirpy} alt='chirpy the bird' />
       </Grid>
 
       <Grid item style={{ width: '180px' }}>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Username"
-          name="username"
-          id="outlined-size-normal"
-          placeholder="Username"
-          variant="outlined"
+          label='Username'
+          name='username'
+          id='outlined-size-normal'
+          placeholder='Username'
+          variant='outlined'
           onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Password"
-          name="password"
-          id="outlined-size-normal"
-          placeholder="Password"
-          variant="outlined"
+          label='Password'
+          name='password'
+          type='password'
+          id='outlined-size-normal'
+          placeholder='Password'
+          variant='outlined'
           onChange={(e) => handleInputChange(e)}
         ></TextField>
       </Grid>
@@ -67,8 +68,8 @@ export default function Login() {
       <Grid item>
         <Button
           style={buttonStyle}
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={handleLogin}
         >
           Login
@@ -76,7 +77,7 @@ export default function Login() {
       </Grid>
 
       <Grid item>
-        No account? <Link to="/signup">Sign up</Link>
+        No account? <Link to='/signup'>Sign up</Link>
       </Grid>
       <Grid item></Grid>
     </Grid>
@@ -85,19 +86,11 @@ export default function Login() {
 
 const container = {
   backgroundColor: '#A1D1B6',
+  fontFamily: 'Reenie Beanie',
   width: '100vw',
   height: '100vh',
   flexGrow: '1',
 };
-
-// const chirpyStyle = {
-//   top: '185px',
-//   textAlign: 'center',
-//   left: '40%',
-//   right: '40%',
-//   width: '4em',
-//   height: '4em',
-// };
 
 const buttonStyle = {
   color: 'black',

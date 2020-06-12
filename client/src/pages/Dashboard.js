@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useInput } from 'react';
 import {
   Grid,
   Box,
@@ -8,7 +8,6 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from '@material-ui/core';
-//import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
@@ -22,16 +21,17 @@ import BottomNav from '../components/BottomNav';
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
+  const [mood, setMood] = useState('');
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setPost(value); //mood will be changed once implememted in textfield
+    setPost(value);
   };
 
   const handleSendPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: 'Happy', sent: true })
+    API.createPost({ post: post, mood: mood, sent: true })
       .then((res) => alert('Post sent!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
@@ -40,7 +40,7 @@ const Dashboard = () => {
   const handleKeepPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: 'Happy', sent: false })
+    API.createPost({ post: post, mood: mood, sent: false })
       .then((res) => alert('Post saved!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
@@ -50,7 +50,6 @@ const Dashboard = () => {
     try {
       const allPosts = await API.getPost();
       setPosts(allPosts.data.reverse());
-      //console.log(allPosts.data);
     } catch (err) {
       throw err;
     }
@@ -79,20 +78,20 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item>
-        <Button>
-          <img src={happy} />
+        <Button onClick={() => setMood('Happy')}>
+          <img src={happy} alt='happy emoji' />
         </Button>
-        <Button>
-          <img src={angry} />
+        <Button onClick={() => setMood('Angry')}>
+          <img src={angry} alt='angry emoji' />
         </Button>
-        <Button>
-          <img src={anxious} />
+        <Button onClick={() => setMood('Anxious')}>
+          <img src={anxious} alt='anxious emoji' />
         </Button>
-        <Button>
-          <img src={loved} />
+        <Button onClick={() => setMood('Loved')}>
+          <img src={loved} alt='loved emoji' />
         </Button>
-        <Button>
-          <img src={sad} />
+        <Button onClick={() => setMood('Happy')}>
+          <img src={sad} alt='sad emoji' />
         </Button>
         <Grid item />
         <TextField
@@ -183,10 +182,4 @@ const buttonStyle = {
   fontFamily: 'Reenie Beanie',
   marginLeft: '5px',
   marginRight: '5px',
-};
-
-const bottomNav = {
-  width: '100%',
-  position: 'fixed',
-  bottom: 0,
 };
