@@ -6,7 +6,7 @@ import API from '../utils/API';
 const styles = {
   container: {
     background: '#A1D1B6',
-    minHeight: '100vh',
+    minHeight: '90vh',
     justifyContent: 'center',
   },
   nextButton: {

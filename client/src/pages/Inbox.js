@@ -23,7 +23,7 @@ const Inbox = () => {
   }, []);
 
   return (
-    <Grid container direction='column' alignItems='center' style={{ background: '#A1D1B6', height: '100vh', fontFamily: 'Rosarivo', }}>
+    <Grid container direction='column' alignItems='center' style={{ background: '#A1D1B6', height: '90vh', fontFamily: 'Rosarivo', }}>
       <Grid item>
         <h3 style={{fontFamily: 'Reenie Beanie'}}>A little birdy told me...</h3>
       </Grid>
