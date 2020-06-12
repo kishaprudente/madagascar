@@ -15,7 +15,8 @@ const styles = {
     display: 'block',
     margin: '0 auto',
     bottom: '100px',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    fontFamily: 'Reenie Beanie',
   }
 }
 const Reply = () => {
@@ -24,21 +25,11 @@ const Reply = () => {
   // posts is all posts from db (filtered)
   const [posts, setPosts] = useState([]);
 
-  const noPost = { post: 'No more posts at this time. Check back later!' }
-
-  // function to shuffle array values
-  const shuffleArray = (array) => {
-    for(let i = array.length-1; i > 0; i--){
-      const j = Math.floor(Math.random() * i);
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    console.log(array);
-    return array;
-  }
-
   const renderRandomPost = () => {
+    // if there is a post, then remove it when shuffling
+    // if (post.length) {
+    //   posts.filter((p) => p._id === post._id);
+    // }
     const randomIndex = Math.floor(Math.random() * posts.length) || 0;
     setPost(posts[randomIndex]);
   }
@@ -53,7 +44,7 @@ const Reply = () => {
         return (post.sent === true && !post.reply); // post.sent === true && !post.reply
       });
       console.log('filtered posts', allPosts);
-      setPosts(shuffleArray(allPosts));
+      setPosts(allPosts);
       renderRandomPost();
     } catch(err) {
       throw err;
@@ -74,7 +65,7 @@ const Reply = () => {
       <Grid item sm={4} />
       <Grid item sm={4}>
         <PostCard post={post} renderRandomPost={renderRandomPost}/>
-        <Button variant='contained' onClick={handleNextButtonClick} style={styles.nextButton}>next</Button>
+        <Button variant='contained' onClick={handleNextButtonClick} style={styles.nextButton}>shuffle</Button>
       </Grid>
       <Grid item sm={4} />
     </Grid>
