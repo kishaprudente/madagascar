@@ -65,7 +65,7 @@ const Reply = () => {
       <Grid item sm={4} />
       <Grid item sm={4}>
         <PostCard post={post} renderRandomPost={renderRandomPost}/>
-        <Button variant='contained' onClick={handleNextButtonClick} style={styles.nextButton}>shuffle</Button>
+        <Button variant='contained' disabled={post ? (false) : (true)} onClick={handleNextButtonClick} style={styles.nextButton}>shuffle</Button>
       </Grid>
       <Grid item sm={4} />
     </Grid>
