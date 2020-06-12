@@ -1,23 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Button, Box } from '@material-ui/core';
-//import { flexbox } from '@material-ui/system';
+import { Grid, Button, Box } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
 
 const quote = '"If you can be anything in the world, be kind."';
 
 export default function Landing() {
   return (
-    <Container fluid maxWidth="sm">
-      <Box style={container}>
+    <Grid
+      container
+      style={container}
+      justify='center'
+      alignItems='center'
+      direction='column'
+    >
+      <Grid item>
         <h2 style={logoStyle}>chirrup!</h2>
-        <img style={chirpyStyle} src={chirpy} alt="chirpy the bird" />
-        <Box style={quoteStyle}>{quote}</Box>
-        <Button style={buttonStyle} variant="contained" color="primary">
-          <Link to="/login">Let's chirp!</Link>
+      </Grid>
+      <Grid item>
+        <img style={chirpyStyle} src={chirpy} alt='chirpy the bird' />
+      </Grid>
+      <Grid item style={quoteStyle}>
+        <Box container style={{ width: '300px' }}>
+          {quote}
+        </Box>
+      </Grid>
+      <Grid item>
+        <Button style={buttonStyle} variant='contained' color='primary'>
+          <Link to='/login'>Let's chirp!</Link>
         </Button>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 }
 
@@ -25,22 +38,12 @@ const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
   height: '100vh',
-  position: 'absolute',
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  bottom: 0,
-  top: 0,
-  right: 0,
-  left: 0,
+  flewgrow: '1',
 };
 
 const logoStyle = {
-  position: 'absolute',
   width: '30%',
   height: '32px',
-  left: '30%',
-  right: '30%',
   top: '88px',
   fontFamily: 'Ruluko',
   fontSize: '3em',
@@ -51,17 +54,12 @@ const logoStyle = {
 };
 
 const chirpyStyle = {
-  position: 'absolute',
   top: '185px',
-  textAlign: 'center',
-  left: '40%',
-  right: '40%',
   width: '4em',
   height: '4em',
 };
 
 const quoteStyle = {
-  position: 'absolute',
   top: '282px',
   left: '30%',
   right: '30%',
@@ -72,7 +70,7 @@ const quoteStyle = {
 };
 
 const buttonStyle = {
-  top: '200px',
+  width: '150px',
   color: 'black',
   fontSize: 16,
   padding: '6px 12px',

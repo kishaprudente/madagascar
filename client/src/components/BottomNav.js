@@ -13,44 +13,48 @@ const useStyles = makeStyles({
   root: {
     width: '100vw',
     bottom: 0,
+    fontFamily: 'Reenie Beanie',
   },
 });
 
 const BottomNav = () => {
-
   const classes = useStyles();
-  const [value, setValue] = React.useState('mood')
+  const [value, setValue] = React.useState('mood');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root}>
+    <BottomNavigation
+      value={value}
+      onChange={handleChange}
+      showLabels
+      className={classes.root}
+    >
       <BottomNavigationAction
         component={Link}
-        to="/reply"
-        label="Send"
-        value="send"
+        to='/reply'
+        label='Send'
+        value='send'
         icon={<SendIcon />}
       />
       <BottomNavigationAction
         component={Link}
-        to="/dashboard"
-        label="Mood"
-        value="mood"
+        to='/dashboard'
+        label='Mood'
+        value='mood'
         icon={<MoodIcon />}
-        />
+      />
       <BottomNavigationAction
         component={Link}
-        to="/inbox"
-        label="Send"
-        value="send"
+        to='/inbox'
+        label='Send'
+        value='send'
         icon={<InboxIcon />}
       />
-      </BottomNavigation>
+    </BottomNavigation>
   );
 };
-
 
 export default BottomNav;

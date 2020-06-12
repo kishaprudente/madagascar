@@ -30,6 +30,9 @@ export default {
 
   // USER ROUTES
   createUser: function(userData) {
-    return axios.post('api/signup', userData);
+    return axios.post('/api/auth/signup', userData);
+  },
+  loginUser: function(userData) {
+    return axios.post('/api/auth/login', userData);
   },
 };
