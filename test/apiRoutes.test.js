@@ -31,7 +31,7 @@ describe('API Routes', () => {
       it('should create a new reply', async ()=> {
         const { status } = await axios.post('/api/replies',
           {
-            response: 'Test Jest Post',
+            response: 'Jest Post',
             post:'5ee1a85254d653c1078a5932'
           });
         expect(status).toBe(200);
