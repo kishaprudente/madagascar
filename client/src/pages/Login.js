@@ -2,13 +2,33 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, TextField } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
+import API from '../utils/API';
 
 export default function Login() {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
 
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setUser({ [name]: value });
+  };
+
+  const handleLogin = async () => {
+    try {
+      const login = await API.loginUser({
+        username: user.username,
+        password: user.password,
+      });
+      console.log(login);
+      alert('login successful');
+      // window.location.replace('/dashboard');
+    } catch (err) {
+      throw err;
+    }
+  };
 
   return (
     <Grid
@@ -26,6 +46,7 @@ export default function Login() {
       <Grid item style={{ width: '180px' }}>
         <TextField
           style={{ marginBottom: '10px' }}
+<<<<<<< HEAD
           label='Username'
           id='outlined-size-normal'
           placeholder='Username'
@@ -38,11 +59,37 @@ export default function Login() {
           id='outlined-size-normal'
           placeholder='Password'
           variant='outlined'
+=======
+          label="Username"
+          name="username"
+          id="outlined-size-normal"
+          placeholder="Username"
+          variant="outlined"
+          onChange={(e) => handleInputChange(e)}
+        ></TextField>
+        <TextField
+          style={{ marginBottom: '10px' }}
+          label="Password"
+          name="password"
+          id="outlined-size-normal"
+          placeholder="Password"
+          variant="outlined"
+          onChange={(e) => handleInputChange(e)}
+>>>>>>> master
         ></TextField>
       </Grid>
 
       <Grid item>
+<<<<<<< HEAD
         <Button style={buttonStyle} variant='contained' color='primary'>
+=======
+        <Button
+          style={buttonStyle}
+          variant="contained"
+          color="primary"
+          onClick={handleLogin}
+        >
+>>>>>>> master
           Login
         </Button>
       </Grid>

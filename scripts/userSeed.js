@@ -6,16 +6,16 @@ mongoose.connect(
     'mongodb://localhost/madagascardb'
 );
 
-const replySeed = [
+const userSeed = [
   {
-    response: 'You will be ok!',
-    post:'5ee1a85254d653c1078a5932'
+    username: 'testo',
+    password:'pass123'
   },
 ];
 
-db.Reply
+db.User
   .remove({})
-  .then(() => db.Reply.collection.insertMany(replySeed))
+  .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + ' records inserted!');
     process.exit(0);
