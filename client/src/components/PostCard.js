@@ -43,7 +43,8 @@ const styles = {
     height: '100px',
     left: '50px',
     bottom: '190px',
-    zIndex: '1200'
+    zIndex: '1200',
+    fontFamily: 'Rosarivo',
   },
   replyButton: {
     background: 'rgba(255, 216, 99, 0.87)',
