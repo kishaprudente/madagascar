@@ -63,17 +63,17 @@ const Dashboard = () => {
     <Grid
       container
       style={container}
-      justify='center'
-      alignItems='center'
-      direction='column'
-      position='fixed'
+      justify="center"
+      alignItems="center"
+      direction="column"
+      position="fixed"
     >
       <Grid item />
 
       <Grid item>
         <h3>
           How are you feeling today?
-          <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
+          <img src={chirpy} alt="chirpy the bird" style={chirpyStyle} />
         </h3>
       </Grid>
 
@@ -100,10 +100,10 @@ const Dashboard = () => {
             backgroundColor: 'white',
             width: '300px',
           }}
-          id='outlined-multiline-static'
+          id="outlined-multiline-static"
           multiline
           rows={6}
-          variant='outlined'
+          variant="outlined"
           onChange={handleInputChange}
           value={post}
         ></TextField>
@@ -113,16 +113,16 @@ const Dashboard = () => {
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
         >
           Keep
         </Button>
         <Button
           onClick={handleSendPost}
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
         >
           Send
         </Button>
@@ -130,14 +130,14 @@ const Dashboard = () => {
 
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
         {posts.length ? (
-          <Box component='div' style={{ height: '330px' }} overflow='auto'>
+          <Box component="div" style={{ height: '330px' }} overflow="auto">
             {posts.map((post) => {
               return (
                 <ExpansionPanel key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls='panel1a-content'
-                    id='panel1a-header'
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
                   >
                     {post.date}
                     {post.mood}
@@ -152,7 +152,6 @@ const Dashboard = () => {
         )}
       </Grid>
       <Grid item style={{ margin: '5px' }}></Grid>
-      <BottomNav />
     </Grid>
   );
 };
@@ -162,7 +161,7 @@ export default Dashboard;
 const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
-  height: '100vh',
+  height: '90vh',
   flexGrow: '1',
   fontFamily: 'Reenie Beanie',
   fontsize: '3em',
