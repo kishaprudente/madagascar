@@ -59,7 +59,7 @@ const PostCard = ({ post, renderRandomPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [reply, setReply] = useState({});
+  const [reply, setReply] = useState({ response: '' });
 
   useEffect(() => {
     renderRandomPost();
@@ -88,7 +88,7 @@ const PostCard = ({ post, renderRandomPost }) => {
     // close all
     setAlertOpen(false);
     setOpen(false);
-    setReply({});
+    setReply({ response: '' });
     renderRandomPost();
   };
 
