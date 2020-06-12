@@ -45,8 +45,7 @@ describe('API Routes', () => {
             mood: 'Test Jest Post',
             post:'5ee1a85254d653c1078a5932',
             date: '2020-06-11 23:35:10.588Z',
-            sent: 'false',
-            reply: '5ee27130a90b1edeed22fbd9'
+            sent: 'false'
           });
         expect(status).toBe(200);
         console.log(status);
