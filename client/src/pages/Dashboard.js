@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useInput } from 'react';
 import {
   Grid,
   Box,
@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setPost(value); //mood will be changed once implememted in textfield
+    setPost(value);
   };
 
   const handleSendPost = (event) => {
@@ -44,10 +44,6 @@ const Dashboard = () => {
       .then((res) => alert('Post saved!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
-  };
-
-  const handleMoodClick = (event) => {
-    setMood(event.target.value);
   };
 
   const loadPosts = async () => {
@@ -82,19 +78,19 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item>
-        <Button value='happy' onClick={handleMoodClick}>
+        <Button onClick={() => setMood('Happy')}>
           <img src={happy} alt='happy emoji' />
         </Button>
-        <Button value='angry' onClick={handleMoodClick}>
+        <Button onClick={() => setMood('Angry')}>
           <img src={angry} alt='angry emoji' />
         </Button>
-        <Button value='anxious' onClick={handleMoodClick}>
+        <Button onClick={() => setMood('Anxious')}>
           <img src={anxious} alt='anxious emoji' />
         </Button>
-        <Button value='loved' onClick={handleMoodClick}>
+        <Button onClick={() => setMood('Loved')}>
           <img src={loved} alt='loved emoji' />
         </Button>
-        <Button value='sad' onClick={handleMoodClick}>
+        <Button onClick={() => setMood('Happy')}>
           <img src={sad} alt='sad emoji' />
         </Button>
         <Grid item />
