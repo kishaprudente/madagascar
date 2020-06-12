@@ -56,15 +56,15 @@ const styles = {
   },
 }
 
-const PostCard = ({ post, renderRandomPost }) => {
+const PostCard = ({ post, posts, renderNextPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [reply, setReply] = useState({ response: '' });
 
   useEffect(() => {
-    renderRandomPost();
-  });
+    renderNextPost();
+  }, [posts]);
 
   const handleInputChange = (event) => {
     setReply({ response: event.target.value, post: post._id });
@@ -90,7 +90,7 @@ const PostCard = ({ post, renderRandomPost }) => {
     setAlertOpen(false);
     setOpen(false);
     setReply({ response: '' });
-    renderRandomPost();
+    renderNextPost();
   };
 
   const handleSendReply = async () => {
@@ -116,7 +116,7 @@ const PostCard = ({ post, renderRandomPost }) => {
           {post ? (
             post.post
           ) : (
-              'There are currently no posts. Check back later!'
+              'If you are seeing this, there are no new posts! Click refresh to try again!'
             )}
         </Box>
         <Button onClick={handleOpen} variant='contained' disabled={post ? (false) : (true)} style={styles.replyButton}>reply</Button>

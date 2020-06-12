@@ -25,27 +25,31 @@ const Reply = () => {
   // posts is all posts from db (filtered)
   const [posts, setPosts] = useState([]);
 
-  const renderRandomPost = () => {
-    // if there is a post, then remove it when shuffling
-    // if (post.length) {
-    //   posts.filter((p) => p._id === post._id);
-    // }
-    const randomIndex = Math.floor(Math.random() * posts.length) || 0;
-    setPost(posts[randomIndex]);
+  const renderNextPost = () => {
+    // TODO: never let a post render twice in a row
+    if (post) {
+      const nextIndex = posts.indexOf(post) + 1;
+      setPost(posts[nextIndex]);
+    }
+    else {
+      filterPosts();
+      setPost(posts[0]);
+    }
   }
 
   // gets all posts, filtered to include only
   // ones that are sent & ones without a response
+  // queue
   const filterPosts = async () => {
-    try{
+    try {
       const { data } = await API.getPost();
       console.log(data);
-      const allPosts = data.reverse().filter((post) => {
+      const allPosts = data.filter((post) => {
         return (post.sent === true && !post.reply); // post.sent === true && !post.reply
       });
       console.log('filtered posts', allPosts);
       setPosts(allPosts);
-      renderRandomPost();
+      console.log('useeffect:', posts, 'post', post);
     } catch(err) {
       throw err;
     }
@@ -53,7 +57,7 @@ const Reply = () => {
 
   const handleNextButtonClick = (event) => {
     event.preventDefault();
-    renderRandomPost();
+    renderNextPost();
   }
 
   useEffect(() => {
@@ -64,8 +68,8 @@ const Reply = () => {
     <Grid container style={styles.container}>
       <Grid item sm={4} />
       <Grid item sm={4}>
-        <PostCard post={post} renderRandomPost={renderRandomPost}/>
-        <Button variant='contained' disabled={post ? (false) : (true)} onClick={handleNextButtonClick} style={styles.nextButton}>shuffle</Button>
+        <PostCard post={post} posts={posts} filterPosts={filterPosts} renderNextPost={renderNextPost}/>
+        <Button variant='contained' onClick={handleNextButtonClick} style={styles.nextButton}>{post ? ('next') : ('refresh')}</Button>
       </Grid>
       <Grid item sm={4} />
     </Grid>
