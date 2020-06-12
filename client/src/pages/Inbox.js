@@ -23,9 +23,9 @@ const Inbox = () => {
   }, []);
 
   return (
-    <Grid container direction='column' alignItems='center' style={{ background: '#A1D1B6', height: '100vh' }}>
+    <Grid container direction='column' alignItems='center' style={{ background: '#A1D1B6', height: '100vh', fontFamily: 'Rosarivo', }}>
       <Grid item>
-        <h3>A little birdy told me...</h3>
+        <h3 style={{fontFamily: 'Reenie Beanie'}}>A little birdy told me...</h3>
       </Grid>
       <Grid item>
         <Paper elevation={3} style={{ borderRadius: '10px' }}>
@@ -39,16 +39,19 @@ const Inbox = () => {
         </Paper>
       </Grid>
       <Grid item>
-        <Button variant='outlined' style={{ background: 'rgba(255, 216, 99, 0.87)', margin: '20px' }}>next</Button>
+        <Button variant='outlined' style={{ background: 'rgba(255, 216, 99, 0.87)', margin: '20px', fontFamily: 'Reenie Beanie' }}>next</Button>
       </Grid>
       <Grid item >
-        <div style={{ maxHeight: '250px', width: '350px', background: '#F2F2F2', marginTop: '30px', borderRadius: '10px' }}>
+        <div style={{ maxHeight: '250px', width: '350px', background: '#F2F2F2', marginTop: '30px', borderRadius: '10px', overflow: 'auto'}} >
           <List component='nav' aria-label='inbox'>
             {replies.length ?
-              (replies.map((reply) => (
-                <ListItem button key={reply._id}>
-                  <ListItemText inset primary={reply.response} />
-                </ListItem>
+              (replies.map((reply, index) => (
+                <React.Fragment key={reply._id}>
+                  <ListItem button>
+                    <ListItemText inset primary={reply.response} primaryTypographyProps={{style: {fontFamily: 'Rosarivo'}}} />
+                  </ListItem>
+                  { index !== replies.length-1 ? (<Divider />) : null}  
+                </React.Fragment>
               ))
               ) : (
                 <ListItem>
