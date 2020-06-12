@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useInput } from 'react';
+import Moment from 'react-moment';
 import {
   Grid,
   Box,
@@ -66,9 +67,9 @@ const Dashboard = () => {
       justify='center'
       alignItems='center'
       direction='column'
-      position='fixed'
+      position='absolute'
     >
-      <Grid item />
+      {/* <Grid item /> */}
 
       <Grid item>
         <h3>
@@ -98,7 +99,7 @@ const Dashboard = () => {
           style={{
             marginBottom: '10px',
             backgroundColor: 'white',
-            width: '300px',
+            width: '320px',
           }}
           id='outlined-multiline-static'
           multiline
@@ -128,18 +129,24 @@ const Dashboard = () => {
         </Button>
       </Grid>
 
-      <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
+      <Grid item style={{ marginBottom: '5px' }}>
         {posts.length ? (
           <Box component='div' style={{ height: '330px' }} overflow='auto'>
             {posts.map((post) => {
               return (
-                <ExpansionPanel key={post._id}>
+                <ExpansionPanel style={{ width: '320px' }} key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1a-content'
                     id='panel1a-header'
                   >
-                    {post.date}
+                    <Moment
+                      style={{ marginRight: '180px' }}
+                      format='MM/DD/YYYY'
+                    >
+                      {post.date}
+                    </Moment>
+
                     {post.mood}
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>{post.post}</ExpansionPanelDetails>
@@ -151,7 +158,6 @@ const Dashboard = () => {
           <h3>You don't have any posts yet!</h3>
         )}
       </Grid>
-      <Grid item style={{ margin: '5px' }}></Grid>
     </Grid>
   );
 };
