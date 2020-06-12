@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     background: 'rgba(255, 216, 99, 0.87)',
     margin: '5px',
     float: 'right',
+    fontFamily: 'Reenie Beanie',
   }
 }));
 
@@ -50,6 +51,7 @@ const styles = {
     left: '250px',
     bottom: '180px',
     borderRadius: '10px',
+    fontFamily: 'Reenie Beanie',
   },
 }
 
@@ -95,7 +97,7 @@ const PostCard = ({ post, renderRandomPost }) => {
       // send reply to db
       const { data } = await API.replyPost(reply);
       // create new post object with reply id
-      const newPost = {...post, reply: data._id }
+      const newPost = { ...post, reply: data._id }
       // update post with reply id
       await API.updatePostResponse(post._id, newPost);
       // open success alert
@@ -116,7 +118,7 @@ const PostCard = ({ post, renderRandomPost }) => {
               'There are currently no posts. Check back later!'
             )}
         </Box>
-        <Button onClick={handleOpen} variant='contained' disabled={post ? (false) : (true) } style={styles.replyButton}>reply</Button>
+        <Button onClick={handleOpen} variant='contained' disabled={post ? (false) : (true)} style={styles.replyButton}>reply</Button>
       </Container>
       <Modal
         aria-labelledby='reply-modal-title'
