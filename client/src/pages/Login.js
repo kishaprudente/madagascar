@@ -46,50 +46,32 @@ export default function Login() {
       <Grid item style={{ width: '180px' }}>
         <TextField
           style={{ marginBottom: '10px' }}
-<<<<<<< HEAD
           label='Username'
+          name='username'
           id='outlined-size-normal'
           placeholder='Username'
           variant='outlined'
+          onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
           label='Password'
+          name='password'
           type='password'
           id='outlined-size-normal'
           placeholder='Password'
           variant='outlined'
-=======
-          label="Username"
-          name="username"
-          id="outlined-size-normal"
-          placeholder="Username"
-          variant="outlined"
           onChange={(e) => handleInputChange(e)}
-        ></TextField>
-        <TextField
-          style={{ marginBottom: '10px' }}
-          label="Password"
-          name="password"
-          id="outlined-size-normal"
-          placeholder="Password"
-          variant="outlined"
-          onChange={(e) => handleInputChange(e)}
->>>>>>> master
         ></TextField>
       </Grid>
 
       <Grid item>
-<<<<<<< HEAD
-        <Button style={buttonStyle} variant='contained' color='primary'>
-=======
         <Button
           style={buttonStyle}
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={handleLogin}
         >
->>>>>>> master
           Login
         </Button>
       </Grid>

@@ -18,50 +18,43 @@ const useStyles = makeStyles({
 });
 
 const BottomNav = () => {
-
   const classes = useStyles();
-  const [value, setValue] = React.useState('mood')
+  const [value, setValue] = React.useState('mood');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root}>
+    <BottomNavigation
+      value={value}
+      onChange={handleChange}
+      showLabels
+      className={classes.root}
+    >
       <BottomNavigationAction
         component={Link}
-<<<<<<< HEAD
         to='/reply'
         label='Send'
-        icon={<SendIcon />}
-      />
-      <BottomNavigationAction label='Mood' icon={<MoodIcon />} />
-      <BottomNavigationAction label='Inbox' icon={<InboxIcon />} />
-    </BottomNavigation>
-=======
-        to="/reply"
-        label="Send"
-        value="send"
+        value='send'
         icon={<SendIcon />}
       />
       <BottomNavigationAction
         component={Link}
-        to="/dashboard"
-        label="Mood"
-        value="mood"
+        to='/dashboard'
+        label='Mood'
+        value='mood'
         icon={<MoodIcon />}
-        />
+      />
       <BottomNavigationAction
         component={Link}
-        to="/inbox"
-        label="Send"
-        value="send"
+        to='/inbox'
+        label='Send'
+        value='send'
         icon={<InboxIcon />}
       />
-      </BottomNavigation>
->>>>>>> master
+    </BottomNavigation>
   );
 };
-
 
 export default BottomNav;
