@@ -116,7 +116,7 @@ const PostCard = ({ post, renderRandomPost }) => {
               'There are currently no posts. Check back later!'
             )}
         </Box>
-        <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
+        <Button onClick={handleOpen} variant='contained' disabled={post ? (false) : (true) } style={styles.replyButton}>reply</Button>
       </Container>
       <Modal
         aria-labelledby='reply-modal-title'
