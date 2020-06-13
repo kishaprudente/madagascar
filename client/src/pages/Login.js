@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, TextField } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
-import API from '../utils/API';
+import userAPI from '../utils/userAPI';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -13,12 +13,12 @@ export default function Login() {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
-    setUser({ [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
   const handleLogin = async () => {
     try {
-      const login = await API.loginUser({
+      const login = await userAPI.loginUser({
         username: user.username,
         password: user.password,
       });
@@ -34,33 +34,33 @@ export default function Login() {
     <Grid
       container
       style={container}
-      justify='space-evenly'
-      alignItems='center'
-      direction='column'
+      justify="space-evenly"
+      alignItems="center"
+      direction="column"
     >
       <Grid item />
       <Grid item>
-        <img src={chirpy} alt='chirpy the bird' />
+        <img src={chirpy} alt="chirpy the bird" />
       </Grid>
 
       <Grid item style={{ width: '180px' }}>
         <TextField
           style={{ marginBottom: '10px' }}
-          label='Username'
-          name='username'
-          id='outlined-size-normal'
-          placeholder='Username'
-          variant='outlined'
+          label="Username"
+          name="username"
+          id="outlined-size-normal"
+          placeholder="Username"
+          variant="outlined"
           onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
-          label='Password'
-          name='password'
-          type='password'
-          id='outlined-size-normal'
-          placeholder='Password'
-          variant='outlined'
+          label="Password"
+          name="password"
+          type="password"
+          id="outlined-size-normal"
+          placeholder="Password"
+          variant="outlined"
           onChange={(e) => handleInputChange(e)}
         ></TextField>
       </Grid>
@@ -68,8 +68,8 @@ export default function Login() {
       <Grid item>
         <Button
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={handleLogin}
         >
           Login
@@ -77,7 +77,7 @@ export default function Login() {
       </Grid>
 
       <Grid item>
-        No account? <Link to='/signup'>Sign up</Link>
+        No account? <Link to="/signup">Sign up</Link>
       </Grid>
       <Grid item></Grid>
     </Grid>
