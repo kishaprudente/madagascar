@@ -12,7 +12,7 @@ import Signup from './pages/Signup';
 import BottomNav from './components/BottomNav';
 
 function App() {
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (
     <div data-testid="app">
