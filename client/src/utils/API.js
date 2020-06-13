@@ -27,12 +27,4 @@ export default {
   replyPost: function(replyData) {
     return axios.post('/api/replies', replyData);
   },
-
-  // USER ROUTES
-  createUser: function(userData) {
-    return axios.post('/api/auth/signup', userData);
-  },
-  loginUser: function(userData) {
-    return axios.post('/api/auth/login', userData);
-  },
 };
