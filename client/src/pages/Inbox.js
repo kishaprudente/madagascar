@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Button, Box, List, ListItem, ListItemText, Divider } from '@material-ui/core';
+import {
+  Grid,
+  Paper,
+  Button,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from '@material-ui/core';
 import API from '../utils/API';
 
 const Inbox = () => {
   const [replies, setReplies] = useState([]);
-  const [latestReply, setLatestReply] = useState("");
+  const [latestReply, setLatestReply] = useState('');
 
   const getReplies = async () => {
     try {
@@ -12,11 +21,10 @@ const Inbox = () => {
       const reversedOrder = [...data.reverse()];
       setReplies(reversedOrder);
       setLatestReply(reversedOrder[0].response);
-    }
-    catch (err) {
+    } catch (err) {
       throw err;
     }
-  }
+  };
 
   useEffect(() => {
     getReplies();
@@ -29,7 +37,11 @@ const Inbox = () => {
       </Grid>
       <Grid item>
         <Paper elevation={3} style={{ borderRadius: '10px' }}>
-          <Box component='div' overflow='auto' style={{ padding: '20px', height: '300px', width: '250px' }}>
+          <Box
+            component="div"
+            overflow="auto"
+            style={{ padding: '20px', height: '300px', width: '250px' }}
+          >
             {latestReply.length ? (
               <p>{latestReply}</p>
             ) : (
@@ -53,16 +65,16 @@ const Inbox = () => {
                   { index !== replies.length-1 ? (<Divider />) : null}  
                 </React.Fragment>
               ))
-              ) : (
-                <ListItem>
-                  <ListItemText inset primary='Nothing to show!' />
-                </ListItem>
-              )}
+            ) : (
+              <ListItem>
+                <ListItemText inset primary="Nothing to show!" />
+              </ListItem>
+            )}
           </List>
         </div>
       </Grid>
-    </Grid >
+    </Grid>
   );
-}
+};
 
 export default Inbox;

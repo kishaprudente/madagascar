@@ -17,8 +17,9 @@ const styles = {
     bottom: '100px',
     borderRadius: '10px',
     fontFamily: 'Reenie Beanie',
-  }
-}
+  },
+};
+
 const Reply = () => {
   // post is single rendered post
   const [post, setPost] = useState({});
@@ -53,7 +54,7 @@ const Reply = () => {
     } catch(err) {
       throw err;
     }
-  }
+  };
 
   const handleNextButtonClick = (event) => {
     event.preventDefault();
@@ -62,7 +63,7 @@ const Reply = () => {
 
   useEffect(() => {
     filterPosts();
-  },[]);
+  }, []);
 
   return (
     <Grid container style={styles.container}>
@@ -74,6 +75,6 @@ const Reply = () => {
       <Grid item sm={4} />
     </Grid>
   );
-}
+};
 
 export default Reply;
