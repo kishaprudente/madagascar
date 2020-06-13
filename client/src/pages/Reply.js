@@ -17,8 +17,8 @@ const styles = {
     bottom: '100px',
     borderRadius: '10px',
     fontFamily: 'Reenie Beanie',
-  }
-}
+  },
+};
 const Reply = () => {
   // post is single rendered post
   const [post, setPost] = useState({});
@@ -30,12 +30,11 @@ const Reply = () => {
     if (post) {
       const nextIndex = posts.indexOf(post) + 1;
       setPost(posts[nextIndex]);
-    }
-    else {
+    } else {
       filterPosts();
       setPost(posts[0]);
     }
-  }
+  };
 
   // gets all posts, filtered to include only
   // ones that are sent & ones without a response
@@ -45,35 +44,46 @@ const Reply = () => {
       const { data } = await API.getPost();
       console.log(data);
       const allPosts = data.filter((post) => {
-        return (post.sent === true && !post.reply); // post.sent === true && !post.reply
+        return post.sent === true && !post.reply; // post.sent === true && !post.reply
       });
       console.log('filtered posts', allPosts);
       setPosts(allPosts);
       console.log('useeffect:', posts, 'post', post);
-    } catch(err) {
+    } catch (err) {
       throw err;
     }
-  }
+  };
 
   const handleNextButtonClick = (event) => {
     event.preventDefault();
     renderNextPost();
-  }
+  };
 
   useEffect(() => {
     filterPosts();
-  },[]);
+  }, []);
 
   return (
     <Grid container style={styles.container}>
       <Grid item sm={4} />
       <Grid item sm={4}>
-        <PostCard post={post} posts={posts} filterPosts={filterPosts} renderNextPost={renderNextPost}/>
-        <Button variant='contained' onClick={handleNextButtonClick} style={styles.nextButton}>{post ? ('next') : ('refresh')}</Button>
+        <PostCard
+          post={post}
+          posts={posts}
+          filterPosts={filterPosts}
+          renderNextPost={renderNextPost}
+        />
+        <Button
+          variant='contained'
+          onClick={handleNextButtonClick}
+          style={styles.nextButton}
+        >
+          {post ? 'next' : 'refresh'}
+        </Button>
       </Grid>
       <Grid item sm={4} />
     </Grid>
   );
-}
+};
 
 export default Reply;

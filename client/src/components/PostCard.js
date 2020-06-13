@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '5px',
     float: 'right',
     fontFamily: 'Reenie Beanie',
-  }
+  },
 }));
 
 const styles = {
@@ -54,7 +54,7 @@ const styles = {
     borderRadius: '10px',
     fontFamily: 'Reenie Beanie',
   },
-}
+};
 
 const PostCard = ({ post, posts, renderNextPost }) => {
   const classes = useStyles();
@@ -98,7 +98,7 @@ const PostCard = ({ post, posts, renderNextPost }) => {
       // send reply to db
       const { data } = await API.replyPost(reply);
       // create new post object with reply id
-      const newPost = { ...post, reply: data._id }
+      const newPost = { ...post, reply: data._id };
       // update post with reply id
       await API.updatePostResponse(post._id, newPost);
       // open success alert
@@ -106,20 +106,30 @@ const PostCard = ({ post, posts, renderNextPost }) => {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   return (
     <div>
       <Container style={styles.container}>
-        <Box component='img' src={LayeredPages} alt='background' style={styles.svg} />
+        <Box
+          component='img'
+          src={LayeredPages}
+          alt='background'
+          style={styles.svg}
+        />
         <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
-          {post ? (
-            post.post
-          ) : (
-              'If you are seeing this, there are no new posts! Click refresh to try again!'
-            )}
+          {post
+            ? post.post
+            : 'If you are seeing this, there are no new posts! Click refresh to try again!'}
         </Box>
-        <Button onClick={handleOpen} variant='contained' disabled={post ? (false) : (true)} style={styles.replyButton}>reply</Button>
+        <Button
+          onClick={handleOpen}
+          variant='contained'
+          disabled={post ? false : true}
+          style={styles.replyButton}
+        >
+          reply
+        </Button>
       </Container>
       <Modal
         aria-labelledby='reply-modal-title'
@@ -144,17 +154,27 @@ const PostCard = ({ post, posts, renderNextPost }) => {
               onChange={handleInputChange}
               style={{ width: '100%' }}
             />
-            <Button onClick={handleSendReply} variant='contained' className={classes.sendButton}>Send</Button>
+            <Button
+              onClick={handleSendReply}
+              variant='contained'
+              className={classes.sendButton}
+            >
+              Send
+            </Button>
           </div>
         </Fade>
       </Modal>
-      <Snackbar open={alertOpen} autoHideDuration={1000} onClose={handleCloseAlert}>
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={1000}
+        onClose={handleCloseAlert}
+      >
         <Alert onClose={handleCloseAlert} severity='success'>
           Sent~
         </Alert>
       </Snackbar>
     </div>
   );
-}
+};
 
 export default PostCard;
