@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     background: 'rgba(255, 216, 99, 0.87)',
     margin: '5px',
     float: 'right',
-  }
+    fontFamily: 'Reenie Beanie',
+  },
 }));
 
 const styles = {
@@ -42,7 +43,8 @@ const styles = {
     height: '100px',
     left: '50px',
     bottom: '190px',
-    zIndex: '1200'
+    zIndex: '1200',
+    fontFamily: 'Rosarivo',
   },
   replyButton: {
     background: 'rgba(255, 216, 99, 0.87)',
@@ -50,18 +52,19 @@ const styles = {
     left: '250px',
     bottom: '180px',
     borderRadius: '10px',
+    fontFamily: 'Reenie Beanie',
   },
-}
+};
 
-const PostCard = ({ post, renderRandomPost }) => {
+const PostCard = ({ post, posts, renderNextPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [reply, setReply] = useState({});
+  const [reply, setReply] = useState({ response: '' });
 
   useEffect(() => {
-    renderRandomPost();
-  });
+    renderNextPost();
+  }, [posts]);
 
   const handleInputChange = (event) => {
     setReply({ response: event.target.value, post: post._id });
@@ -86,8 +89,8 @@ const PostCard = ({ post, renderRandomPost }) => {
     // close all
     setAlertOpen(false);
     setOpen(false);
-    setReply({});
-    renderRandomPost();
+    setReply({ response: '' });
+    renderNextPost();
   };
 
   const handleSendReply = async () => {
@@ -95,7 +98,7 @@ const PostCard = ({ post, renderRandomPost }) => {
       // send reply to db
       const { data } = await API.replyPost(reply);
       // create new post object with reply id
-      const newPost = {...post, reply: data._id }
+      const newPost = { ...post, reply: data._id };
       // update post with reply id
       await API.updatePostResponse(post._id, newPost);
       // open success alert
@@ -103,20 +106,30 @@ const PostCard = ({ post, renderRandomPost }) => {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   return (
     <div>
       <Container style={styles.container}>
-        <Box component='img' src={LayeredPages} alt='background' style={styles.svg} />
+        <Box
+          component='img'
+          src={LayeredPages}
+          alt='background'
+          style={styles.svg}
+        />
         <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
-          {post ? (
-            post.post
-          ) : (
-              'There are currently no posts. Check back later!'
-            )}
+          {post
+            ? post.post
+            : 'If you are seeing this, there are no new posts! Click refresh to try again!'}
         </Box>
-        <Button onClick={handleOpen} variant='contained' style={styles.replyButton}>reply</Button>
+        <Button
+          onClick={handleOpen}
+          variant='contained'
+          disabled={post ? false : true}
+          style={styles.replyButton}
+        >
+          reply
+        </Button>
       </Container>
       <Modal
         aria-labelledby='reply-modal-title'
@@ -141,17 +154,27 @@ const PostCard = ({ post, renderRandomPost }) => {
               onChange={handleInputChange}
               style={{ width: '100%' }}
             />
-            <Button onClick={handleSendReply} variant='contained' className={classes.sendButton}>Send</Button>
+            <Button
+              onClick={handleSendReply}
+              variant='contained'
+              className={classes.sendButton}
+            >
+              Send
+            </Button>
           </div>
         </Fade>
       </Modal>
-      <Snackbar open={alertOpen} autoHideDuration={1000} onClose={handleCloseAlert}>
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={1000}
+        onClose={handleCloseAlert}
+      >
         <Alert onClose={handleCloseAlert} severity='success'>
           Sent~
         </Alert>
       </Snackbar>
     </div>
   );
-}
+};
 
 export default PostCard;
