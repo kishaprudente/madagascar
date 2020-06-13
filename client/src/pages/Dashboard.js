@@ -16,7 +16,6 @@ import angry from '../assets/angry.svg';
 import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
-import BottomNav from '../components/BottomNav';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
@@ -79,19 +78,19 @@ const Dashboard = () => {
 
       <Grid item>
         <Button onClick={() => setMood('Happy')}>
-          <img src={happy} alt='happy emoji' />
+          <img src={happy} alt="happy emoji" />
         </Button>
         <Button onClick={() => setMood('Angry')}>
-          <img src={angry} alt='angry emoji' />
+          <img src={angry} alt="angry emoji" />
         </Button>
         <Button onClick={() => setMood('Anxious')}>
-          <img src={anxious} alt='anxious emoji' />
+          <img src={anxious} alt="anxious emoji" />
         </Button>
         <Button onClick={() => setMood('Loved')}>
-          <img src={loved} alt='loved emoji' />
+          <img src={loved} alt="loved emoji" />
         </Button>
-        <Button onClick={() => setMood('Happy')}>
-          <img src={sad} alt='sad emoji' />
+        <Button onClick={() => setMood('Sad')}>
+          <img src={sad} alt="sad emoji" />
         </Button>
         <Grid item />
         <TextField
