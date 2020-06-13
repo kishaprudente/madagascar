@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Button, TextField } from '@material-ui/core';
+import { Grid, Button, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
 
 export default function Login() {
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
+  const [show, setShow] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
     setUser({ ...user, [name]: value });
+  };
+
+  const handleClickShowPassword = () => {
+    setShow(!show);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   const handleLogin = async () => {
@@ -57,11 +69,24 @@ export default function Login() {
           style={{ marginBottom: '10px' }}
           label="Password"
           name="password"
-          type="password"
-          id="outlined-size-normal"
+          type={show ? 'text' : 'password'}
+          id="filled-adornment-password"
           placeholder="Password"
           variant="outlined"
           onChange={(e) => handleInputChange(e)}
+          InputProps={{
+            endAdornment: 
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {show ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+          }}
         ></TextField>
       </Grid>
 

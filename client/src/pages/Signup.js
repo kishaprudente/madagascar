@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Button, TextField } from '@material-ui/core';
+import { Grid, Button, TextField, IconButton, InputAdornment} from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function Signup() {
   // const [username, setUsername] = useState('');
@@ -13,10 +15,20 @@ export default function Signup() {
     confirm: '',
   });
 
+  const [show, setShow] = useState(false);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
     setUser({ ...user, [name]: value });
+  };
+
+  const handleClickShowPassword = () => {
+    setShow(!show);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   const handleSubmitUser = async () => {
@@ -50,7 +62,7 @@ export default function Signup() {
         <img src={chirpy} alt="chirpy the bird" />
       </Grid>
 
-      <Grid item style={{ width: '180px' }}>
+      <Grid item style={{ width: '200px' }}>
         <TextField
           style={{ marginBottom: '10px' }}
           label="Username"
@@ -64,21 +76,47 @@ export default function Signup() {
           style={{ marginBottom: '10px' }}
           label="Password"
           name="password"
-          type="password"
+          type={show ? 'text' : 'password'}
           id="outlined-size-normal"
           placeholder="Password"
           variant="outlined"
           onChange={(e) => handleInputChange(e)}
+          InputProps={{
+            endAdornment: 
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {show ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+          }}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
           label="Confirm Password"
           name="confirm"
-          type="password"
+          type={show ? 'text' : 'password'}
           id="outlined-size-normal"
           placeholder="Confirm Password"
           variant="outlined"
           onChange={(e) => handleInputChange(e)}
+          InputProps={{
+            endAdornment: 
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {show ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+          }}
         ></TextField>
       </Grid>
 
