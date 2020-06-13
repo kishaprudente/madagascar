@@ -19,6 +19,7 @@ const styles = {
     fontFamily: 'Reenie Beanie',
   },
 };
+
 const Reply = () => {
   // post is single rendered post
   const [post, setPost] = useState({});

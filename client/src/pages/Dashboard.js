@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useInput } from 'react';
 import {
   Grid,
   Box,
@@ -8,7 +8,6 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from '@material-ui/core';
-//import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
@@ -22,16 +21,17 @@ import BottomNav from '../components/BottomNav';
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
+  const [mood, setMood] = useState('');
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setPost(value); //mood will be changed once implememted in textfield
+    setPost(value);
   };
 
   const handleSendPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: 'Happy', sent: true })
+    API.createPost({ post: post, mood: mood, sent: true })
       .then((res) => alert('Post sent!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
@@ -40,7 +40,7 @@ const Dashboard = () => {
   const handleKeepPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: 'Happy', sent: false })
+    API.createPost({ post: post, mood: mood, sent: false })
       .then((res) => alert('Post saved!'))
       .then(() => setPost(''))
       .catch((err) => console.log(err));
@@ -50,7 +50,6 @@ const Dashboard = () => {
     try {
       const allPosts = await API.getPost();
       setPosts(allPosts.data.reverse());
-      //console.log(allPosts.data);
     } catch (err) {
       throw err;
     }
@@ -64,35 +63,35 @@ const Dashboard = () => {
     <Grid
       container
       style={container}
-      justify='center'
-      alignItems='center'
-      direction='column'
-      position='fixed'
+      justify="center"
+      alignItems="center"
+      direction="column"
+      position="fixed"
     >
       <Grid item />
 
       <Grid item>
         <h3>
           How are you feeling today?
-          <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
+          <img src={chirpy} alt="chirpy the bird" style={chirpyStyle} />
         </h3>
       </Grid>
 
       <Grid item>
-        <Button>
-          <img src={happy} />
+        <Button onClick={() => setMood('Happy')}>
+          <img src={happy} alt='happy emoji' />
         </Button>
-        <Button>
-          <img src={angry} />
+        <Button onClick={() => setMood('Angry')}>
+          <img src={angry} alt='angry emoji' />
         </Button>
-        <Button>
-          <img src={anxious} />
+        <Button onClick={() => setMood('Anxious')}>
+          <img src={anxious} alt='anxious emoji' />
         </Button>
-        <Button>
-          <img src={loved} />
+        <Button onClick={() => setMood('Loved')}>
+          <img src={loved} alt='loved emoji' />
         </Button>
-        <Button>
-          <img src={sad} />
+        <Button onClick={() => setMood('Happy')}>
+          <img src={sad} alt='sad emoji' />
         </Button>
         <Grid item />
         <TextField
@@ -101,10 +100,10 @@ const Dashboard = () => {
             backgroundColor: 'white',
             width: '300px',
           }}
-          id='outlined-multiline-static'
+          id="outlined-multiline-static"
           multiline
           rows={6}
-          variant='outlined'
+          variant="outlined"
           onChange={handleInputChange}
           value={post}
         ></TextField>
@@ -114,16 +113,16 @@ const Dashboard = () => {
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
         >
           Keep
         </Button>
         <Button
           onClick={handleSendPost}
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
         >
           Send
         </Button>
@@ -131,14 +130,14 @@ const Dashboard = () => {
 
       <Grid item style={{ marginLeft: '20px', marginRight: '20px' }}>
         {posts.length ? (
-          <Box component='div' style={{ height: '330px' }} overflow='auto'>
+          <Box component="div" style={{ height: '330px' }} overflow="auto">
             {posts.map((post) => {
               return (
                 <ExpansionPanel key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls='panel1a-content'
-                    id='panel1a-header'
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
                   >
                     {post.date}
                     {post.mood}
@@ -153,7 +152,6 @@ const Dashboard = () => {
         )}
       </Grid>
       <Grid item style={{ margin: '5px' }}></Grid>
-      <BottomNav />
     </Grid>
   );
 };
@@ -163,7 +161,7 @@ export default Dashboard;
 const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
-  height: '100vh',
+  height: '90vh',
   flexGrow: '1',
   fontFamily: 'Reenie Beanie',
   fontsize: '3em',
@@ -183,10 +181,4 @@ const buttonStyle = {
   fontFamily: 'Reenie Beanie',
   marginLeft: '5px',
   marginRight: '5px',
-};
-
-const bottomNav = {
-  width: '100%',
-  position: 'fixed',
-  bottom: 0,
 };
