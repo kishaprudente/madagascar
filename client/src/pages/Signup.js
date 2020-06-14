@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Button, TextField, IconButton, InputAdornment} from '@material-ui/core';
+import {
+  Grid,
+  Button,
+  TextField,
+  IconButton,
+  InputAdornment,
+} from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
 import Visibility from '@material-ui/icons/Visibility';
@@ -53,69 +59,71 @@ export default function Signup() {
     <Grid
       container
       style={container}
-      justify="space-evenly"
-      alignItems="center"
-      direction="column"
+      justify='space-evenly'
+      alignItems='center'
+      direction='column'
     >
       <Grid item />
       <Grid item>
-        <img src={chirpy} alt="chirpy the bird" />
+        <img src={chirpy} alt='chirpy the bird' />
       </Grid>
 
       <Grid item style={{ width: '200px' }}>
         <TextField
-          style={{ marginBottom: '10px' }}
-          label="Username"
-          name="username"
-          id="outlined-size-normal"
-          placeholder="Username"
-          variant="outlined"
+          style={{ marginBottom: '10px', width: '200px' }}
+          label='Username'
+          name='username'
+          id='outlined-size-normal'
+          placeholder='Username'
+          variant='outlined'
           onChange={(e) => handleInputChange(e)}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Password"
-          name="password"
+          label='Password'
+          name='password'
           type={show ? 'text' : 'password'}
-          id="outlined-size-normal"
-          placeholder="Password"
-          variant="outlined"
+          id='outlined-size-normal'
+          placeholder='Password'
+          variant='outlined'
           onChange={(e) => handleInputChange(e)}
           InputProps={{
-            endAdornment: 
-              <InputAdornment position="end">
+            endAdornment: (
+              <InputAdornment position='end'>
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label='toggle password visibility'
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  edge="end"
+                  edge='end'
                 >
                   {show ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
+            ),
           }}
         ></TextField>
         <TextField
           style={{ marginBottom: '10px' }}
-          label="Confirm Password"
-          name="confirm"
+          label='Confirm Password'
+          name='confirm'
           type={show ? 'text' : 'password'}
-          id="outlined-size-normal"
-          placeholder="Confirm Password"
-          variant="outlined"
+          id='outlined-size-normal'
+          placeholder='Confirm Password'
+          variant='outlined'
           onChange={(e) => handleInputChange(e)}
           InputProps={{
-            endAdornment: 
-              <InputAdornment position="end">
+            endAdornment: (
+              <InputAdornment position='end'>
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label='toggle password visibility'
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  edge="end"
+                  edge='end'
                 >
                   {show ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
+            ),
           }}
         ></TextField>
       </Grid>
@@ -123,8 +131,8 @@ export default function Signup() {
       <Grid item>
         <Button
           style={buttonStyle}
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={handleSubmitUser}
         >
           Sign Up
@@ -132,7 +140,7 @@ export default function Signup() {
       </Grid>
 
       <Grid item>
-        Already have an account? <Link to="/login">Login</Link>
+        Already have an account? <Link to='/login'>Login</Link>
       </Grid>
       <Grid item></Grid>
     </Grid>
