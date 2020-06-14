@@ -21,9 +21,7 @@ export default function Landing() {
         <img style={chirpyStyle} src={chirpy} alt='chirpy the bird' />
       </Grid>
       <Grid item style={quoteStyle}>
-        <Box container style={{ width: '300px' }}>
-          {quote}
-        </Box>
+        <Box style={{ width: '300px' }}>{quote}</Box>
       </Grid>
       <Grid item>
         <Button style={buttonStyle} variant='contained' color='primary'>
