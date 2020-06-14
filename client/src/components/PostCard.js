@@ -5,13 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import AlertBar from './AlertBar';
 import API from '../utils/API';
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -164,15 +159,12 @@ const PostCard = ({ post, posts, renderNextPost }) => {
           </div>
         </Fade>
       </Modal>
-      <Snackbar
-        open={alertOpen}
-        autoHideDuration={1000}
+      <AlertBar
+        message='Sent~'
+        type='success'
+        openState={alertOpen}
         onClose={handleCloseAlert}
-      >
-        <Alert onClose={handleCloseAlert} severity='success'>
-          Sent~
-        </Alert>
-      </Snackbar>
+      />
     </div>
   );
 };
