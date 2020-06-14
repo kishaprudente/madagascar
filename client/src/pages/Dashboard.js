@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useInput } from 'react';
+import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import {
   Grid,
@@ -10,6 +10,7 @@ import {
   ExpansionPanelDetails,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
 import happy from '../assets/happy.svg';
@@ -26,6 +27,10 @@ const Dashboard = () => {
   const handleInputChange = (event) => {
     const { value } = event.target;
     setPost(value);
+  };
+
+  const handleMoodChange = (event, newMood) => {
+    setMood(newMood);
   };
 
   const handleSendPost = (event) => {
@@ -68,8 +73,6 @@ const Dashboard = () => {
       direction='column'
       position='absolute'
     >
-      {/* <Grid item /> */}
-
       <Grid item>
         <h3>
           How are you feeling today?
@@ -78,21 +81,49 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item>
-        <Button onClick={() => setMood('Happy')}>
-          <img src={happy} alt='happy emoji' />
-        </Button>
-        <Button onClick={() => setMood('Angry')}>
-          <img src={angry} alt='angry emoji' />
-        </Button>
-        <Button onClick={() => setMood('Anxious')}>
-          <img src={anxious} alt='anxious emoji' />
-        </Button>
-        <Button onClick={() => setMood('Loved')}>
-          <img src={loved} alt='loved emoji' />
-        </Button>
-        <Button onClick={() => setMood('Sad')}>
-          <img src={sad} alt='sad emoji' />
-        </Button>
+        <ToggleButtonGroup
+          value={mood}
+          exclusive
+          onChange={handleMoodChange}
+          aria-label='moods'
+        >
+          <ToggleButton
+            value='happy'
+            aria-label='happy'
+            style={{ border: 0, marginRight: '16px' }}
+          >
+            <img src={happy} alt='happy emoji' />
+          </ToggleButton>
+          <ToggleButton
+            value='Angry'
+            aria-label='angry'
+            style={{ border: 0, marginRight: '16px' }}
+          >
+            <img src={angry} alt='angry emoji' />
+          </ToggleButton>
+          <ToggleButton
+            value='Anxious'
+            aria-label='anxious'
+            style={{ border: 0, marginLeft: '16px', marginRight: '16px' }}
+          >
+            <img src={anxious} alt='anxious emoji' />
+          </ToggleButton>
+          <ToggleButton
+            value='Loved'
+            aria-label='loved'
+            style={{ border: 0, marginLeft: '16px', marginRight: '16px' }}
+          >
+            <img src={loved} alt='loved emoji' />
+          </ToggleButton>
+          <ToggleButton
+            value='Sad'
+            aria-label='sad'
+            style={{ border: 0, marginLeft: '16px' }}
+          >
+            <img src={sad} alt='sad emoji' />
+          </ToggleButton>
+        </ToggleButtonGroup>
+
         <Grid item />
         <TextField
           style={{
