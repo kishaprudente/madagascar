@@ -17,7 +17,6 @@ import angry from '../assets/angry.svg';
 import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
-import BottomNav from '../components/BottomNav';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');

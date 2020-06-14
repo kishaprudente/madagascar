@@ -16,45 +16,40 @@ const styles = {
     margin: '0 auto',
     bottom: '100px',
     borderRadius: '10px',
+    fontFamily: 'Reenie Beanie',
   },
 };
+
 const Reply = () => {
   // post is single rendered post
   const [post, setPost] = useState({});
   // posts is all posts from db (filtered)
   const [posts, setPosts] = useState([]);
 
-  const noPost = { post: 'No more posts at this time. Check back later!' };
-
-  // function to shuffle array values
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * i);
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+  const renderNextPost = () => {
+    // TODO: never let a post render twice in a row
+    if (post) {
+      const nextIndex = posts.indexOf(post) + 1;
+      setPost(posts[nextIndex]);
+    } else {
+      filterPosts();
+      setPost(posts[0]);
     }
-    console.log(array);
-    return array;
-  };
-
-  const renderRandomPost = () => {
-    const randomIndex = Math.floor(Math.random() * posts.length) || 0;
-    setPost(posts[randomIndex]);
   };
 
   // gets all posts, filtered to include only
   // ones that are sent & ones without a response
+  // queue
   const filterPosts = async () => {
     try {
       const { data } = await API.getPost();
       console.log(data);
-      const allPosts = data.reverse().filter((post) => {
+      const allPosts = data.filter((post) => {
         return post.sent === true && !post.reply; // post.sent === true && !post.reply
       });
       console.log('filtered posts', allPosts);
-      setPosts(shuffleArray(allPosts));
-      renderRandomPost();
+      setPosts(allPosts);
+      console.log('useeffect:', posts, 'post', post);
     } catch (err) {
       throw err;
     }
@@ -62,7 +57,7 @@ const Reply = () => {
 
   const handleNextButtonClick = (event) => {
     event.preventDefault();
-    renderRandomPost();
+    renderNextPost();
   };
 
   useEffect(() => {
@@ -73,13 +68,18 @@ const Reply = () => {
     <Grid container style={styles.container}>
       <Grid item sm={4} />
       <Grid item sm={4}>
-        <PostCard post={post} renderRandomPost={renderRandomPost} />
+        <PostCard
+          post={post}
+          posts={posts}
+          filterPosts={filterPosts}
+          renderNextPost={renderNextPost}
+        />
         <Button
-          variant="contained"
+          variant='contained'
           onClick={handleNextButtonClick}
           style={styles.nextButton}
         >
-          next
+          {post ? 'next' : 'refresh'}
         </Button>
       </Grid>
       <Grid item sm={4} />
