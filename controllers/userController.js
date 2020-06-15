@@ -1,12 +1,12 @@
 // const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
 
-const keys = require('../config/keys');
+// const keys = require('../config/keys');
 const db = require('../models');
 
-const validateSignupInput = require('../routes/authAPI/validation/signup');
-const validateLoginInput = require('../routes/authAPI/validation/login');
+// const validateSignupInput = require('../routes/authAPI/validation/signup');
+// const validateLoginInput = require('../routes/authAPI/validation/login');
 
 // Defining methods for the UsersController
 module.exports = {
@@ -33,6 +33,7 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
+  /**
   // auth contollers
   // sign up
   signup: async (req, res) => {
@@ -120,4 +121,5 @@ module.exports = {
     req.logout();
     res.redirect('/');
   },
+  */
 };
