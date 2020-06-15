@@ -47,7 +47,7 @@ const Inbox = () => {
           <Box
             component='div'
             overflow='auto'
-            style={{ padding: '20px', height: '300px', width: '250px' }}
+            style={{ padding: '20px', height: '270px', width: '250px' }}
           >
             {latestReply.length ? (
               <p>{latestReply}</p>
@@ -75,7 +75,6 @@ const Inbox = () => {
             maxHeight: '250px',
             width: '350px',
             background: '#F2F2F2',
-            marginTop: '30px',
             borderRadius: '10px',
             overflow: 'auto',
           }}
