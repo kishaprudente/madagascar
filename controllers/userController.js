@@ -25,9 +25,7 @@ module.exports = {
   // auth contollers
   // sign up
   signup: async (req, res) => {
-    // console.log('user signup');
     try {
-      console.log(req.body);
       const { username, password } = req.body;
       // ADD VALIDATION
       await db.User.findOne({ username: username }, (err, user) => {
@@ -42,13 +40,12 @@ module.exports = {
             username: username,
             password: password,
           });
-          console.log('NEW USER', newUser);
           newUser.save((err, savedUser) => {
             if (err) {
+              console.log(err);
               return res.json(err);
             }
             res.json(savedUser);
-            console.log(savedUser);
           });
         }
       });
@@ -57,17 +54,19 @@ module.exports = {
     }
   },
   // login
-  login:
-    (passport.authenticate('local'),
-    (req, res) => {
-      console.log(req.body);
-      console.log('logged in', req.body);
+  login: (req, res, next) => {
+    passport.authenticate('local', function(err, user) {
+      if (err) {
+        return next(err);
+      }
+      console.log('logged in', user);
       var userInfo = {
-        username: req.body.username,
-        id: req.id,
+        username: user.username,
+        id: user.id,
       };
       res.send(userInfo);
-    }),
+    })(req, res, next);
+  },
   // logout
   logout: (req, res) => {
     if (req.user) {
