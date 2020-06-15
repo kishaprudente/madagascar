@@ -10,8 +10,11 @@ export default {
     console.log(userData);
     return axios.post('/api/auth/login', userData);
   },
-  logoutUser: function() {
+  logoutUser: () => {
     localStorage.removeItem('user');
     return axios.post('/api/auth/logout');
+  },
+  getUserData: (id) => {
+    return axios.get(`/api/auth/user/${id}`);
   },
 };
