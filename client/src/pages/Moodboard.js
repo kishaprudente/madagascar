@@ -9,21 +9,23 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AlertBar from '../components/AlertBar';
-import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
 import happy from '../assets/happy.svg';
 import angry from '../assets/angry.svg';
 import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
+import API from '../utils/API.js';
+import userAPI from '../utils/userAPI';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
+  const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -86,6 +88,15 @@ const Dashboard = () => {
       });
   };
 
+  const handleLogout = async () => {
+    try {
+      await userAPI.logoutUser();
+      window.location.replace('/');
+    } catch (err) {
+      throw err;
+    }
+  };
+
   const loadPosts = async () => {
     try {
       const allPosts = await API.getPost();
@@ -110,7 +121,7 @@ const Dashboard = () => {
     >
       <Grid item>
         <h3>
-          How are you feeling today?
+          Hello, {username}! How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
         </h3>
       </Grid>
@@ -191,6 +202,14 @@ const Dashboard = () => {
           color='primary'
         >
           Send
+        </Button>
+        <Button
+          style={buttonStyle}
+          variant='contained'
+          color='primary'
+          onClick={handleLogout}
+        >
+          Logout
         </Button>
       </Grid>
 

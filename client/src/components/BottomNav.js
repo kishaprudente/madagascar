@@ -34,23 +34,23 @@ const BottomNav = () => {
     >
       <BottomNavigationAction
         component={Link}
-        to="/reply"
-        label="Send"
-        value="send"
+        to='/reply'
+        label='Reply'
+        value='reply'
         icon={<SendIcon />}
       />
       <BottomNavigationAction
         component={Link}
-        to="/dashboard"
-        label="Mood"
-        value="mood"
+        to='/moodboard'
+        label='Moodboard'
+        value='moodboard'
         icon={<MoodIcon />}
       />
       <BottomNavigationAction
         component={Link}
-        to="/inbox"
-        label="Inbox"
-        value="inbox"
+        to='/inbox'
+        label='Inbox'
+        value='inbox'
         icon={<InboxIcon />}
       />
     </BottomNavigation>

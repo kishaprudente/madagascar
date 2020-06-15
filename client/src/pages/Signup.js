@@ -7,18 +7,14 @@ import {
   IconButton,
   InputAdornment,
 } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function Signup() {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
   const [user, setUser] = useState({
     username: '',
     password: '',
-    confirm: '',
   });
 
   const [show, setShow] = useState(false);
@@ -45,10 +41,12 @@ export default function Signup() {
         const newUser = await userAPI.createUser({
           username: user.username,
           password: user.password,
-          confirm: user.confirm,
         });
-        console.log(newUser.config.data);
-        window.location.replace('/dashboard');
+        console.log('newUser', newUser);
+        if (newUser.status === 200) {
+          localStorage.setItem('user', JSON.stringify(newUser.data.username));
+        }
+        window.location.replace('/moodboard');
       }
     } catch (err) {
       throw err;

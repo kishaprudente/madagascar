@@ -1,13 +1,5 @@
-// const router = require('express').Router();
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
-
-// const keys = require('../config/keys');
 const db = require('../models');
 const passport = require('../config/passport');
-
-// const validateSignupInput = require('../routes/authAPI/validation/signup');
-// const validateLoginInput = require('../routes/authAPI/validation/login');
 
 // Defining methods for the UsersController
 module.exports = {
@@ -49,7 +41,7 @@ module.exports = {
             error: `Sorry, already a user with the username: ${username}`,
           });
         } else {
-          const newUser = new User({
+          const newUser = new db.User({
             username: username,
             password: password,
           });
@@ -67,15 +59,13 @@ module.exports = {
   },
   // login
   login:
-    ((req, res, next) => {
-      next();
-    },
-    passport.authenticate('local'),
+    (passport.authenticate('local'),
     (req, res) => {
-      console.log('logged in', req.user);
+      console.log(req.body);
+      console.log('logged in', req.body);
       var userInfo = {
-        username: req.user.username,
-        id: req.user.id,
+        username: req.body.username,
+        id: req.id,
       };
       res.send(userInfo);
     }),
