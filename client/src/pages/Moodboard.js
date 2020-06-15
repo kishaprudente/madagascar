@@ -123,10 +123,11 @@ const Dashboard = () => {
       position='absolute'
     >
       <Grid item>
-        <h3>
-          Hello, {username}! How are you feeling today?
+        <h3 style={{ margin: 0, textAlign: 'center' }}>Hello, {username}!</h3>
+        <h4 style={{ margin: 0, textAlign: 'center' }}>
+          How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
-        </h3>
+        </h4>
       </Grid>
 
       <Grid item>
@@ -218,7 +219,7 @@ const Dashboard = () => {
         </Button>
       </Grid>
 
-      <Grid item style={{ marginBottom: '5px' }}>
+      <Grid item style={{ fontSize: '1em', marginBottom: '5px' }}>
         {posts.length ? (
           <Box component='div' style={{ height: '330px' }} overflow='auto'>
             {posts.map((post) => {
@@ -230,7 +231,7 @@ const Dashboard = () => {
                     id='panel1a-header'
                   >
                     <Moment
-                      style={{ marginRight: '180px' }}
+                      style={{ marginRight: '150px' }}
                       format='MM/DD/YYYY'
                     >
                       {post.date}
@@ -265,12 +266,13 @@ const container = {
   height: '90vh',
   flexGrow: '1',
   fontFamily: 'Reenie Beanie',
-  fontsize: '3em',
+  fontSize: '18px',
 };
 
 const chirpyStyle = {
   width: '1em',
   height: '1em',
+  marginLeft: '5px',
 };
 
 const buttonStyle = {
@@ -279,7 +281,7 @@ const buttonStyle = {
   border: '1px solid',
   lineHeight: 1.5,
   backgroundColor: 'rgba(255, 216, 99, 0.87)',
-  fontFamily: 'Reenie Beanie',
+  fontFamily: 'Ruluko',
   marginLeft: '5px',
   marginRight: '5px',
 };
