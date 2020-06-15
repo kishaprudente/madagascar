@@ -1,25 +1,37 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const keys = require('./keys');
+const passport = require('passport');
+const User = require('../models/User');
+const LocalStrategy = require('passport-local').Strategy;
 
-const db = require('../models');
-
-const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = keys.secretOrKey;
-
-module.exports = (passport) => {
-  passport.use(
-    new JwtStrategy(opts, async (jwtPayload, done) => {
-      try {
-        const user = await db.User.findById(jwtPayload.id);
-        if (user) {
-          return done(null, user);
-        }
-        return done(null, false);
-      } catch (err) {
-        throw err;
+const strategy = new LocalStrategy(
+  {
+    usernameField: 'username', // not necessary, DEFAULT
+  },
+  function(username, password, done) {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) {
+        return done(err);
       }
-    })
-  );
-};
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username' });
+      }
+      if (!user.checkPassword(password)) {
+        return done(null, false, { message: 'Incorrect password' });
+      }
+      return done(null, user);
+    });
+  }
+);
+passport.serializeUser((user, done) => {
+  done(null, { _id: user._id });
+});
+
+// user object attaches to the request as req.user
+passport.deserializeUser((id, done) => {
+  User.findOne({ _id: id }, 'username', (err, user) => {
+    done(null, user);
+  });
+});
+
+passport.use(strategy);
+
+module.exports = passport;
