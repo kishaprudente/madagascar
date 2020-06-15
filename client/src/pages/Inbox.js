@@ -13,17 +13,23 @@ import API from '../utils/API';
 
 const Inbox = () => {
   const [replies, setReplies] = useState([]);
-  const [latestReply, setLatestReply] = useState('');
+  const [reply, setReply] = useState('');
 
   const getReplies = async () => {
     try {
       const { data } = await API.getReplies();
       const reversedOrder = [...data.reverse()];
       setReplies(reversedOrder);
-      setLatestReply(reversedOrder[0].response);
+      setReply(reversedOrder[0].response);
     } catch (err) {
       throw err;
     }
+  };
+  const handleInboxClick = (event) => {
+    const clickedReply = replies.filter(
+      (r) => r.response === event.target.innerHTML
+    );
+    setReply(clickedReply[0].response);
   };
 
   useEffect(() => {
@@ -49,8 +55,8 @@ const Inbox = () => {
             overflow='auto'
             style={{ padding: '20px', height: '270px', width: '250px' }}
           >
-            {latestReply.length ? (
-              <p>{latestReply}</p>
+            {reply ? (
+              <p>{reply}</p>
             ) : (
               <p>You have not received any responses yet!</p>
             )}
@@ -85,7 +91,8 @@ const Inbox = () => {
                 <React.Fragment key={reply._id}>
                   <ListItem button>
                     <ListItemText
-                      inset
+                      style={{ margin: 0, padding: 0, textAlign: 'center' }}
+                      onClick={handleInboxClick}
                       primary={reply.response}
                       primaryTypographyProps={{
                         style: { fontFamily: 'Rosarivo' },
