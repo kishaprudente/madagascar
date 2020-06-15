@@ -25,6 +25,7 @@ const Inbox = () => {
       throw err;
     }
   };
+
   const handleInboxClick = (event) => {
     const clickedReply = replies.filter(
       (r) => r.response === event.target.innerHTML
@@ -91,11 +92,20 @@ const Inbox = () => {
                 <React.Fragment key={reply._id}>
                   <ListItem button>
                     <ListItemText
-                      style={{ margin: 0, padding: 0, textAlign: 'center' }}
+                      style={{
+                        textAlign: 'center',
+                        maxHeight: '50px',
+                      }}
                       onClick={handleInboxClick}
                       primary={reply.response}
                       primaryTypographyProps={{
-                        style: { fontFamily: 'Rosarivo' },
+                        style: {
+                          display: 'block',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          fontFamily: 'Rosarivo',
+                        },
                       }}
                     />
                   </ListItem>
