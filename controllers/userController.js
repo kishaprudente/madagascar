@@ -1,12 +1,13 @@
 // const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
 
-const keys = require('../config/keys');
+// const keys = require('../config/keys');
 const db = require('../models');
+const passport = require('../config/passport');
 
-const validateSignupInput = require('../routes/authAPI/validation/signup');
-const validateLoginInput = require('../routes/authAPI/validation/login');
+// const validateSignupInput = require('../routes/authAPI/validation/signup');
+// const validateLoginInput = require('../routes/authAPI/validation/login');
 
 // Defining methods for the UsersController
 module.exports = {
@@ -36,88 +37,66 @@ module.exports = {
   // auth contollers
   // sign up
   signup: async (req, res) => {
+    // console.log('user signup');
     try {
-      const { username, password, confirm } = req.body;
-      // Form validation
-      const { errors, isValid } = validateSignupInput({ username, password, confirm });
-      // Check validation
-      if (!isValid) {
-        return res.status(400).json(errors);
-      }
-
-      const user = await db.User.findOne({ username });
-      if (user) {
-        return res.status(400).json({ username: 'Username already exists' });
-      } else {
-        const newUser = new db.User({
-          username: username,
-          password: password,
-          confirm: confirm
-        });
-
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, async (err, hash) => {
-            if (err) {
-              throw err;
-            }
-            newUser.password = hash;
-            const saveUser = await newUser.save();
-            res.json(saveUser);
+      const { username, password } = req.body;
+      // ADD VALIDATION
+      await db.User.findOne({ username: username }, (err, user) => {
+        if (err) {
+          console.log('User.js post error: ', err);
+        } else if (user) {
+          res.json({
+            error: `Sorry, already a user with the username: ${username}`,
           });
-        });
-      }
-    } catch (err) {
-      throw err;
+        } else {
+          const newUser = new User({
+            username: username,
+            password: password,
+          });
+          newUser.save((err, savedUser) => {
+            if (err) {
+              return res.json(err);
+            }
+            res.json(savedUser);
+          });
+        }
+      });
+    } catch (error) {
+      return error;
     }
   },
   // login
-  login: async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      // Form validation
-      const { errors, isValid } = validateLoginInput(req.body);
-      // Check validation
-      if (!isValid) {
-        return res.status(400).json(errors);
-      }
-
-      // Find user by username
-      const user = await db.User.findOne({ username });
-      // Check if user exists
-      if (!user) {
-        return res
-          .status(404)
-          .json({ usernamenotfound: 'username not found' });
-      }
-      // Check password
-      const isMatched = await bcrypt.compare(password, user.password);
-      if (isMatched) {
-        // Create JWT Payload
-        const payload = {
-          id: user.id,
-          username: user.username
-        };
-          // Sign token
-        jwt.sign(payload, keys.secretOrKey,
-          {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({ success: true, token: 'Bearer ' + token });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: 'Password incorrect' });
-      }
-    } catch (err) {
-      throw err;
-    }
-  },
+  login:
+    ((req, res, next) => {
+      next();
+    },
+    passport.authenticate('local'),
+    (req, res) => {
+      console.log('logged in', req.user);
+      var userInfo = {
+        username: req.user.username,
+        id: req.user.id,
+      };
+      res.send(userInfo);
+    }),
   // logout
   logout: (req, res) => {
-    req.logout();
-    res.redirect('/');
+    if (req.user) {
+      req.logout();
+      res.send({ msg: 'logging out' });
+    } else {
+      res.send({ msg: 'no user to log out' });
+    }
+  },
+  checkUser: (req, res, next) => {
+    if (req.user) {
+      res.json({
+        username: req.user.username,
+        id: req.user.id,
+      });
+    } else {
+      res.json({ user: null });
+      next();
+    }
   },
 };
