@@ -16,15 +16,15 @@ function App() {
   const user = localStorage.getItem('user');
   console.log(user);
   return (
-    <div data-testid="app">
+    <div data-testid='app'>
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <PrivateRoute exact path="/moodboard" component={Moodboard} />
-          <PrivateRoute exact path="/reply" component={Reply} />
-          <PrivateRoute exact path="/inbox" component={Inbox} />
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={Signup} />
+          <PrivateRoute exact path='/moodboard' component={Moodboard} />
+          <PrivateRoute exact path='/reply' component={Reply} />
+          <PrivateRoute exact path='/inbox' component={Inbox} />
         </Switch>
         {user ? <BottomNav /> : null}
       </Router>

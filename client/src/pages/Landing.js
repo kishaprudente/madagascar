@@ -10,22 +10,22 @@ export default function Landing() {
     <Grid
       container
       style={container}
-      justify="center"
-      alignItems="center"
-      direction="column"
+      justify='center'
+      alignItems='center'
+      direction='column'
     >
       <Grid item>
         <h2 style={logoStyle}>chirrup!</h2>
       </Grid>
       <Grid item>
-        <img style={chirpyStyle} src={chirpy} alt="chirpy the bird" />
+        <img style={chirpyStyle} src={chirpy} alt='chirpy the bird' />
       </Grid>
       <Grid item style={quoteStyle}>
         <Box style={{ width: '300px' }}>{quote}</Box>
       </Grid>
       <Grid item>
-        <Button style={buttonStyle} variant="contained" color="primary">
-          <Link to="/login">Let's chirp!</Link>
+        <Button style={buttonStyle} variant='contained' color='primary'>
+          <Link to='/login'>Let's chirp!</Link>
         </Button>
       </Grid>
     </Grid>
