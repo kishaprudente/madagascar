@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import AlertBar from '../components/AlertBar';
 import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
 import happy from '../assets/happy.svg';
@@ -23,6 +24,22 @@ const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
+  // error alert state
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const handleErrorAlert = (message) => {
+    setAlertMessage(message);
+    setAlertOpen(true);
+  };
+
+  const handleCloseErrorAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    // close alert
+    setAlertOpen(false);
+  };
 
   const handleInputChange = (event) => {
     const { value } = event.target;
@@ -39,7 +56,16 @@ const Dashboard = () => {
     API.createPost({ post: post, mood: mood, sent: true })
       .then((res) => alert('Post sent!'))
       .then(() => setPost(''))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (!post) {
+          handleErrorAlert('Please enter text in your post.');
+        } else if (!mood) {
+          handleErrorAlert('Please select a mood for your post.');
+        } else if (!post && !mood) {
+          handleErrorAlert('Sorry! Your post cannot be empty.');
+        }
+        console.log(err);
+      });
   };
 
   const handleKeepPost = (event) => {
@@ -48,7 +74,16 @@ const Dashboard = () => {
     API.createPost({ post: post, mood: mood, sent: false })
       .then((res) => alert('Post saved!'))
       .then(() => setPost(''))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (!post && !mood) {
+          handleErrorAlert('Sorry! Your post cannot be empty.');
+        } else if (!post) {
+          handleErrorAlert('Please enter text in your post.');
+        } else if (!mood) {
+          handleErrorAlert('Please select a mood for your post.');
+        }
+        console.log(err);
+      });
   };
 
   const loadPosts = async () => {
@@ -188,6 +223,12 @@ const Dashboard = () => {
           <h3>You don't have any posts yet!</h3>
         )}
       </Grid>
+      <AlertBar
+        message={alertMessage}
+        type='error'
+        openState={alertOpen}
+        onClose={handleCloseErrorAlert}
+      />
     </Grid>
   );
 };
