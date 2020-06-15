@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import {
   Grid,
+  Paper,
   Box,
   Button,
   TextField,
@@ -82,11 +83,11 @@ const Dashboard = () => {
       handleErrorAlert('Please select a mood for your post.');
     } else {
       API.createPost({ post: post, mood: mood, sent: false })
-      .then((res) => alert('Post saved!'))
-      .then(() => setPost(''))
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => alert('Post saved!'))
+        .then(() => setPost(''))
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -173,22 +174,24 @@ const Dashboard = () => {
         </ToggleButtonGroup>
 
         <Grid item />
-        <TextField
-          style={{
-            marginBottom: '10px',
-            backgroundColor: 'white',
-            width: '320px',
-          }}
-          id='outlined-multiline-static'
-          multiline
-          rows={6}
-          variant='outlined'
-          onChange={handleInputChange}
-          value={post}
-        ></TextField>
+        <Paper elevation={3} style={{ borderRadius: '10px' }}>
+          <TextField
+            style={{
+              margin: '10px',
+              backgroundColor: 'white',
+              width: '320px',
+            }}
+            id='outlined-multiline-static'
+            multiline
+            rows={6}
+            variant='outlined'
+            onChange={handleInputChange}
+            value={post}
+          ></TextField>
+        </Paper>
       </Grid>
 
-      <Grid item style={{ marginBottom: '15px' }}>
+      <Grid item style={{ marginTop: '10px', marginBottom: '15px' }}>
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
