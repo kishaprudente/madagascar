@@ -18,6 +18,14 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+  replies: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Reply',
+  }]
 });
 
 UserSchema.methods = {
