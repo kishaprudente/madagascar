@@ -55,37 +55,39 @@ const Dashboard = () => {
   const handleSendPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: mood, sent: true })
-      .then((res) => alert('Post sent!'))
-      .then(() => setPost(''))
-      .catch((err) => {
-        if (!post && !mood) {
-          handleErrorAlert('Sorry! Your post cannot be empty.');
-        } else if (!post) {
-          handleErrorAlert('Please enter text in your post.');
-        } else if (!mood) {
-          handleErrorAlert('Please select a mood for your post.');
-        }
-        console.log(err);
-      });
+    if (!post && !mood) {
+      handleErrorAlert('Sorry! Your post cannot be empty.');
+    } else if (!post) {
+      handleErrorAlert('Please enter text in your post.');
+    } else if (!mood) {
+      handleErrorAlert('Please select a mood for your post.');
+    } else {
+      API.createPost({ post: post, mood: mood, sent: true })
+        .then((res) => alert('Post sent!'))
+        .then(() => setPost(''))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const handleKeepPost = (event) => {
     event.preventDefault();
 
-    API.createPost({ post: post, mood: mood, sent: false })
+    if (!post && !mood) {
+      handleErrorAlert('Sorry! Your post cannot be empty.');
+    } else if (!post) {
+      handleErrorAlert('Please enter text in your post.');
+    } else if (!mood) {
+      handleErrorAlert('Please select a mood for your post.');
+    } else {
+      API.createPost({ post: post, mood: mood, sent: false })
       .then((res) => alert('Post saved!'))
       .then(() => setPost(''))
       .catch((err) => {
-        if (!post && !mood) {
-          handleErrorAlert('Sorry! Your post cannot be empty.');
-        } else if (!post) {
-          handleErrorAlert('Please enter text in your post.');
-        } else if (!mood) {
-          handleErrorAlert('Please select a mood for your post.');
-        }
         console.log(err);
       });
+    }
   };
 
   const handleLogout = async () => {
