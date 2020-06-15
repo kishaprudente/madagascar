@@ -97,7 +97,13 @@ const Inbox = () => {
               ))
             ) : (
               <ListItem>
-                <ListItemText inset primary='Nothing to show!' />
+                <ListItemText
+                  inset
+                  primary='Nothing to show!'
+                  primaryTypographyProps={{
+                    style: { fontFamily: 'Rosarivo' },
+                  }}
+                />
               </ListItem>
             )}
           </List>
