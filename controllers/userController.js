@@ -54,17 +54,19 @@ module.exports = {
     }
   },
   // login
-  login:
-    (passport.authenticate('local'),
-    (req, res) => {
-      console.log(req.body);
-      console.log('logged in', req.body);
+  login: (req, res, next) => {
+    passport.authenticate('local', function(err, user) {
+      if (err) {
+        return next(err);
+      }
+      console.log('logged in', user);
       var userInfo = {
-        username: req.body.username,
-        id: req.id,
+        username: user.username,
+        id: user.id,
       };
       res.send(userInfo);
-    }),
+    })(req, res, next);
+  },
   // logout
   logout: (req, res) => {
     if (req.user) {
