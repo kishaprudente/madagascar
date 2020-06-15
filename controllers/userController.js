@@ -15,12 +15,19 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
+  getData: (req, res) => {
+    db.User.findById(req.params.id)
+      .populate('posts')
+      .populate('replies')
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   // auth contollers
   // sign up
   signup: async (req, res) => {
     // console.log('user signup');
     try {
+      console.log(req.body);
       const { username, password } = req.body;
       // ADD VALIDATION
       await db.User.findOne({ username: username }, (err, user) => {
@@ -35,11 +42,13 @@ module.exports = {
             username: username,
             password: password,
           });
+          console.log('NEW USER', newUser);
           newUser.save((err, savedUser) => {
             if (err) {
               return res.json(err);
             }
             res.json(savedUser);
+            console.log(savedUser);
           });
         }
       });
