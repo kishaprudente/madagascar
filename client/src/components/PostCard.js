@@ -53,7 +53,9 @@ const styles = {
 
 const PostCard = ({ post, posts, setPost, setPosts, renderNextPost }) => {
   const classes = useStyles();
+  // modal open state
   const [open, setOpen] = useState(false);
+  // alert open state
   const [alertOpen, setAlertOpen] = useState(false);
   const [reply, setReply] = useState({ response: '' });
 
