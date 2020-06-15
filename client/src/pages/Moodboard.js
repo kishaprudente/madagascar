@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import {
   Grid,
+  Paper,
   Box,
   Button,
   TextField,
@@ -28,14 +29,19 @@ const Dashboard = () => {
   const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
   const handleErrorAlert = (message) => {
-    setAlertMessage(message);
+    setAlertMessage({ message, type: 'error' });
     setAlertOpen(true);
   };
 
-  const handleCloseErrorAlert = (event, reason) => {
+  const handleSuccessAlert = (message) => {
+    setAlertMessage({ message, type: 'success' });
+    setAlertOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -63,8 +69,11 @@ const Dashboard = () => {
       handleErrorAlert('Please select a mood for your post.');
     } else {
       API.createPost({ post: post, mood: mood, sent: true })
-        .then((res) => alert('Post sent!'))
-        .then(() => setPost(''))
+        .then((res) => handleSuccessAlert('Post sent!'))
+        .then(() => {
+          setPost('');
+          loadPosts();
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -82,11 +91,14 @@ const Dashboard = () => {
       handleErrorAlert('Please select a mood for your post.');
     } else {
       API.createPost({ post: post, mood: mood, sent: false })
-      .then((res) => alert('Post saved!'))
-      .then(() => setPost(''))
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => handleSuccessAlert('Post saved!'))
+        .then(() => {
+          setPost('');
+          loadPosts();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -101,6 +113,7 @@ const Dashboard = () => {
 
   const loadPosts = async () => {
     try {
+      console.log('loadPosts');
       const allPosts = await API.getPost();
       setPosts(allPosts.data.reverse());
     } catch (err) {
@@ -110,7 +123,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <Grid
@@ -122,73 +135,92 @@ const Dashboard = () => {
       position='absolute'
     >
       <Grid item>
-        <h3>
-          Hello, {username}! How are you feeling today?
+        <h3 style={{ margin: 0, textAlign: 'center' }}>Hello, {username}!</h3>
+        <h4 style={{ margin: 0, textAlign: 'center' }}>
+          How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
-        </h3>
+        </h4>
       </Grid>
 
-      <Grid item>
+      <Grid item style={{ textAlign: 'center' }}>
         <ToggleButtonGroup
           value={mood}
           exclusive
           onChange={handleMoodChange}
           aria-label='moods'
+          //style={{ align: 'center' }}
         >
           <ToggleButton
             value='Happy'
             aria-label='happy'
-            style={{ border: 0, marginRight: '16px' }}
+            style={{ border: 0, margin: '8px', borderRadius: '42px' }}
           >
             <img src={happy} alt='happy emoji' />
           </ToggleButton>
           <ToggleButton
             value='Angry'
             aria-label='angry'
-            style={{ border: 0, marginRight: '16px' }}
+            style={{ border: 0, margin: '8px', borderRadius: '42px' }}
           >
             <img src={angry} alt='angry emoji' />
           </ToggleButton>
           <ToggleButton
             value='Anxious'
             aria-label='anxious'
-            style={{ border: 0, marginLeft: '16px', marginRight: '16px' }}
+            style={{
+              border: 0,
+
+              margin: '8px',
+              borderRadius: '42px',
+            }}
           >
             <img src={anxious} alt='anxious emoji' />
           </ToggleButton>
           <ToggleButton
             value='Loved'
             aria-label='loved'
-            style={{ border: 0, marginLeft: '16px', marginRight: '16px' }}
+            style={{
+              border: 0,
+
+              margin: '8px',
+              borderRadius: '42px',
+            }}
           >
             <img src={loved} alt='loved emoji' />
           </ToggleButton>
           <ToggleButton
             value='Sad'
             aria-label='sad'
-            style={{ border: 0, marginLeft: '16px' }}
+            style={{ border: 0, margin: '8px', borderRadius: '42px' }}
           >
             <img src={sad} alt='sad emoji' />
           </ToggleButton>
         </ToggleButtonGroup>
 
         <Grid item />
-        <TextField
-          style={{
-            marginBottom: '10px',
-            backgroundColor: 'white',
-            width: '320px',
-          }}
-          id='outlined-multiline-static'
-          multiline
-          rows={6}
-          variant='outlined'
-          onChange={handleInputChange}
-          value={post}
-        ></TextField>
+        <Paper elevation={3} style={{ borderRadius: '10px' }}>
+          <TextField
+            style={{
+              margin: '10px',
+              backgroundColor: 'white',
+              width: '320px',
+            }}
+            id='outlined-multiline-static'
+            multiline
+            rows={6}
+            variant='outlined'
+            onChange={handleInputChange}
+            value={post}
+            InputProps={{
+              style: {
+                fontFamily: 'Rosarivo',
+              },
+            }}
+          ></TextField>
+        </Paper>
       </Grid>
 
-      <Grid item style={{ marginBottom: '15px' }}>
+      <Grid item style={{ marginTop: '10px', marginBottom: '15px' }}>
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
@@ -215,19 +247,26 @@ const Dashboard = () => {
         </Button>
       </Grid>
 
-      <Grid item style={{ marginBottom: '5px' }}>
+      <Grid item style={{ fontSize: '1em', marginBottom: '5px' }}>
         {posts.length ? (
           <Box component='div' style={{ height: '330px' }} overflow='auto'>
             {posts.map((post) => {
               return (
-                <ExpansionPanel style={{ width: '320px' }} key={post._id}>
+                <ExpansionPanel
+                  style={{
+                    width: '320px',
+                    fontSize: '14px',
+                    fontFamily: 'Rosarivo',
+                  }}
+                  key={post._id}
+                >
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1a-content'
                     id='panel1a-header'
                   >
                     <Moment
-                      style={{ marginRight: '180px' }}
+                      style={{ marginRight: '140px' }}
                       format='MM/DD/YYYY'
                     >
                       {post.date}
@@ -245,10 +284,10 @@ const Dashboard = () => {
         )}
       </Grid>
       <AlertBar
-        message={alertMessage}
-        type='error'
+        message={alertMessage.message}
+        type={alertMessage.type}
         openState={alertOpen}
-        onClose={handleCloseErrorAlert}
+        onClose={handleCloseAlert}
       />
     </Grid>
   );
@@ -262,21 +301,27 @@ const container = {
   height: '90vh',
   flexGrow: '1',
   fontFamily: 'Reenie Beanie',
-  fontsize: '3em',
+  fontSize: '18px',
 };
 
 const chirpyStyle = {
   width: '1em',
   height: '1em',
+  marginLeft: '5px',
 };
 
 const buttonStyle = {
   color: 'black',
   fontSize: 16,
-  border: '1px solid',
+  //border: '1px solid',
   lineHeight: 1.5,
-  backgroundColor: 'rgba(255, 216, 99, 0.87)',
-  fontFamily: 'Reenie Beanie',
+  background: '#ffe259' /* fallback for old browsers */,
+  background:
+    '-webkit-linear-gradient(to left, #ffa751, #ffe259)' /* Chrome 10-25, Safari 5.1-6 */,
+  background:
+    'linear-gradient(to left, #ffa751, #ffe259)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+
+  fontFamily: 'Ruluko',
   marginLeft: '5px',
   marginRight: '5px',
 };
