@@ -24,18 +24,19 @@ const Reply = () => {
   // post is single rendered post
   const [post, setPost] = useState({});
   // posts is all posts from db (filtered)
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
 
   const renderNextPost = () => {
-    // TODO: never let a post render twice in a row
+    console.log('rendernextpost', posts);
     if (posts) {
       if (post) {
         const nextIndex = posts.indexOf(post) + 1;
         setPost(posts[nextIndex]);
       } else {
-        filterPosts();
         setPost(posts[0]);
       }
+    } else {
+      filterPosts();
     }
   };
 
@@ -50,17 +51,24 @@ const Reply = () => {
         return post.sent === true && !post.reply; // post.sent === true && !post.reply
       });
       console.log('allposts', allPosts);
-      if (allPosts.length) {
-        setPosts(allPosts);
-      }
+      setPosts(allPosts);
     } catch (err) {
       throw err;
     }
   };
 
   const handleNextButtonClick = (event) => {
-    event.preventDefault();
-    renderNextPost();
+    console.log(event.target.innerHTML);
+    switch (event.target.innerHTML) {
+      case 'refresh':
+        filterPosts();
+        break;
+      case 'next':
+        renderNextPost();
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -74,7 +82,8 @@ const Reply = () => {
         <PostCard
           post={post}
           posts={posts}
-          filterPosts={filterPosts}
+          setPost={setPost}
+          setPosts={setPosts}
           renderNextPost={renderNextPost}
         />
         <Button
