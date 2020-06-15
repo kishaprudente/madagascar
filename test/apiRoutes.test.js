@@ -27,7 +27,6 @@ describe('API Routes', () => {
     describe('POST Endpoints', () => {
       it('should create a new reply', async () => {
         const { status } = await axios.post('/api/replies', {
-          // _id: '5ee1a85254d653c1078a5674',
           response: 'Jest Post',
           post: '5ee1a85254d653c1078a5932',
         });
