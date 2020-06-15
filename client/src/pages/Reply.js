@@ -71,10 +71,6 @@ const Reply = () => {
     }
   };
 
-  useEffect(() => {
-    filterPosts();
-  }, []);
-
   return (
     <Grid container style={styles.container}>
       <Grid item sm={4} />
