@@ -38,7 +38,6 @@ describe('API Routes', () => {
     describe('POST Endpoints', () => {
       it('should create a new post', async () => {
         const { status } = await axios.post('/api/posts', {
-          // _id: '5ee1a85254d653c1078a5932',
           mood: 'Test Jest Post',
           post: 'hello',
           date: '2020-06-11 23:35:10.588Z',
