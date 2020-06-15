@@ -58,7 +58,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await userAPI.logoutUser();
-      window.location.replace('/login');
+      window.location.replace('/');
     } catch (err) {
       throw err;
     }
