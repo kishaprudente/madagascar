@@ -14,7 +14,7 @@ import PrivateRoute from './utils/PrivateRoute';
 
 function App() {
   const user = localStorage.getItem('user');
-  console.log(user);
+
   return (
     <div data-testid='app'>
       <Router>
@@ -31,12 +31,5 @@ function App() {
     </div>
   );
 }
-
-const styles = {
-  bottom: {
-    position: 'fixed',
-    bottom: 0,
-  },
-};
 
 export default App;
