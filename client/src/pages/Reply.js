@@ -28,12 +28,14 @@ const Reply = () => {
 
   const renderNextPost = () => {
     // TODO: never let a post render twice in a row
-    if (post) {
-      const nextIndex = posts.indexOf(post) + 1;
-      setPost(posts[nextIndex]);
-    } else {
-      filterPosts();
-      setPost(posts[0]);
+    if (posts) {
+      if (post) {
+        const nextIndex = posts.indexOf(post) + 1;
+        setPost(posts[nextIndex]);
+      } else {
+        filterPosts();
+        setPost(posts[0]);
+      }
     }
   };
 
@@ -47,9 +49,10 @@ const Reply = () => {
       const allPosts = data.filter((post) => {
         return post.sent === true && !post.reply; // post.sent === true && !post.reply
       });
-      console.log('filtered posts', allPosts);
-      setPosts(allPosts);
-      console.log('useeffect:', posts, 'post', post);
+      console.log('allposts', allPosts);
+      if (allPosts.length) {
+        setPosts(allPosts);
+      }
     } catch (err) {
       throw err;
     }
