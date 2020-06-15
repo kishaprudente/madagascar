@@ -18,10 +18,11 @@ module.exports = {
   create: ({ body }, res) => {
     db.Reply.create(body)
       .then(({ _id }) =>
-        db.Post.findOneAndUpdate({}, { $set: { reply: _id } }, { new: true })
-      )
-      .then(({ _id }) =>
-        db.User.findOneAndUpdate({}, { $push: { replies: _id } }, { new: true })
+        db.Post.findOneAndUpdate(
+          { _id: body.post },
+          { $set: { reply: _id } },
+          { new: true }
+        )
       )
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
