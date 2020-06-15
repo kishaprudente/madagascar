@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Button, TextField, IconButton, InputAdornment } from '@material-ui/core';
+import {
+  Grid,
+  Button,
+  TextField,
+  IconButton,
+  InputAdornment,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -35,8 +39,10 @@ export default function Login() {
         password: user.password,
       });
       console.log(login);
-      alert('login successful');
-      // window.location.replace('/dashboard');
+      if (login.status === 200) {
+        localStorage.setItem('user', JSON.stringify(login.data));
+      }
+      window.location.replace('/dashboard');
     } catch (err) {
       throw err;
     }
@@ -75,7 +81,7 @@ export default function Login() {
           variant="outlined"
           onChange={(e) => handleInputChange(e)}
           InputProps={{
-            endAdornment: 
+            endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
@@ -86,6 +92,7 @@ export default function Login() {
                   {show ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
+            ),
           }}
         ></TextField>
       </Grid>
