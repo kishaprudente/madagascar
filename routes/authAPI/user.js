@@ -21,15 +21,9 @@ router
   .route('/logout')
   .post(userController.logout);
 
-// @route GET api/auth/user
-router
-  .route('/user')
-  .get(userController.findAll);
-
 // @route GET api/auth/user/id
 router
   .route('/user/:id')
-  .get(userController.findById)
   .put(userController.update)
   .delete(userController.remove);
 
