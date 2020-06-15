@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import API from '../utils/API.js';
+
 import chirpy from '../assets/chirpy.svg';
 import happy from '../assets/happy.svg';
 import angry from '../assets/angry.svg';
@@ -19,10 +19,14 @@ import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 
+import API from '../utils/API.js';
+import userAPI from '../utils/userAPI';
+
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
+  const { username } = JSON.parse(localStorage.getItem('user'));
 
   const handleInputChange = (event) => {
     const { value } = event.target;
@@ -51,6 +55,15 @@ const Dashboard = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleLogout = async () => {
+    try {
+      await userAPI.logoutUser();
+      window.location.replace('/login');
+    } catch (err) {
+      throw err;
+    }
+  };
+
   const loadPosts = async () => {
     try {
       const allPosts = await API.getPost();
@@ -68,15 +81,15 @@ const Dashboard = () => {
     <Grid
       container
       style={container}
-      justify='center'
-      alignItems='center'
-      direction='column'
-      position='absolute'
+      justify="center"
+      alignItems="center"
+      direction="column"
+      position="absolute"
     >
       <Grid item>
         <h3>
-          How are you feeling today?
-          <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
+          Hello, {username}! How are you feeling today?
+          <img src={chirpy} alt="chirpy the bird" style={chirpyStyle} />
         </h3>
       </Grid>
 
@@ -85,42 +98,42 @@ const Dashboard = () => {
           value={mood}
           exclusive
           onChange={handleMoodChange}
-          aria-label='moods'
+          aria-label="moods"
         >
           <ToggleButton
-            value='happy'
-            aria-label='happy'
+            value="happy"
+            aria-label="happy"
             style={{ border: 0, marginRight: '16px' }}
           >
-            <img src={happy} alt='happy emoji' />
+            <img src={happy} alt="happy emoji" />
           </ToggleButton>
           <ToggleButton
-            value='Angry'
-            aria-label='angry'
+            value="Angry"
+            aria-label="angry"
             style={{ border: 0, marginRight: '16px' }}
           >
-            <img src={angry} alt='angry emoji' />
+            <img src={angry} alt="angry emoji" />
           </ToggleButton>
           <ToggleButton
-            value='Anxious'
-            aria-label='anxious'
+            value="Anxious"
+            aria-label="anxious"
             style={{ border: 0, marginLeft: '16px', marginRight: '16px' }}
           >
-            <img src={anxious} alt='anxious emoji' />
+            <img src={anxious} alt="anxious emoji" />
           </ToggleButton>
           <ToggleButton
-            value='Loved'
-            aria-label='loved'
+            value="Loved"
+            aria-label="loved"
             style={{ border: 0, marginLeft: '16px', marginRight: '16px' }}
           >
-            <img src={loved} alt='loved emoji' />
+            <img src={loved} alt="loved emoji" />
           </ToggleButton>
           <ToggleButton
-            value='Sad'
-            aria-label='sad'
+            value="Sad"
+            aria-label="sad"
             style={{ border: 0, marginLeft: '16px' }}
           >
-            <img src={sad} alt='sad emoji' />
+            <img src={sad} alt="sad emoji" />
           </ToggleButton>
         </ToggleButtonGroup>
 
@@ -131,10 +144,10 @@ const Dashboard = () => {
             backgroundColor: 'white',
             width: '320px',
           }}
-          id='outlined-multiline-static'
+          id="outlined-multiline-static"
           multiline
           rows={6}
-          variant='outlined'
+          variant="outlined"
           onChange={handleInputChange}
           value={post}
         ></TextField>
@@ -144,35 +157,43 @@ const Dashboard = () => {
         <Button
           onClick={handleKeepPost}
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
         >
           Keep
         </Button>
         <Button
           onClick={handleSendPost}
           style={buttonStyle}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
         >
           Send
+        </Button>
+        <Button
+          style={buttonStyle}
+          variant="contained"
+          color="primary"
+          onClick={handleLogout}
+        >
+          Logout
         </Button>
       </Grid>
 
       <Grid item style={{ marginBottom: '5px' }}>
         {posts.length ? (
-          <Box component='div' style={{ height: '330px' }} overflow='auto'>
+          <Box component="div" style={{ height: '330px' }} overflow="auto">
             {posts.map((post) => {
               return (
                 <ExpansionPanel style={{ width: '320px' }} key={post._id}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls='panel1a-content'
-                    id='panel1a-header'
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
                   >
                     <Moment
                       style={{ marginRight: '180px' }}
-                      format='MM/DD/YYYY'
+                      format="MM/DD/YYYY"
                     >
                       {post.date}
                     </Moment>
