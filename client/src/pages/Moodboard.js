@@ -9,17 +9,15 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AlertBar from '../components/AlertBar';
-import API from '../utils/API.js';
 import chirpy from '../assets/chirpy.svg';
 import happy from '../assets/happy.svg';
 import angry from '../assets/angry.svg';
 import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
-
 import API from '../utils/API.js';
 import userAPI from '../utils/userAPI';
 
