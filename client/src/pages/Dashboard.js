@@ -123,7 +123,7 @@ const Dashboard = () => {
           aria-label='moods'
         >
           <ToggleButton
-            value='happy'
+            value='Happy'
             aria-label='happy'
             style={{ border: 0, marginRight: '16px' }}
           >
