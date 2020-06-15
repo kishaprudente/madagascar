@@ -35,15 +35,15 @@ const BottomNav = () => {
       <BottomNavigationAction
         component={Link}
         to="/reply"
-        label="Send"
-        value="send"
+        label="Reply"
+        value="reply"
         icon={<SendIcon />}
       />
       <BottomNavigationAction
         component={Link}
-        to="/dashboard"
-        label="Mood"
-        value="mood"
+        to="/moodboard"
+        label="Moodboard"
+        value="moodboard"
         icon={<MoodIcon />}
       />
       <BottomNavigationAction

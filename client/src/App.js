@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Reply from './pages/Reply';
-import Dashboard from './pages/Dashboard';
+import Moodboard from './pages/Moodboard';
 import Inbox from './pages/Inbox';
 
 import Landing from './pages/Landing';
@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/moodboard" component={Moodboard} />
           <PrivateRoute exact path="/reply" component={Reply} />
           <PrivateRoute exact path="/inbox" component={Inbox} />
         </Switch>

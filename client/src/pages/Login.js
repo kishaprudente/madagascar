@@ -42,7 +42,7 @@ export default function Login() {
       if (login.status === 200) {
         localStorage.setItem('user', JSON.stringify(login.data));
       }
-      window.location.replace('/dashboard');
+      window.location.replace('/moodboard');
     } catch (err) {
       throw err;
     }

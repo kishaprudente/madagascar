@@ -46,7 +46,7 @@ export default function Signup() {
         if (newUser.status === 200) {
           localStorage.setItem('user', JSON.stringify(newUser.data.username));
         }
-        window.location.replace('/dashboard');
+        window.location.replace('/moodboard');
       }
     } catch (err) {
       throw err;
