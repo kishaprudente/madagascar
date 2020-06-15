@@ -17,4 +17,7 @@ export default {
   getUserData: (id) => {
     return axios.get(`/api/auth/user/${id}`);
   },
+  checkUser: () => {
+    return axios.get('/api/auth/');
+  },
 };
