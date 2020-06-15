@@ -83,22 +83,19 @@ const PostCard = ({ post, posts, setPost, setPosts, renderNextPost }) => {
     setAlertOpen(false);
     setOpen(false);
     setReply({ response: '' });
-    renderNextPost();
   };
 
   const handleSendReply = async () => {
     try {
-      // send reply to db
-      const { data } = await API.replyPost(reply);
-      // create new post object with reply id
-      const newPost = { ...post, reply: data._id };
-      // update post with reply id
-      await API.updatePostResponse(post._id, newPost);
-      // open success alert
+      // send reply to db, creates reply & updates post with reply id
+      await API.replyPost({
+        ...reply,
+        post: post._id,
+      });
       setAlertOpen(true);
       // remove the post that was just replied to
+      setPosts(posts.filter((p) => post._id !== p._id));
       setPost({});
-      setPosts(posts.filter((p) => data._id !== p._id));
     } catch (err) {
       throw err;
     }
