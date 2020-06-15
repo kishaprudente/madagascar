@@ -3,22 +3,23 @@ const db = require('../models');
 // Defining methods for the postsController
 module.exports = {
   //All post will show up and if there is a reply then it should show as well
-  findAll: function(req, res) {
+  findAll: (req, res) => {
     db.Post
       .find({})
       .populate('reply')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
+  findById: (req, res) => {
     db.Post
       .findById(req.params.id)
-      // .populate('replyid')
+      .populate('reply')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     db.Post.create(req.body)
+      .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { posts: _id } }, { new: true }))
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
