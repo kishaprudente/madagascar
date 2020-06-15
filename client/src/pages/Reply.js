@@ -24,16 +24,19 @@ const Reply = () => {
   // post is single rendered post
   const [post, setPost] = useState({});
   // posts is all posts from db (filtered)
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
 
   const renderNextPost = () => {
-    // TODO: never let a post render twice in a row
-    if (post) {
-      const nextIndex = posts.indexOf(post) + 1;
-      setPost(posts[nextIndex]);
+    console.log('rendernextpost', posts);
+    if (posts) {
+      if (post) {
+        const nextIndex = posts.indexOf(post) + 1;
+        setPost(posts[nextIndex]);
+      } else {
+        setPost(posts[0]);
+      }
     } else {
       filterPosts();
-      setPost(posts[0]);
     }
   };
 
@@ -47,22 +50,20 @@ const Reply = () => {
       const allPosts = data.filter((post) => {
         return post.sent === true && !post.reply; // post.sent === true && !post.reply
       });
-      console.log('filtered posts', allPosts);
+      console.log('allposts', allPosts);
       setPosts(allPosts);
-      console.log('useeffect:', posts, 'post', post);
     } catch (err) {
       throw err;
     }
   };
 
-  const handleNextButtonClick = (event) => {
-    event.preventDefault();
+  const handleNextButtonClick = () => {
     renderNextPost();
   };
 
-  useEffect(() => {
+  const handleRefreshButtonClick = () => {
     filterPosts();
-  }, []);
+  };
 
   return (
     <Grid container style={styles.container}>
@@ -71,12 +72,13 @@ const Reply = () => {
         <PostCard
           post={post}
           posts={posts}
-          filterPosts={filterPosts}
+          setPost={setPost}
+          setPosts={setPosts}
           renderNextPost={renderNextPost}
         />
         <Button
           variant='contained'
-          onClick={handleNextButtonClick}
+          onClick={post ? handleNextButtonClick : handleRefreshButtonClick}
           style={styles.nextButton}
         >
           {post ? 'next' : 'refresh'}
