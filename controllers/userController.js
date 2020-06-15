@@ -4,7 +4,7 @@
 
 // const keys = require('../config/keys');
 const db = require('../models');
-const passport = require('../../config/passport');
+const passport = require('../config/passport');
 
 // const validateSignupInput = require('../routes/authAPI/validation/signup');
 // const validateLoginInput = require('../routes/authAPI/validation/login');
