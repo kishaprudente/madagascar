@@ -4,16 +4,6 @@ const passport = require('../config/passport');
 // Defining methods for the UsersController
 module.exports = {
   //All post will show up and if there is a reply then it should show as well
-  findAll: (req, res) => {
-    db.User.find({})
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
-  findById: (req, res) => {
-    db.User.findById(req.params.id)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
   update: (req, res) => {
     db.User.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
