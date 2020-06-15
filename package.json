@@ -21,7 +21,7 @@
     "heroku-postbuild": "npm run build",
     "lint": "eslint",
     "fix": "eslint --fix .",
-    "test": "jest --watchAll=false && npm run lint",
+    "test": "jest --verbose && npm run lint",
     "test-dev": "concurrently \"nodemon server.js\" \"jest --watchAll\""
   },
   "repository": {
