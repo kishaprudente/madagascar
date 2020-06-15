@@ -147,6 +147,11 @@ const PostCard = ({ post, posts, setPost, setPosts, renderNextPost }) => {
               value={reply.response}
               onChange={handleInputChange}
               style={{ width: '100%' }}
+              InputProps={{
+                style: {
+                  fontFamily: 'Rosarivo',
+                },
+              }}
             />
             <Button
               onClick={handleSendReply}
