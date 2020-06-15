@@ -23,17 +23,17 @@ describe('API Routes', () => {
   });
 
   //Two POST Tests for api/post and api/replies
-  // describe('API Routes', () => {
-  //   describe('POST Endpoints', () => {
-  //     it('should create a new reply', async () => {
-  //       const { status } = await axios.post('/api/replies', {
-  //         response: 'Jest Post',
-  //         post: '5ee1a85254d653c1078a5932',
-  //       });
-  //       expect(status).toBe(200);
-  //       console.log(status);
-  //     });
-  //   });
+  describe('API Routes', () => {
+    //   describe('POST Endpoints', () => {
+    //     it('should create a new reply', async () => {
+    //       const { status } = await axios.post('/api/replies', {
+    //         response: 'Jest Post',
+    //         post: '5ee1a85254d653c1078a5932',
+    //       });
+    //       expect(status).toBe(200);
+    //       console.log(status);
+    //     });
+    //   });
     describe('POST Endpoints', () => {
       it('should create a new post', async () => {
         const { status } = await axios.post('/api/posts', {
