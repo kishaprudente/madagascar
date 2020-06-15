@@ -51,7 +51,7 @@ const styles = {
   },
 };
 
-const PostCard = ({ post, posts, renderNextPost }) => {
+const PostCard = ({ post, posts, setPost, setPosts, renderNextPost }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -72,10 +72,6 @@ const PostCard = ({ post, posts, renderNextPost }) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // const handleClickAlert = () => {
-  //   setAlertOpen(true);
-  // };
 
   const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
@@ -98,6 +94,9 @@ const PostCard = ({ post, posts, renderNextPost }) => {
       await API.updatePostResponse(post._id, newPost);
       // open success alert
       setAlertOpen(true);
+      // remove the post that was just replied to
+      setPost({});
+      setPosts(posts.filter((p) => data._id !== p._id));
     } catch (err) {
       throw err;
     }
@@ -115,7 +114,7 @@ const PostCard = ({ post, posts, renderNextPost }) => {
         <Box style={styles.paper} overflow='auto' whiteSpace='normal'>
           {post
             ? post.post
-            : 'If you are seeing this, there are no new posts! Click refresh to try again!'}
+            : 'There are no new posts! Click refresh to try again!'}
         </Box>
         <Button
           onClick={handleOpen}
