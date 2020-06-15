@@ -1,5 +1,6 @@
 const db = require('../models');
 const passport = require('../config/passport');
+// const User = require('../models/User');
 
 // Defining methods for the UsersController
 module.exports = {
@@ -25,9 +26,7 @@ module.exports = {
   // auth contollers
   // sign up
   signup: async (req, res) => {
-    // console.log('user signup');
     try {
-      console.log(req.body);
       const { username, password } = req.body;
       // ADD VALIDATION
       await db.User.findOne({ username: username }, (err, user) => {
@@ -42,13 +41,12 @@ module.exports = {
             username: username,
             password: password,
           });
-          console.log('NEW USER', newUser);
           newUser.save((err, savedUser) => {
             if (err) {
+              console.log(err);
               return res.json(err);
             }
             res.json(savedUser);
-            console.log(savedUser);
           });
         }
       });
