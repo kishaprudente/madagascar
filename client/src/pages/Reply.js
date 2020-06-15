@@ -57,18 +57,12 @@ const Reply = () => {
     }
   };
 
-  const handleNextButtonClick = (event) => {
-    console.log(event.target.innerHTML);
-    switch (event.target.innerHTML) {
-      case 'refresh':
-        filterPosts();
-        break;
-      case 'next':
-        renderNextPost();
-        break;
-      default:
-        break;
-    }
+  const handleNextButtonClick = () => {
+    renderNextPost();
+  };
+
+  const handleRefreshButtonClick = () => {
+    filterPosts();
   };
 
   return (
@@ -84,7 +78,7 @@ const Reply = () => {
         />
         <Button
           variant='contained'
-          onClick={handleNextButtonClick}
+          onClick={post ? handleNextButtonClick : handleRefreshButtonClick}
           style={styles.nextButton}
         >
           {post ? 'next' : 'refresh'}
