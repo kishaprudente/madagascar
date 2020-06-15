@@ -57,12 +57,12 @@ const Dashboard = () => {
       .then((res) => alert('Post sent!'))
       .then(() => setPost(''))
       .catch((err) => {
-        if (!post) {
+        if (!post && !mood) {
+          handleErrorAlert('Sorry! Your post cannot be empty.');
+        } else if (!post) {
           handleErrorAlert('Please enter text in your post.');
         } else if (!mood) {
           handleErrorAlert('Please select a mood for your post.');
-        } else if (!post && !mood) {
-          handleErrorAlert('Sorry! Your post cannot be empty.');
         }
         console.log(err);
       });
