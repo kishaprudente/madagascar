@@ -31,9 +31,13 @@ const Inbox = () => {
       );
       const allUserReplies = sentUserPosts.map((p) => p.reply);
       setReplies(allUserReplies.reverse());
-      setReply(allUserReplies[0].response);
+      if (!allUserReplies) {
+        return;
+      } else {
+        setReply(allUserReplies[0].response);
+      }
     } catch (err) {
-      throw err;
+      console.log(err);
     }
   };
 
