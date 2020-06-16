@@ -17,8 +17,10 @@ module.exports = {
   },
   getData: (req, res) => {
     db.User.findById(req.params.id)
-      .populate('posts')
-      .populate('replies')
+      .populate({
+        path: 'posts',
+        populate: { path: 'reply' },
+      })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
