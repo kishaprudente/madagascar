@@ -4,7 +4,7 @@ import {
   Grid,
   Paper,
   Box,
-  Button,
+  //Button,
   TextField,
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -21,6 +21,7 @@ import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
 import userAPI from '../utils/userAPI';
+import Buttons from '../components/Button.js';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
@@ -148,7 +149,6 @@ const Dashboard = () => {
           exclusive
           onChange={handleMoodChange}
           aria-label='moods'
-          //style={{ align: 'center' }}
         >
           <ToggleButton
             value='Happy'
@@ -196,8 +196,8 @@ const Dashboard = () => {
             <img src={sad} alt='sad emoji' />
           </ToggleButton>
         </ToggleButtonGroup>
-
         <Grid item />
+
         <Paper elevation={3} style={{ borderRadius: '10px' }}>
           <TextField
             style={{
@@ -221,30 +221,9 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item style={{ marginTop: '10px', marginBottom: '15px' }}>
-        <Button
-          onClick={handleKeepPost}
-          style={buttonStyle}
-          variant='contained'
-          color='primary'
-        >
-          Keep
-        </Button>
-        <Button
-          onClick={handleSendPost}
-          style={buttonStyle}
-          variant='contained'
-          color='primary'
-        >
-          Send
-        </Button>
-        <Button
-          style={buttonStyle}
-          variant='contained'
-          color='primary'
-          onClick={handleLogout}
-        >
-          Logout
-        </Button>
+        <Buttons onClick={handleKeepPost}>Keep</Buttons>
+        <Buttons onClick={handleSendPost}>Send</Buttons>
+        <Buttons onClick={handleLogout}>Logout</Buttons>
       </Grid>
 
       <Grid item style={{ fontSize: '1em', marginBottom: '5px' }}>
@@ -308,20 +287,4 @@ const chirpyStyle = {
   width: '1em',
   height: '1em',
   marginLeft: '5px',
-};
-
-const buttonStyle = {
-  color: 'black',
-  fontSize: 16,
-  //border: '1px solid',
-  lineHeight: 1.5,
-  background: '#ffe259' /* fallback for old browsers */,
-  background:
-    '-webkit-linear-gradient(to left, #ffa751, #ffe259)' /* Chrome 10-25, Safari 5.1-6 */,
-  background:
-    'linear-gradient(to left, #ffa751, #ffe259)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
-
-  fontFamily: 'Ruluko',
-  marginLeft: '5px',
-  marginRight: '5px',
 };
