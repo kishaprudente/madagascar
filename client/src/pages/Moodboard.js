@@ -76,6 +76,7 @@ const Dashboard = () => {
       API.createPost({ post: post, mood: mood, sent: true, user: getUserID() })
         .then((res) => handleSuccessAlert('Post sent!'))
         .then(() => {
+          setMood('');
           setPost('');
           loadPosts();
         })
@@ -98,6 +99,7 @@ const Dashboard = () => {
       API.createPost({ post: post, mood: mood, sent: false, user: getUserID() })
         .then((res) => handleSuccessAlert('Post saved!'))
         .then(() => {
+          setMood('');
           setPost('');
           loadPosts();
         })
