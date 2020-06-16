@@ -34,17 +34,22 @@ const Reply = () => {
     }
   };
 
+  const getUserID = () => {
+    const { id } = JSON.parse(localStorage.getItem('user'));
+    return id;
+  };
+
   // gets all posts, filtered to include only
-  // ones that are sent & ones without a response
+  // ones that are sent & ones without a response & doesnt match user id
   // queue
   const filterPosts = async () => {
     try {
+      const userID = getUserID();
       const { data } = await API.getPost();
       console.log(data);
       const allPosts = data.filter((post) => {
-        return post.sent === true && !post.reply; // post.sent === true && !post.reply
+        return post.sent && !post.reply && post.user !== userID; // post.sent === true && !post.reply
       });
-      console.log('allposts', allPosts);
       setPosts(allPosts);
     } catch (err) {
       throw err;

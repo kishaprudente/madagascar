@@ -39,7 +39,7 @@ export default function Login() {
         username: user.username,
         password: user.password,
       });
-      console.log(login);
+      console.log(login.data);
       if (login.status === 200) {
         localStorage.setItem('user', JSON.stringify(login.data));
       }

@@ -16,6 +16,7 @@ export default function Signup() {
   const [user, setUser] = useState({
     username: '',
     password: '',
+    confirm: '',
   });
 
   const [show, setShow] = useState(false);
@@ -45,7 +46,13 @@ export default function Signup() {
         });
         console.log('newUser', newUser);
         if (newUser.status === 200) {
-          localStorage.setItem('user', JSON.stringify(newUser.data.username));
+          localStorage.setItem(
+            'user',
+            JSON.stringify({
+              username: newUser.data.username,
+              id: newUser.data._id,
+            })
+          );
         }
         window.location.replace('/moodboard');
       }

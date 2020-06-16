@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 
 //your local database url
 //27017 is the default mongoDB port
-const uri = process.env.MONGODB_URI || 'mongodb://localhost/madagascardb';
+var uri = process.env.MONGODB_URI || 'mongodb://localhost/madagascardb';
 
 mongoose.connect(uri).then(
   () => {
@@ -19,6 +19,12 @@ mongoose.connect(uri).then(
 
   }
 );
+
+
+
+
+
+
 
 
 module.exports = mongoose.connection;

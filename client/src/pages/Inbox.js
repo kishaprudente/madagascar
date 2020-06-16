@@ -9,18 +9,30 @@ import {
   Divider,
 } from '@material-ui/core';
 import API from '../utils/API';
+import userAPI from '../utils/userAPI';
 import Buttons from '../components/Button.js';
 
 const Inbox = () => {
   const [replies, setReplies] = useState([]);
   const [reply, setReply] = useState('');
 
+  const getUserID = () => {
+    const { id } = JSON.parse(localStorage.getItem('user'));
+    return id;
+  };
+
   const getReplies = async () => {
     try {
-      const { data } = await API.getReplies();
-      const reversedOrder = [...data.reverse()];
-      setReplies(reversedOrder);
-      setReply(reversedOrder[0].response);
+      // get user data populated with replies
+      // put replies in array and then in state
+      const { data } = await userAPI.getUserData(getUserID());
+      const allUserPosts = data.posts;
+      const sentUserPosts = allUserPosts.filter(
+        (p) => p.sent === true && p.reply
+      );
+      const allUserReplies = sentUserPosts.map((p) => p.reply);
+      setReplies(allUserReplies.reverse());
+      setReply(allUserReplies[0].response);
     } catch (err) {
       throw err;
     }
@@ -46,7 +58,7 @@ const Inbox = () => {
     >
       <Grid item>
         <h3 style={{ fontFamily: 'Reenie Beanie' }}>
-          A little birdy told me...
+          A little birdy told me and these are the replies you got:
         </h3>
       </Grid>
       <Grid item>

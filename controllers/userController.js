@@ -15,11 +15,18 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
+  getData: (req, res) => {
+    db.User.findById(req.params.id)
+      .populate({
+        path: 'posts',
+        populate: { path: 'reply' },
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   // auth contollers
   // sign up
   signup: async (req, res) => {
-    // console.log('user signup');
     try {
       const { username, password } = req.body;
       // ADD VALIDATION
@@ -37,6 +44,7 @@ module.exports = {
           });
           newUser.save((err, savedUser) => {
             if (err) {
+              console.log(err);
               return res.json(err);
             }
             res.json(savedUser);
@@ -48,17 +56,19 @@ module.exports = {
     }
   },
   // login
-  login:
-    (passport.authenticate('local'),
-    (req, res) => {
-      console.log(req.body);
-      console.log('logged in', req.body);
+  login: (req, res, next) => {
+    passport.authenticate('local', function(err, user) {
+      if (err) {
+        return next(err);
+      }
+      console.log('logged in', user);
       var userInfo = {
-        username: req.body.username,
-        id: req.id,
+        username: user.username,
+        id: user.id,
       };
       res.send(userInfo);
-    }),
+    })(req, res, next);
+  },
   // logout
   logout: (req, res) => {
     if (req.user) {

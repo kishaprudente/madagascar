@@ -29,14 +29,24 @@ const Dashboard = () => {
   const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
+
+  const getUserID = () => {
+    const { id } = JSON.parse(localStorage.getItem('user'));
+    return id;
+  };
 
   const handleErrorAlert = (message) => {
-    setAlertMessage(message);
+    setAlertMessage({ message, type: 'error' });
     setAlertOpen(true);
   };
 
-  const handleCloseErrorAlert = (event, reason) => {
+  const handleSuccessAlert = (message) => {
+    setAlertMessage({ message, type: 'success' });
+    setAlertOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -63,9 +73,13 @@ const Dashboard = () => {
     } else if (!mood) {
       handleErrorAlert('Please select a mood for your post.');
     } else {
-      API.createPost({ post: post, mood: mood, sent: true })
-        .then((res) => alert('Post sent!'))
-        .then(() => setPost(''))
+      API.createPost({ post: post, mood: mood, sent: true, user: getUserID() })
+        .then((res) => handleSuccessAlert('Post sent!'))
+        .then(() => {
+          setMood('');
+          setPost('');
+          loadPosts();
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -82,9 +96,13 @@ const Dashboard = () => {
     } else if (!mood) {
       handleErrorAlert('Please select a mood for your post.');
     } else {
-      API.createPost({ post: post, mood: mood, sent: false })
-        .then((res) => alert('Post saved!'))
-        .then(() => setPost(''))
+      API.createPost({ post: post, mood: mood, sent: false, user: getUserID() })
+        .then((res) => handleSuccessAlert('Post saved!'))
+        .then(() => {
+          setMood('');
+          setPost('');
+          loadPosts();
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -102,8 +120,10 @@ const Dashboard = () => {
 
   const loadPosts = async () => {
     try {
-      const allPosts = await API.getPost();
-      setPosts(allPosts.data.reverse());
+      console.log('loadPosts');
+      const { data } = await userAPI.getUserData(getUserID());
+      console.log('posts', data.posts);
+      setPosts(data.posts.reverse());
     } catch (err) {
       throw err;
     }
@@ -111,7 +131,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <Grid
@@ -250,10 +270,10 @@ const Dashboard = () => {
         )}
       </Grid>
       <AlertBar
-        message={alertMessage}
-        type='error'
+        message={alertMessage.message}
+        type={alertMessage.type}
         openState={alertOpen}
-        onClose={handleCloseErrorAlert}
+        onClose={handleCloseAlert}
       />
     </Grid>
   );
