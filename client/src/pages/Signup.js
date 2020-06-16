@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Grid,
-  Button,
-  TextField,
-  IconButton,
-  InputAdornment,
-} from '@material-ui/core';
+import { Grid, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
