@@ -4,25 +4,29 @@ const db = require('../models');
 module.exports = {
   //All post will show up and if there is a reply then it should show as well
   findAll: (req, res) => {
-    db.Post
-      .find({})
+    db.Post.find({})
       .populate('reply')
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
   findById: (req, res) => {
-    db.Post
-      .findById(req.params.id)
+    db.Post.findById(req.params.id)
       .populate({
         path: 'reply',
-        populate: { path: 'user' }
+        populate: { path: 'user' },
       })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
   create: function(req, res) {
     db.Post.create(req.body)
-      .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { posts: _id } }, { new: true }))
+      .then(({ _id }) =>
+        db.User.findOneAndUpdate(
+          { _id: req.body.user },
+          { $push: { posts: _id } },
+          { new: true }
+        )
+      )
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
