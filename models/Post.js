@@ -14,6 +14,10 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Reply',
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }
 });
 
 const Post = mongoose.model('Post', PostSchema);
