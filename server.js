@@ -32,6 +32,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
+app.get('/service-worker.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'service-worker.js'));
+});
+
 app.get('*', (req, res) => {
   res.status(404).send('File not found');
 });
