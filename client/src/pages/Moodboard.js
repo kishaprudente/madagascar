@@ -31,6 +31,11 @@ const Dashboard = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
+  const getUserID = () => {
+    const { id } = JSON.parse(localStorage.getItem('user'));
+    return id;
+  };
+
   const handleErrorAlert = (message) => {
     setAlertMessage({ message, type: 'error' });
     setAlertOpen(true);
@@ -68,7 +73,7 @@ const Dashboard = () => {
     } else if (!mood) {
       handleErrorAlert('Please select a mood for your post.');
     } else {
-      API.createPost({ post: post, mood: mood, sent: true })
+      API.createPost({ post: post, mood: mood, sent: true, user: getUserID() })
         .then((res) => handleSuccessAlert('Post sent!'))
         .then(() => {
           setPost('');
@@ -90,7 +95,7 @@ const Dashboard = () => {
     } else if (!mood) {
       handleErrorAlert('Please select a mood for your post.');
     } else {
-      API.createPost({ post: post, mood: mood, sent: false })
+      API.createPost({ post: post, mood: mood, sent: false, user: getUserID() })
         .then((res) => handleSuccessAlert('Post saved!'))
         .then(() => {
           setPost('');
@@ -114,8 +119,9 @@ const Dashboard = () => {
   const loadPosts = async () => {
     try {
       console.log('loadPosts');
-      const allPosts = await API.getPost();
-      setPosts(allPosts.data.reverse());
+      const { data } = await userAPI.getUserData(getUserID());
+      console.log('posts', data.posts);
+      setPosts(data.posts.reverse());
     } catch (err) {
       throw err;
     }
