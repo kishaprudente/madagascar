@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Paper,
-  Button,
   Box,
   List,
   ListItem,
@@ -11,6 +10,7 @@ import {
 } from '@material-ui/core';
 import API from '../utils/API';
 import userAPI from '../utils/userAPI';
+import Buttons from '../components/Button.js';
 
 const Inbox = () => {
   const [replies, setReplies] = useState([]);
@@ -76,17 +76,8 @@ const Inbox = () => {
           </Box>
         </Paper>
       </Grid>
-      <Grid item>
-        <Button
-          variant='outlined'
-          style={{
-            background: 'rgba(255, 216, 99, 0.87)',
-            margin: '20px',
-            fontFamily: 'Reenie Beanie',
-          }}
-        >
-          next
-        </Button>
+      <Grid item style={{ margin: '10px' }}>
+        <Buttons>next</Buttons>
       </Grid>
       <Grid item>
         <div

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Button, TextField } from '@material-ui/core';
+import { Container, Grid, Box, TextField } from '@material-ui/core';
 import LayeredPages from '../assets/LayeredPages.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import AlertBar from './AlertBar';
 import API from '../utils/API';
+import Buttons from './Button.js';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,17 +19,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#F2F2F2',
     borderRadius: '10px',
   },
-  sendButton: {
-    background: 'rgba(255, 216, 99, 0.87)',
-    margin: '5px',
-    float: 'right',
-    fontFamily: 'Reenie Beanie',
-  },
 }));
 
 const styles = {
   svg: {
-    paddingTop: '100px',
+    paddingTop: '50px',
     position: 'relative',
   },
   paper: {
@@ -42,12 +37,9 @@ const styles = {
     fontFamily: 'Rosarivo',
   },
   replyButton: {
-    background: 'rgba(255, 216, 99, 0.87)',
     position: 'relative',
-    left: '250px',
     bottom: '180px',
     borderRadius: '10px',
-    fontFamily: 'Reenie Beanie',
   },
 };
 
@@ -115,14 +107,11 @@ const PostCard = ({ post, posts, setPost, setPosts, renderNextPost }) => {
             ? post.post
             : 'There are no new posts! Click refresh to try again!'}
         </Box>
-        <Button
-          onClick={handleOpen}
-          variant='contained'
-          disabled={post ? false : true}
-          style={styles.replyButton}
-        >
-          reply
-        </Button>
+        <Grid item style={{ position: 'relative', bottom: '180px' }}>
+          <Buttons onClick={handleOpen} disabled={post ? false : true}>
+            reply
+          </Buttons>
+        </Grid>
       </Container>
       <Modal
         aria-labelledby='reply-modal-title'
@@ -152,13 +141,7 @@ const PostCard = ({ post, posts, setPost, setPosts, renderNextPost }) => {
                 },
               }}
             />
-            <Button
-              onClick={handleSendReply}
-              variant='contained'
-              className={classes.sendButton}
-            >
-              Send
-            </Button>
+            <Buttons onClick={handleSendReply}>Send</Buttons>
           </div>
         </Fade>
       </Modal>

@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
-import { Grid, Button } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Grid } from '@material-ui/core';
 import PostCard from '../components/PostCard';
 import API from '../utils/API';
+import Buttons from '../components/Button.js';
 
 const styles = {
   container: {
     background: '#A1D1B6',
+    width: '100vw',
     minHeight: '90vh',
     justifyContent: 'center',
-  },
-  nextButton: {
-    background: 'rgba(255, 216, 99, 0.87)',
-    postion: 'relative',
-    display: 'block',
-    margin: '0 auto',
-    bottom: '100px',
-    borderRadius: '10px',
-    fontFamily: 'Reenie Beanie',
+    textAlign: 'center',
   },
 };
 
@@ -71,25 +65,37 @@ const Reply = () => {
   };
 
   return (
-    <Grid container style={styles.container}>
-      <Grid item sm={4} />
-      <Grid item sm={4}>
-        <PostCard
-          post={post}
-          posts={posts}
-          setPost={setPost}
-          setPosts={setPosts}
-          renderNextPost={renderNextPost}
-        />
-        <Button
-          variant='contained'
-          onClick={post ? handleNextButtonClick : handleRefreshButtonClick}
-          style={styles.nextButton}
+    <Grid
+      container
+      style={styles.container}
+      justify='center'
+      alignItems='center'
+      direction='column'
+      position='absolute'
+    >
+      <Grid item>
+        <h3
+          style={{
+            fontFamily: 'Reenie Beanie',
+            fontSize: '20px',
+            textAlign: 'center',
+          }}
         >
-          {post ? 'next' : 'refresh'}
-        </Button>
+          Send kindness!
+        </h3>
       </Grid>
-      <Grid item sm={4} />
+      <PostCard
+        post={post}
+        posts={posts}
+        setPost={setPost}
+        setPosts={setPosts}
+        renderNextPost={renderNextPost}
+      />
+      <Buttons
+        onClick={post ? handleNextButtonClick : handleRefreshButtonClick}
+      >
+        {post ? 'next' : 'refresh'}
+      </Buttons>
     </Grid>
   );
 };
