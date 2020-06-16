@@ -5,17 +5,17 @@
     {
       "src": "madagascar/chirpy.png",
       "type": "image/png",
-      "sizes": "366x315"
+      "sizes": "121x122"
     },
     {
       "src": "madagascar/chirpy@2x.png",
       "type": "image/png",
-      "sizes": "238x203"
+      "sizes": "242x244"
     },
     {
       "src": "madagascar/chirpy@3x.png",
       "type": "image/png",
-      "sizes": "357x304"
+      "sizes": "363x366"
     }
   ],
   "start_url": "/",
