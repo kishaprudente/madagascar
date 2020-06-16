@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, Box } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
+import Buttons from '../components/Button.js';
 
 const quote = '"If you can be anything in the world, be kind."';
 
@@ -23,10 +24,10 @@ export default function Landing() {
       <Grid item style={quoteStyle}>
         <Box style={{ width: '300px' }}>{quote}</Box>
       </Grid>
-      <Grid item>
-        <Button style={buttonStyle} variant='contained' color='primary'>
+      <Grid item style={{ marginTop: '20px' }}>
+        <Buttons>
           <Link to='/login'>Let's chirp!</Link>
-        </Button>
+        </Buttons>
       </Grid>
     </Grid>
   );
@@ -65,16 +66,4 @@ const quoteStyle = {
   fontFamily: 'Reenie Beanie',
   fontSize: '2em',
   lineHeight: '141%',
-};
-
-const buttonStyle = {
-  width: '150px',
-  color: 'black',
-  fontSize: 16,
-  padding: '6px 12px',
-  border: '1px solid',
-  lineHeight: 1.5,
-  backgroundColor: 'rgba(255, 216, 99, 0.87)',
-  fontFamily: 'Reenie Beanie',
-  margin: '7em',
 };
