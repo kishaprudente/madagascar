@@ -46,7 +46,7 @@ const Inbox = () => {
     >
       <Grid item>
         <h3 style={{ fontFamily: 'Reenie Beanie' }}>
-          A little birdy told me...
+          A little birdy told me and these are the replies you got:
         </h3>
       </Grid>
       <Grid item>

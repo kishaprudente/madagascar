@@ -29,14 +29,19 @@ const Dashboard = () => {
   const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
   const handleErrorAlert = (message) => {
-    setAlertMessage(message);
+    setAlertMessage({ message, type: 'error' });
     setAlertOpen(true);
   };
 
-  const handleCloseErrorAlert = (event, reason) => {
+  const handleSuccessAlert = (message) => {
+    setAlertMessage({ message, type: 'success' });
+    setAlertOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -64,8 +69,11 @@ const Dashboard = () => {
       handleErrorAlert('Please select a mood for your post.');
     } else {
       API.createPost({ post: post, mood: mood, sent: true })
-        .then((res) => alert('Post sent!'))
-        .then(() => setPost(''))
+        .then((res) => handleSuccessAlert('Post sent!'))
+        .then(() => {
+          setPost('');
+          loadPosts();
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -83,8 +91,11 @@ const Dashboard = () => {
       handleErrorAlert('Please select a mood for your post.');
     } else {
       API.createPost({ post: post, mood: mood, sent: false })
-        .then((res) => alert('Post saved!'))
-        .then(() => setPost(''))
+        .then((res) => handleSuccessAlert('Post saved!'))
+        .then(() => {
+          setPost('');
+          loadPosts();
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -102,6 +113,7 @@ const Dashboard = () => {
 
   const loadPosts = async () => {
     try {
+      console.log('loadPosts');
       const allPosts = await API.getPost();
       setPosts(allPosts.data.reverse());
     } catch (err) {
@@ -111,7 +123,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <Grid
@@ -250,10 +262,10 @@ const Dashboard = () => {
         )}
       </Grid>
       <AlertBar
-        message={alertMessage}
-        type='error'
+        message={alertMessage.message}
+        type={alertMessage.type}
         openState={alertOpen}
-        onClose={handleCloseErrorAlert}
+        onClose={handleCloseAlert}
       />
     </Grid>
   );

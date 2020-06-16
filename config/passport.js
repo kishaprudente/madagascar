@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../models/User');
+const db = require('../models');
 const LocalStrategy = require('passport-local').Strategy;
 
 const strategy = new LocalStrategy(
@@ -7,7 +7,7 @@ const strategy = new LocalStrategy(
     usernameField: 'username', // not necessary, DEFAULT
   },
   function(username, password, done) {
-    User.findOne({ username: username }, (err, user) => {
+    db.User.findOne({ username: username }, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -27,7 +27,7 @@ passport.serializeUser((user, done) => {
 
 // user object attaches to the request as req.user
 passport.deserializeUser((id, done) => {
-  User.findOne({ _id: id }, 'username', (err, user) => {
+  db.User.findOne({ _id: id }, 'username', (err, user) => {
     done(null, user);
   });
 });
