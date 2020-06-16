@@ -8,7 +8,6 @@ import {
   ListItemText,
   Divider,
 } from '@material-ui/core';
-import API from '../utils/API';
 import userAPI from '../utils/userAPI';
 import Buttons from '../components/Button.js';
 
