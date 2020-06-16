@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
-import {
-  Grid,
-  Paper,
-  Box,
-  TextField,
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-} from '@material-ui/core';
+
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import AlertBar from '../components/AlertBar';
 import chirpy from '../assets/chirpy.svg';
 import happy from '../assets/happy.svg';
@@ -121,9 +122,12 @@ const Dashboard = () => {
   const loadPosts = async () => {
     try {
       console.log('loadPosts');
-      const { data } = await userAPI.getUserData(getUserID());
-      console.log('posts', data.posts);
-      setPosts(data.posts.reverse());
+      const allPosts = await API.getPost();
+      console.log(allPosts);
+      const userPosts = allPosts.data.filter(
+        (post) => post.user === getUserID()
+      );
+      setPosts(userPosts.reverse());
     } catch (err) {
       throw err;
     }
