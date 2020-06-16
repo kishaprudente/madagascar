@@ -10,17 +10,32 @@ import {
   Divider,
 } from '@material-ui/core';
 import API from '../utils/API';
+import userAPI from '../utils/userAPI';
 
 const Inbox = () => {
   const [replies, setReplies] = useState([]);
   const [reply, setReply] = useState('');
 
+  const getUserID = () => {
+    const { id } = JSON.parse(localStorage.getItem('user'));
+    return id;
+  };
+
   const getReplies = async () => {
     try {
-      const { data } = await API.getReplies();
-      const reversedOrder = [...data.reverse()];
-      setReplies(reversedOrder);
-      setReply(reversedOrder[0].response);
+      // get user data populated with replies
+      // put replies in array and then in state
+      const { data } = await userAPI.getUserData(getUserID());
+      console.log('data', data.posts);
+      const allUserPosts = data.posts;
+      const sentUserPosts = allUserPosts.filter(
+        (p) => p.sent === true && p.reply
+      );
+      console.log('sent', sentUserPosts);
+      const allUserReplies = sentUserPosts.map((p) => p.reply);
+      console.log('alluserreplies', allUserReplies);
+      setReplies(allUserReplies.reverse());
+      setReply(allUserReplies[0].response);
     } catch (err) {
       throw err;
     }
