@@ -2,14 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 
 const Buttons = (props) => {
-  return (
-    <Button
-      style={buttonStyle}
-      variant='contained'
-      color='primary'
-      {...props}
-    />
-  );
+  return <Button style={buttonStyle} variant='contained' {...props} />;
 };
 
 export default Buttons;
@@ -17,7 +10,6 @@ export default Buttons;
 const buttonStyle = {
   color: 'black',
   fontSize: 16,
-  //border: '1px solid',
   lineHeight: 1.5,
   background: '#ffe259' /* fallback for old browsers */,
   background:
