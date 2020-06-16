@@ -24,12 +24,6 @@ const UserSchema = new Schema({
       ref: 'Post',
     },
   ],
-  replies: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Reply',
-    },
-  ],
 });
 
 UserSchema.methods = {
