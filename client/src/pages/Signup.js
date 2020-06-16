@@ -10,6 +10,7 @@ import {
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
+import Buttons from '../components/Button.js';
 
 export default function Signup() {
   const [user, setUser] = useState({
@@ -127,14 +128,7 @@ export default function Signup() {
       </Grid>
 
       <Grid item>
-        <Button
-          style={buttonStyle}
-          variant='contained'
-          color='primary'
-          onClick={handleSubmitUser}
-        >
-          Sign Up
-        </Button>
+        <Buttons onClick={handleSubmitUser}>Sign Up</Buttons>
       </Grid>
 
       <Grid item>
@@ -151,13 +145,4 @@ const container = {
   width: '100vw',
   height: '100vh',
   flexGrow: '1',
-};
-
-const buttonStyle = {
-  color: 'black',
-  fontSize: 16,
-  border: '1px solid',
-  lineHeight: 1.5,
-  backgroundColor: 'rgba(255, 216, 99, 0.87)',
-  fontFamily: 'Reenie Beanie',
 };
