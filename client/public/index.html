@@ -9,7 +9,7 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
     <link
       href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Ruluko&display=swap"
       rel="stylesheet"
@@ -23,5 +23,14 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="text/html">
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("serviceWorker.js").then(reg => {
+            console.log("We found your service worker file!", reg);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
