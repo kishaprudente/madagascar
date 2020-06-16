@@ -51,13 +51,11 @@ const Reply = () => {
   const filterPosts = async () => {
     try {
       const userID = getUserID();
-      console.log(userID);
       const { data } = await API.getPost();
       console.log(data);
       const allPosts = data.filter((post) => {
         return post.sent && !post.reply && post.user !== userID; // post.sent === true && !post.reply
       });
-      console.log('allposts', allPosts);
       setPosts(allPosts);
     } catch (err) {
       throw err;

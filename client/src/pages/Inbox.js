@@ -26,14 +26,11 @@ const Inbox = () => {
       // get user data populated with replies
       // put replies in array and then in state
       const { data } = await userAPI.getUserData(getUserID());
-      console.log('data', data.posts);
       const allUserPosts = data.posts;
       const sentUserPosts = allUserPosts.filter(
         (p) => p.sent === true && p.reply
       );
-      console.log('sent', sentUserPosts);
       const allUserReplies = sentUserPosts.map((p) => p.reply);
-      console.log('alluserreplies', allUserReplies);
       setReplies(allUserReplies.reverse());
       setReply(allUserReplies[0].response);
     } catch (err) {
