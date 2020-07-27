@@ -235,13 +235,13 @@ const Dashboard = () => {
       </Grid>
 
       {posts.length ? (
-        <Box component='div' style={{ height: '290px' }} overflow='auto'>
+        <Box component='div' style={{ height: '290px' }}>
           {posts.map((post) => {
             return (
               <Grid item>
                 <Paper
                   style={{
-                    width: '300px',
+                    width: '332px',
 
                     fontSize: '14px',
                     fontFamily: 'Rosarivo',
@@ -283,7 +283,7 @@ export default Dashboard;
 const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
-  height: '100vh',
+  height: '100%',
   flexGrow: '1',
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
