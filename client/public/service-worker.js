@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 // Set this to true for production
 var doCache = false;
 
