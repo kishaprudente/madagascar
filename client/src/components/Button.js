@@ -20,4 +20,5 @@ const buttonStyle = {
   fontFamily: 'Ruluko',
   marginLeft: '5px',
   marginRight: '5px',
+  marginBottom: '5px',
 };
