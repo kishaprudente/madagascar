@@ -1,5 +1,6 @@
 const db = require('../models');
 const passport = require('../config/passport');
+const jwt = require('jsonwebtoken');
 
 // Defining methods for the UsersController
 module.exports = {
