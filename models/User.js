@@ -1,18 +1,21 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema;
+
+const passwordReg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
 
 const UserSchema = new Schema({
   username: {
     type: String,
     trim: true,
-    required: 'Username is Required',
+    required: [true, 'Username is required'],
   },
   password: {
     type: String,
     trim: true,
     required: 'Password is Required',
-    validate: [({ length }) => length >= 6, 'Password should be longer.'],
+    validate: passwordReg
   },
   userCreated: {
     type: Date,

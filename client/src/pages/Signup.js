@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Grid, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import Buttons from '../components/Button.js';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
-import Buttons from '../components/Button.js';
+import { useAuth } from '../utils/authContext';
 
 export default function Signup() {
+  const [show, setShow] = useState(false);
   const [user, setUser] = useState({
     username: '',
     password: '',
     confirm: '',
   });
-
-  const [show, setShow] = useState(false);
+  const { setAuthTokens, setCurrentUser } = useAuth();
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: '/dashboard' } };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,26 +33,24 @@ export default function Signup() {
     event.preventDefault();
   };
 
-  const handleSubmitUser = async () => {
+  const handleSignup = async () => {
     try {
       if (user.password !== user.confirm) {
         throw new Error('Confirm Password must match Password');
       } else {
-        const newUser = await userAPI.createUser({
-          username: user.username,
-          password: user.password,
+        const { username, password } = user;
+        const signup = await userAPI.createUser({
+          username: username,
+          password: password,
         });
-        console.log('newUser', newUser);
-        if (newUser.status === 200) {
-          localStorage.setItem(
-            'user',
-            JSON.stringify({
-              username: newUser.data.username,
-              id: newUser.data._id,
-            })
-          );
+        if (signup.status === 200) {
+          console.log(signup.data);
+          setCurrentUser(signup.data.body);
+          setAuthTokens(signup.data.token);
+          history.replace(from);
+        } else {
+          throw new Error('Oops. Something went wrong. :(');
         }
-        window.location.replace('/moodboard');
       }
     } catch (err) {
       throw err;
@@ -63,7 +65,6 @@ export default function Signup() {
       alignItems='center'
       direction='column'
     >
-      <Grid item />
       <Grid item>
         <img src={chirpy} alt='chirpy the bird' />
       </Grid>
@@ -73,17 +74,17 @@ export default function Signup() {
           style={{ marginBottom: '10px', width: '200px' }}
           label='Username'
           name='username'
-          id='outlined-size-normal'
+          id='username'
           placeholder='Username'
           variant='outlined'
           onChange={(e) => handleInputChange(e)}
-        ></TextField>
+        />
         <TextField
           style={{ marginBottom: '10px' }}
           label='Password'
           name='password'
           type={show ? 'text' : 'password'}
-          id='outlined-size-normal'
+          id='password'
           placeholder='Password'
           variant='outlined'
           onChange={(e) => handleInputChange(e)}
@@ -101,13 +102,13 @@ export default function Signup() {
               </InputAdornment>
             ),
           }}
-        ></TextField>
+        />
         <TextField
           style={{ marginBottom: '10px' }}
           label='Confirm Password'
           name='confirm'
           type={show ? 'text' : 'password'}
-          id='outlined-size-normal'
+          id='confirm'
           placeholder='Confirm Password'
           variant='outlined'
           onChange={(e) => handleInputChange(e)}
@@ -125,17 +126,14 @@ export default function Signup() {
               </InputAdornment>
             ),
           }}
-        ></TextField>
+        />
       </Grid>
-
       <Grid item>
-        <Buttons onClick={handleSubmitUser}>Sign Up</Buttons>
+        <Buttons onClick={handleSignup}>Sign Up</Buttons>
       </Grid>
-
       <Grid item>
-        Already have an account? <Link to='/login'>Login</Link>
+        Already have an account? <Link to='/signin'>Sign In</Link>
       </Grid>
-      <Grid item></Grid>
     </Grid>
   );
 }
@@ -144,6 +142,6 @@ const container = {
   backgroundColor: '#A1D1B6',
   fontFamily: 'Reenie Beanie',
   width: '100vw',
-  height: '100vh',
+  height: '94vh',
   flexGrow: '1',
 };

@@ -4,20 +4,20 @@ export default {
   // USER ROUTES
   createUser: (userData) => {
     console.log(userData);
-    return axios.post('/api/auth/signup', userData);
+    return axios.post('/auth/signup', userData);
   },
-  loginUser: (userData) => {
+  signinUser: (userData) => {
     console.log(userData);
-    return axios.post('/api/auth/login', userData);
+    return axios.post('/auth/signin', userData);
   },
   logoutUser: () => {
     localStorage.removeItem('user');
-    return axios.post('/api/auth/logout');
+    return axios.post('/auth/logout');
   },
   getUserData: (id) => {
-    return axios.get(`/api/auth/user/${id}`);
+    return axios.get(`/auth/user/${id}`);
   },
   checkUser: () => {
-    return axios.get('/api/auth/');
+    return axios.get('/auth/');
   },
 };
