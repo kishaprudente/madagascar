@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   Grid,
-  Paper,
-  Box,
-  List,
-  ListItem,
-  ListItemText,
   Divider,
+  Typography
 } from '@material-ui/core';
 import userAPI from '../utils/userAPI';
-import Buttons from '../components/Button.js';
+import InboxCard from '../components/InboxCard.js'
 
 const Inbox = () => {
   const [replies, setReplies] = useState([]);
@@ -56,83 +52,34 @@ const Inbox = () => {
   return (
     <Grid
       container
-      direction='column'
-      alignItems='center'
-      style={{ background: '#A1D1B6', height: '90vh', fontFamily: 'Rosarivo' }}
+      // alignItems='center'
+      style={{ background: '#A1D1B6', height: '90vh', justifyContent: 'center', fontFamily: 'Rosarivo' }}
     >
-      <Grid item>
-        <h3 style={{ fontFamily: 'Reenie Beanie' }}>
-          A little birdy told me and these are the replies you got:
-        </h3>
+      <Grid item xs={10} sm={11}>
+          <Typography style={{ fontFamily: 'Reenie Beanie', display: 'flex', padding: '40px'}} variant='h3'>
+            Inbox
+          </Typography>
       </Grid>
-      <Grid item>
-        <Paper elevation={3} style={{ borderRadius: '10px' }}>
-          <Box
-            component='div'
-            overflow='auto'
-            style={{ padding: '20px', height: '270px', width: '250px' }}
-          >
-            {reply ? (
-              <p>{reply}</p>
-            ) : (
-              <p>You have not received any responses yet!</p>
-            )}
-          </Box>
-        </Paper>
+      
+      <InboxCard>
+     {replies.length ? (
+      replies.map((reply, index) => (
+        <Grid item xs={11} key={reply._id}>
+          // <InboxCard
+            response={reply.response}
+          />
+          {index !== replies.length - 1 ? <Divider /> : null}
+        </Grid>
+      ))
+      ) : (
+      <Grid item xs={11} alignItems='center'>
+          <Typography style= {{fontFamily: 'Reenie Beanie', marginBottom: '150px', padding: '40px'}} variant='h4'>
+            Nothing to show
+          </Typography>
       </Grid>
-      <Grid item style={{ margin: '10px' }}>
-        <Buttons>next</Buttons>
-      </Grid>
-      <Grid item>
-        <div
-          style={{
-            maxHeight: '250px',
-            width: '350px',
-            background: '#F2F2F2',
-            borderRadius: '10px',
-            overflow: 'auto',
-          }}
-        >
-          <List component='nav' aria-label='inbox'>
-            {replies.length ? (
-              replies.map((reply, index) => (
-                <React.Fragment key={reply._id}>
-                  <ListItem button>
-                    <ListItemText
-                      style={{
-                        textAlign: 'center',
-                        maxHeight: '50px',
-                      }}
-                      onClick={handleInboxClick}
-                      primary={reply.response}
-                      primaryTypographyProps={{
-                        style: {
-                          display: 'block',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          fontFamily: 'Rosarivo',
-                        },
-                      }}
-                    />
-                  </ListItem>
-                  {index !== replies.length - 1 ? <Divider /> : null}
-                </React.Fragment>
-              ))
-            ) : (
-              <ListItem>
-                <ListItemText
-                  inset
-                  primary='Nothing to show!'
-                  primaryTypographyProps={{
-                    style: { fontFamily: 'Rosarivo' },
-                  }}
-                />
-              </ListItem>
-            )}
-          </List>
-        </div>
-      </Grid>
+      )}
+      </InboxCard> 
+      
     </Grid>
   );
 };
