@@ -145,9 +145,9 @@ const Dashboard = () => {
       justifyContent='center'
       direction='column'
     >
-      <Grid item>
-        <h3 style={{ margin: 0, textAlign: 'center' }}>Hello, {username}!</h3>
-        <h4 style={{ marginBottom: '5px', textAlign: 'center' }}>
+      <Grid item style={{ textAlign: 'center' }}>
+        <h3>Hello, {username}!</h3>
+        <h4>
           How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
         </h4>
@@ -234,17 +234,15 @@ const Dashboard = () => {
         </Card>
       </Grid>
 
-      <Grid
-        item
-        style={{ fontSize: '1em', marginTop: '5px', marginBottom: '5px' }}
-      >
-        {posts.length ? (
-          <Box component='div' style={{ height: '300px' }} overflow='auto'>
-            {posts.map((post) => {
-              return (
+      {posts.length ? (
+        <Box component='div' style={{ height: '290px' }} overflow='auto'>
+          {posts.map((post) => {
+            return (
+              <Grid item>
                 <Paper
                   style={{
-                    width: '290px',
+                    width: '300px',
+
                     fontSize: '14px',
                     fontFamily: 'Rosarivo',
                     borderRadius: '5px',
@@ -262,13 +260,13 @@ const Dashboard = () => {
                   </p>
                   <p style={p}>{post.post}</p>
                 </Paper>
-              );
-            })}
-          </Box>
-        ) : (
-          <h3>You don't have any posts yet!</h3>
-        )}
-      </Grid>
+              </Grid>
+            );
+          })}
+        </Box>
+      ) : (
+        <h3>You don't have any posts yet!</h3>
+      )}
 
       <AlertBar
         message={alertMessage.message}
@@ -289,6 +287,7 @@ const container = {
   flexGrow: '1',
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
+  flexWrap: 'nowrap',
 };
 
 const chirpyStyle = {
@@ -298,5 +297,6 @@ const chirpyStyle = {
 };
 
 const p = {
-  padding: '10px',
+  padding: '5px',
+  margin: '5px',
 };
