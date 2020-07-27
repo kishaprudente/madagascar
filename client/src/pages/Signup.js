@@ -45,7 +45,7 @@ export default function Signup() {
         });
         if (signup.status === 200) {
           console.log(signup.data);
-          setCurrentUser(signin.data.body);
+          setCurrentUser(signup.data.body);
           setAuthTokens(signup.data.token);
           history.replace(from);
         } else {
@@ -142,6 +142,6 @@ const container = {
   backgroundColor: '#A1D1B6',
   fontFamily: 'Reenie Beanie',
   width: '100vw',
-  height: '100vh',
+  height: '94vh',
   flexGrow: '1',
 };

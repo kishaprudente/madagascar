@@ -116,6 +116,6 @@ const container = {
   backgroundColor: '#A1D1B6',
   fontFamily: 'Reenie Beanie',
   width: '100vw',
-  height: '100vh',
+  height: '94vh',
   flexGrow: '1',
 };
