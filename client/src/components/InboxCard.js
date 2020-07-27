@@ -6,6 +6,7 @@ import {
     Typography,
   } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import chirpy from '../assets/chirpy.svg';
 
 
 const useStyles = makeStyles({
@@ -18,27 +19,38 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
-    marginTop: 12
+    marginTop: 12,
+    fontSize: '18px',
+    fontFamily: 'Reenie Beanie'
   },
+  post: {
+    fontSize: '18px',
+    fontFamily: 'Reenie Beanie'
+  },
+  reply: {
+    fontSize: '18px',
+    fontFamily: 'Reenie Beanie'
+  },
+
 });
 
-const InboxCard = ({}) => {
+const InboxCard = ({response}) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography component="p" style= {{fontFamily: 'Reenie Beanie'}}>
+        <Typography className={classes.post}>
         {/* {post} */}
         Sed aliquam quis semper aliquet dui, nulla lacus eu dolor
         </Typography>
         <Divider />
-        <Typography className={classes.pos} style= {{fontFamily: 'Reenie Beanie'}}>
-        A little birdie told me...
+        <Typography className={classes.pos}>
+        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle}/> A little birdie told me...
         </Typography>
-        <Typography component="p" style= {{fontFamily: 'Reenie Beanie'}}>
-        {/* {response} */}
-        Hello! Tellus nisl mollis suscipit morbi adipiscing ut nunc, curabitur nulla
+        <Typography className={classes.reply}>
+        {response}
+        {/* Hello! Tellus nisl mollis suscipit morbi adipiscing ut nunc, curabitur nulla */}
         </Typography>
       </CardContent>
     </Card>
@@ -46,3 +58,9 @@ const InboxCard = ({}) => {
 }
 
 export default InboxCard;
+
+const chirpyStyle = {
+  width: '1em',
+  height: '1em',
+  marginLeft: '5px',
+};

@@ -61,10 +61,8 @@ const Inbox = () => {
           </Typography>
       </Grid>
       
-      <InboxCard> 
-      </InboxCard>     
-      
-     {/* {replies.length ? (
+      <InboxCard>
+     {replies.length ? (
       replies.map((reply, index) => (
         <Grid item xs={11} key={reply._id}>
           // <InboxCard
@@ -79,7 +77,9 @@ const Inbox = () => {
             Nothing to show
           </Typography>
       </Grid>
-      )} */}
+      )}
+      </InboxCard> 
+      
     </Grid>
   );
 };
