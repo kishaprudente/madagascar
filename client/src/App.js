@@ -16,7 +16,7 @@ function App() {
   const user = localStorage.getItem('user');
 
   return (
-    <div data-testid='app'>
+    <div data-testid='app' style={container}>
       <Router>
         <Switch>
           <Route exact path='/' component={Landing} />
@@ -33,3 +33,10 @@ function App() {
 }
 
 export default App;
+
+const container = {
+  backgroundColor: '#A1D1B6',
+  width: '100vw',
+  height: '100%',
+  overflow: 'auto',
+};
