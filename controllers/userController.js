@@ -59,7 +59,7 @@ module.exports = {
             console.log('TOKEN', token);
             // localStorage.setItem('token', token);
             //Send back the token to the user
-            return res.json({ savedUser, token });
+            return res.send({ savedUser, token });
           });
         }
       });

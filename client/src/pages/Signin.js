@@ -13,7 +13,7 @@ export default function Signin() {
     username: '',
     password: '',
   });
-  const { setAuthTokens } = useAuth();
+  const { setAuthTokens, setCurrentUser } = useAuth();
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/moodboard' } };
@@ -40,6 +40,7 @@ export default function Signin() {
       });
       if (signin.status === 200) {
         console.log(signin.data);
+        setCurrentUser(signin.data.body);
         setAuthTokens(signin.data.token);
         history.replace(from);
       } else {
