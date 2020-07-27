@@ -14,7 +14,7 @@ export default function Signup() {
     password: '',
     confirm: '',
   });
-  const { setAuthTokens } = useAuth();
+  const { setAuthTokens, setCurrentUser } = useAuth();
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/dashboard' } };
@@ -45,6 +45,7 @@ export default function Signup() {
         });
         if (signup.status === 200) {
           console.log(signup.data);
+          setCurrentUser(signin.data.body);
           setAuthTokens(signup.data.token);
           history.replace(from);
         } else {
