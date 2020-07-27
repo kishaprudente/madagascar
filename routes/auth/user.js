@@ -8,7 +8,7 @@ router.route('/').get(userController.checkUser);
 router.route('/signup').post(userController.signup);
 
 // @route POST api/auth/login
-router.route('/login').post(userController.login);
+router.route('/signin').post(userController.signin);
 
 // @route POST api/auth/logout
 router.route('/logout').post(userController.logout);
