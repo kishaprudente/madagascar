@@ -2,60 +2,68 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import SendIcon from '@material-ui/icons/Send';
+import ReplyIcon from '@material-ui/icons/Reply';
 import MoodIcon from '@material-ui/icons/Mood';
 import InboxIcon from '@material-ui/icons/Inbox';
-// import Send from '../assets/Send.svg';
-// import Inbox from '../assets/Inbox.svg';
-// import SendIcon from './SendIcon';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles({
   root: {
     width: '100vw',
-    bottom: 0,
-    fontFamily: 'Reenie Beanie',
     position: 'fixed',
+    bottom: 0,
+    background: 'rgba(255, 216, 99)',
   },
 });
 
 const BottomNav = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState('mood');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
-    <BottomNavigation
-      value={value}
-      onChange={handleChange}
-      showLabels
-      className={classes.root}
-    >
+    <BottomNavigation className={classes.root}>
       <BottomNavigationAction
         component={Link}
         to='/reply'
-        label='Reply'
-        value='reply'
-        icon={<SendIcon />}
-      />
-      <BottomNavigationAction
-        component={Link}
-        to='/moodboard'
-        label='Moodboard'
-        value='moodboard'
-        icon={<MoodIcon />}
+        icon={<ReplyIcon style={styles.icon} />}
+        style={styles.button}
       />
       <BottomNavigationAction
         component={Link}
         to='/inbox'
-        label='Inbox'
-        value='inbox'
-        icon={<InboxIcon />}
+        icon={<InboxIcon style={styles.icon} />}
+        style={styles.button}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to='/moodboard'
+        icon={<MoodIcon style={styles.icon} />}
+        style={styles.button}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to='/stats'
+        icon={<ShowChartIcon style={styles.icon} />}
+        style={styles.button}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to='/about'
+        value='about'
+        icon={<InfoIcon style={styles.icon} />}
+        style={styles.button}
       />
     </BottomNavigation>
   );
+};
+
+const styles = {
+  button: {
+    padding: 0,
+  },
+  icon: {
+    color: 'black',
+  },
 };
 
 export default BottomNav;
