@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Grid, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import Buttons from '../components/Button.js';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
-import Buttons from '../components/Button.js';
+import { useAuth } from '../utils/authContext';
 
-export default function Login() {
+export default function Signin() {
+  const [show, setShow] = useState(false);
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
-  const [show, setShow] = useState(false);
+  const { setAuthTokens } = useAuth();
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: '/moodboard' } };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setUser({ ...user, [name]: value });
   };
 
@@ -27,17 +31,20 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const handleLogin = async () => {
+  const handleSignin = async () => {
     try {
-      const login = await userAPI.loginUser({
-        username: user.username,
-        password: user.password,
+      const { username, password } = user;
+      const signin = await userAPI.signinUser({
+        username: username,
+        password: password,
       });
-      console.log(login.data);
-      if (login.status === 200) {
-        localStorage.setItem('user', JSON.stringify(login.data));
+      if (signin.status === 200) {
+        console.log(signin.data);
+        setAuthTokens(signin.data.token);
+        history.replace(from);
+      } else {
+        throw new Error('Oops. Something went wrong :(');
       }
-      window.location.replace('/moodboard');
     } catch (err) {
       throw err;
     }
@@ -93,11 +100,11 @@ export default function Login() {
       </Grid>
 
       <Grid item>
-        <Buttons onClick={handleLogin}>Login</Buttons>
+        <Buttons onClick={handleSignin}>Sign In</Buttons>
       </Grid>
 
       <Grid item>
-        No account? <Link to='/signup'>Sign up</Link>
+        No account? <Link to='/signup'>Sign Up</Link>
       </Grid>
       <Grid item></Grid>
     </Grid>
