@@ -29,8 +29,7 @@ export default function Landing() {
           <Link to='/login'>Let's chirp!</Link>
         </Buttons>
       </Grid>
-    </Grid>
-  );
+    </Grid>)
 }
 
 const container = {
