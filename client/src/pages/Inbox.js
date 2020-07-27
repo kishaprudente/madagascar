@@ -60,10 +60,14 @@ const Inbox = () => {
             Inbox
           </Typography>
       </Grid>
-     {replies.length ? (
+      
+      <InboxCard> 
+      </InboxCard>     
+      
+     {/* {replies.length ? (
       replies.map((reply, index) => (
         <Grid item xs={11} key={reply._id}>
-          <InboxCard
+          // <InboxCard
             response={reply.response}
           />
           {index !== replies.length - 1 ? <Divider /> : null}
@@ -75,7 +79,7 @@ const Inbox = () => {
             Nothing to show
           </Typography>
       </Grid>
-      )}
+      )} */}
     </Grid>
   );
 };
