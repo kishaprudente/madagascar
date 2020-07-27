@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     width: '100vw',
     bottom: 0,
     fontFamily: 'Reenie Beanie',
+    position: 'fixed',
   },
 });
 
