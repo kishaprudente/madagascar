@@ -8,6 +8,7 @@ import Inbox from './pages/Inbox';
 import Landing from './pages/Landing';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -38,14 +39,17 @@ function App() {
         }}
       >
         <Router>
-          <Switch>
-            <Route exact path='/' component={Landing} />
-            <Route exact path='/signin' component={Signin} />
-            <Route exact path='/signup' component={Signup} />
-            <PrivateRoute path='/moodboard' component={Moodboard} />
-            <PrivateRoute path='/reply' component={Reply} />
-            <PrivateRoute path='/inbox' component={Inbox} />
-          </Switch>
+          <Header />
+          <div style={{ marginTop: '50px' }}>
+            <Switch>
+              <Route exact path='/' component={Landing} />
+              <Route exact path='/signin' component={Signin} />
+              <Route exact path='/signup' component={Signup} />
+              <PrivateRoute path='/moodboard' component={Moodboard} />
+              <PrivateRoute path='/reply' component={Reply} />
+              <PrivateRoute path='/inbox' component={Inbox} />
+            </Switch>
+          </div>
           {existingTokens ? <BottomNav /> : null}
         </Router>
       </AuthContext.Provider>
