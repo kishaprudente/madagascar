@@ -12,7 +12,7 @@ const About = () => {
       style={{ background: '#A1D1B6', height: '90vh', justifyContent: 'center', fontFamily: 'Rosarivo' }}
     >
     <Grid item xs={10} sm={11}>
-          <Typography style={{ fontFamily: 'Reenie Beanie', display: 'flex', padding: '40px'}} variant='h3'>
+          <Typography style={{ fontFamily: 'Reenie Beanie', display: 'flex'}} variant='h3'>
             About Us
           </Typography>
       </Grid>
@@ -28,13 +28,15 @@ const About = () => {
         <AboutCard
         title="What's Chirrup"
         description="Sed sapien, praesent odio justo. Quam quam mauris blandit dictumst vitae odio. Tortor commodo velit turpis laoreet sed lacus turpis."
-        />
+       />
     </Grid>
     <Grid item xs={11} alignItems='center'>
         <AboutCard
         title="Who's Chirpy?"
         description="Tellus eu nulla diam ut laoreet feugiat magna quis viverra. Velit ut porta elit mattis nullam sed. Lacus ante nunc mattis eu adipiscing nam in."
         />
+        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle}/>
+        
     </Grid>
     <Grid item xs={11} alignItems='center'>
         <AboutCard
@@ -46,3 +48,9 @@ const About = () => {
 }
 
 export default About;
+
+const chirpyStyle = {
+  width: '1em',
+  height: '1em',
+  marginLeft: '5px',
+};
