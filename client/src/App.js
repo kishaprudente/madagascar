@@ -13,6 +13,8 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const existingTokens = JSON.parse(localStorage.getItem('tokens'));
+  const existingUser = JSON.parse(localStorage.getItem('user'));
+  const [currentUser, setCurrentUser] = useState(existingUser);
   const [authTokens, setAuthTokens] = useState(existingTokens);
 
   const setTokens = (data) => {
@@ -20,9 +22,21 @@ function App() {
     setAuthTokens(data);
   };
 
+  const setCurrentUserData = (data) => {
+    localStorage.setItem('user', JSON.stringify(data));
+    setCurrentUser(data);
+  };
+
   return (
     <div data-testid='app'>
-      <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+      <AuthContext.Provider
+        value={{
+          authTokens,
+          currentUser,
+          setAuthTokens: setTokens,
+          setCurrentUser: setCurrentUserData,
+        }}
+      >
         <Router>
           <Switch>
             <Route exact path='/' component={Landing} />
