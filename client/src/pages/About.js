@@ -1,10 +1,30 @@
 import React from 'react';
 import { Grid, Button, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import chirpy from '../assets/chirpy.svg';
 import AboutCard from '../components/AboutCard.js'
 import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  }, 
+  title: {
+    fontFamily: 'Reenie Beanie'
+  },
+  body: {
+    fontSize: '14px', 
+    fontFamily: 'Reenie Beanie',
+    left:'5.81%',
+    right: '22.63%',
+  }
+});
 
 const About = () => {
+   const classes = useStyles();
     return (
     <Grid
       container
@@ -30,26 +50,51 @@ const About = () => {
         description="Sed sapien, praesent odio justo. Quam quam mauris blandit dictumst vitae odio. Tortor commodo velit turpis laoreet sed lacus turpis."
        />
     </Grid>
-    <Grid item xs={11} alignItems='center'>
-        <AboutCard
-        title="Who's Chirpy?"
-        description="Tellus eu nulla diam ut laoreet feugiat magna quis viverra. Velit ut porta elit mattis nullam sed. Lacus ante nunc mattis eu adipiscing nam in."
-        />
-        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
+    
+    <Grid item xs={11} alignItems='right'>
+      <Card className={classes.root} variant="outlined">
+        <CardContent>
+        <Typography className={classes.title} variant="h5">
+        Who's Chirpy
+        </Typography>
+        <Typography className={classes.body} variant="body2" component="p">
+        Tellus eu nulla diam ut laoreet feugiat magna quis viverra. Velit ut porta elit mattis nullam sed. Lacus ante nunc mattis eu adipiscing nam in.
+        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle}/> 
+        </Typography>
+        </CardContent>
+      </Card>
     </Grid>
     <Grid item xs={11} alignItems='center'>
-        <AboutCard
-        title="The Dream Team"
-        />
+    <Card className={classes.root} variant="outlined">
+    <CardContent>
+        <Typography className={classes.title} variant="h5">
+        The Dream Team
+        </Typography>
+        {/* We could put the icons here of our GitHub profiles */}
+        
+        <Typography className={classes.body} variant="body2" component="p">
+        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle2}/> 
+        Chirpy The Bird
+        </Typography>
+    </CardContent>
+    </Card>
     </Grid> 
+
     </Grid>
+   
     );
 }
 
 export default About;
 
 const chirpyStyle = {
-  width: '1em',
-  height: '1em',
-  marginLeft: '5px',
+  width: '5em',
+  height: '5em',
+  float: 'right'
+};
+
+const chirpyStyle2 = {
+  width: '2em',
+  height: '2em',
+  bottom: '17.09%',
 };
