@@ -3,11 +3,9 @@ import axios from 'axios';
 export default {
   // USER ROUTES
   createUser: (userData) => {
-    console.log(userData);
     return axios.post('/auth/signup', userData);
   },
   signinUser: (userData) => {
-    console.log(userData);
     return axios.post('/auth/signin', userData);
   },
   logoutUser: () => {
@@ -18,6 +16,6 @@ export default {
     return axios.get(`/auth/user/${id}`);
   },
   checkUser: () => {
-    return axios.get('/auth/');
+    return axios.get('/auth');
   },
 };

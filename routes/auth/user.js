@@ -1,19 +1,19 @@
 const router = require('express').Router();
 const userController = require('../../controllers/userController');
 
-// @route GET api/auth
+// @route GET /auth
 router.route('/').get(userController.checkUser);
 
-// @route POST api/auth/signup
+// @route POST /auth/signup
 router.route('/signup').post(userController.signup);
 
-// @route POST api/auth/login
+// @route POST /auth/login
 router.route('/signin').post(userController.signin);
 
-// @route POST api/auth/logout
-router.route('/logout').post(userController.logout);
+// @route POST /auth/logout
+router.route('/auth/logout').post(userController.logout);
 
-// @route GET api/auth/user/id
+// @route GET /user/id
 router
   .route('/user/:id')
   .get(userController.getData)

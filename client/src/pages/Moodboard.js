@@ -1,16 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import AlertBar from '../components/AlertBar';
 import chirpy from '../assets/chirpy.svg';
@@ -20,21 +20,21 @@ import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
-import userAPI from '../utils/userAPI';
 import Buttons from '../components/Button.js';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
+  const [isMounted, setIsMounted] = useState(true); // note this flag denote mount status
   const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
   const getUserID = () => {
-    const { id } = JSON.parse(localStorage.getItem('user'));
-    return id;
+    const { _id } = JSON.parse(localStorage.getItem('user'));
+    return _id;
   };
 
   const handleErrorAlert = (message) => {
@@ -110,24 +110,17 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await userAPI.logoutUser();
-      window.location.replace('/');
-    } catch (err) {
-      throw err;
-    }
-  };
-
   const loadPosts = async () => {
     try {
       console.log('loadPosts');
       const allPosts = await API.getPost();
-      console.log(allPosts);
       const userPosts = allPosts.data.filter(
         (post) => post.user === getUserID()
       );
-      setPosts(userPosts.reverse());
+      if (isMounted) {
+        setPosts(userPosts.reverse());
+      }
+      return setIsMounted(false);
     } catch (err) {
       throw err;
     }
@@ -135,144 +128,137 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [isMounted, setPosts]);
 
   return (
     <Grid
       container
       style={container}
-      justify='center'
       alignItems='center'
       direction='column'
-      position='absolute'
     >
-      <Grid item>
-        <h3 style={{ margin: 0, textAlign: 'center' }}>Hello, {username}!</h3>
-        <h4 style={{ margin: 0, textAlign: 'center' }}>
+      <Grid item style={{ textAlign: 'center' }}>
+        <h3>Hello, {username}!</h3>
+        <h4>
           How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
         </h4>
       </Grid>
 
-      <Grid item style={{ textAlign: 'center' }}>
-        <ToggleButtonGroup
-          value={mood}
-          exclusive
-          onChange={handleMoodChange}
-          aria-label='moods'
-        >
-          <ToggleButton
-            value='Happy'
-            aria-label='happy'
-            style={{ border: 0, margin: '8px', borderRadius: '42px' }}
+      <Grid item>
+        <Card>
+          <ToggleButtonGroup
+            value={mood}
+            exclusive
+            onChange={handleMoodChange}
+            aria-label='moods'
           >
-            <img src={happy} alt='happy emoji' />
-          </ToggleButton>
-          <ToggleButton
-            value='Angry'
-            aria-label='angry'
-            style={{ border: 0, margin: '8px', borderRadius: '42px' }}
-          >
-            <img src={angry} alt='angry emoji' />
-          </ToggleButton>
-          <ToggleButton
-            value='Anxious'
-            aria-label='anxious'
-            style={{
-              border: 0,
+            <ToggleButton
+              value='Happy'
+              aria-label='happy'
+              style={{ border: 0, margin: '8px', borderRadius: '42px' }}
+            >
+              <img src={happy} alt='happy emoji' />
+            </ToggleButton>
+            <ToggleButton
+              value='Angry'
+              aria-label='angry'
+              style={{ border: 0, margin: '8px', borderRadius: '42px' }}
+            >
+              <img src={angry} alt='angry emoji' />
+            </ToggleButton>
+            <ToggleButton
+              value='Anxious'
+              aria-label='anxious'
+              style={{
+                border: 0,
 
-              margin: '8px',
-              borderRadius: '42px',
-            }}
-          >
-            <img src={anxious} alt='anxious emoji' />
-          </ToggleButton>
-          <ToggleButton
-            value='Loved'
-            aria-label='loved'
-            style={{
-              border: 0,
+                margin: '8px',
+                borderRadius: '42px',
+              }}
+            >
+              <img src={anxious} alt='anxious emoji' />
+            </ToggleButton>
+            <ToggleButton
+              value='Loved'
+              aria-label='loved'
+              style={{
+                border: 0,
 
-              margin: '8px',
-              borderRadius: '42px',
-            }}
-          >
-            <img src={loved} alt='loved emoji' />
-          </ToggleButton>
-          <ToggleButton
-            value='Sad'
-            aria-label='sad'
-            style={{ border: 0, margin: '8px', borderRadius: '42px' }}
-          >
-            <img src={sad} alt='sad emoji' />
-          </ToggleButton>
-        </ToggleButtonGroup>
-        <Grid item />
-
-        <Paper elevation={3} style={{ borderRadius: '10px' }}>
-          <TextField
-            style={{
-              margin: '10px',
-              backgroundColor: 'white',
-              width: '320px',
-            }}
-            id='outlined-multiline-static'
-            multiline
-            rows={6}
-            variant='outlined'
-            onChange={handleInputChange}
-            value={post}
-            InputProps={{
-              style: {
+                margin: '8px',
+                borderRadius: '42px',
+              }}
+            >
+              <img src={loved} alt='loved emoji' />
+            </ToggleButton>
+            <ToggleButton
+              value='Sad'
+              aria-label='sad'
+              style={{
+                border: 0,
+                margin: '8px',
+                borderRadius: '42px',
+              }}
+            >
+              <img src={sad} alt='sad emoji' />
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Grid item />
+          <CardContent>
+            <TextField
+              style={{
+                backgroundColor: 'white',
+                width: '300px',
                 fontFamily: 'Rosarivo',
-              },
-            }}
-          ></TextField>
-        </Paper>
+              }}
+              id='outlined-multiline-static'
+              multiline
+              rows={4}
+              variant='outlined'
+              onChange={handleInputChange}
+              value={post}
+            ></TextField>
+          </CardContent>
+          <CardActions display='inline'>
+            <Buttons onClick={handleKeepPost}>Keep</Buttons>
+            <Buttons onClick={handleSendPost}>Send</Buttons>
+          </CardActions>
+        </Card>
       </Grid>
 
-      <Grid item style={{ marginTop: '10px', marginBottom: '15px' }}>
-        <Buttons onClick={handleKeepPost}>Keep</Buttons>
-        <Buttons onClick={handleSendPost}>Send</Buttons>
-        <Buttons onClick={handleLogout}>Logout</Buttons>
-      </Grid>
-
-      <Grid item style={{ fontSize: '1em', marginBottom: '5px' }}>
-        {posts.length ? (
-          <Box component='div' style={{ height: '330px' }} overflow='auto'>
-            {posts.map((post) => {
-              return (
-                <ExpansionPanel
+      {posts.length ? (
+        <Box>
+          {posts.map((post) => {
+            return (
+              <Grid item key={post._id}>
+                <Paper
                   style={{
-                    width: '320px',
+                    width: '332px',
                     fontSize: '14px',
                     fontFamily: 'Rosarivo',
+                    borderRadius: '5px',
                   }}
                   key={post._id}
                 >
-                  <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls='panel1a-content'
-                    id='panel1a-header'
-                  >
+                  <p style={p}>
                     <Moment
                       style={{ marginRight: '140px' }}
                       format='MM/DD/YYYY'
                     >
                       {post.date}
                     </Moment>
-
                     {post.mood}
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>{post.post}</ExpansionPanelDetails>
-                </ExpansionPanel>
-              );
-            })}
-          </Box>
-        ) : (
-          <h3>You don't have any posts yet!</h3>
-        )}
-      </Grid>
+                  </p>
+                  <p style={p}>{post.post}</p>
+                </Paper>
+              </Grid>
+            );
+          })}
+        </Box>
+      ) : (
+        <h3>You don't have any posts yet!</h3>
+      )}
+
       <AlertBar
         message={alertMessage.message}
         type={alertMessage.type}
@@ -288,14 +274,20 @@ export default Dashboard;
 const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
-  height: '90vh',
-  flexGrow: '1',
+  height: '100%',
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
+  paddingBottom: '80px',
+  overflow: 'auto'
 };
 
 const chirpyStyle = {
   width: '1em',
   height: '1em',
   marginLeft: '5px',
+};
+
+const p = {
+  padding: '5px',
+  margin: '5px',
 };

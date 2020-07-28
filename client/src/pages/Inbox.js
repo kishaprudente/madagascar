@@ -1,87 +1,83 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import {
   Grid,
-  Divider,
   Typography
 } from '@material-ui/core';
 import userAPI from '../utils/userAPI';
+import PageTitle from '../components/PageTitle';
 import InboxCard from '../components/InboxCard.js'
 
 const Inbox = () => {
-  const [replies, setReplies] = useState([]);
-  const [reply, setReply] = useState('');
+  const [sentPosts, setSentPosts] = useState([]);
+  const [isMounted, setIsMounted] = useState(true); // note this flag denote mount status
 
   const getUserID = () => {
-    const { id } = JSON.parse(localStorage.getItem('user'));
-    return id;
+    const { _id } = JSON.parse(localStorage.getItem('user'));
+    return _id;
   };
 
-  const getReplies = async () => {
+  const getSentPosts = async () => {
     try {
-      // get user data populated with replies
-      // put replies in array and then in state
       const { data } = await userAPI.getUserData(getUserID());
-      console.log(data);
       const allUserPosts = data.posts;
       const sentUserPosts = allUserPosts.filter(
         (p) => p.sent === true && p.reply
       );
-      const allUserReplies = sentUserPosts.map((p) => p.reply);
-      setReplies(allUserReplies.reverse());
-      if (!allUserReplies) {
-        return;
-      } else {
-        setReply(allUserReplies[0].response);
+      if (isMounted) {
+        setSentPosts(sentUserPosts);
       }
+      return setIsMounted(false)
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleInboxClick = (event) => {
-    const clickedReply = replies.filter(
-      (r) => r.response === event.target.innerHTML
-    );
-    setReply(clickedReply[0].response);
-  };
-
   useEffect(() => {
-    getReplies();
-  }, []);
+    getSentPosts();
+  }, [isMounted, setSentPosts]);
 
   return (
     <Grid
       container
-      // alignItems='center'
-      style={{ background: '#A1D1B6', height: '90vh', justifyContent: 'center', fontFamily: 'Rosarivo' }}
+      style={styles.container}
     >
       <Grid item xs={10} sm={11}>
-          <Typography style={{ fontFamily: 'Reenie Beanie', display: 'flex', padding: '40px'}} variant='h3'>
-            Inbox
-          </Typography>
+          <PageTitle>Inbox</PageTitle>
       </Grid>
-      
-      <InboxCard>
-     {replies.length ? (
-      replies.map((reply, index) => (
-        <Grid item xs={11} key={reply._id}>
-          // <InboxCard
-            response={reply.response}
+     {sentPosts.length ? (
+      sentPosts.map((sentPost, index) => (
+        <Grid item xs={11} sm={8} key={sentPost._id}>
+          <InboxCard
+            post={sentPost.post}
+            response={sentPost.reply.response}
           />
-          {index !== replies.length - 1 ? <Divider /> : null}
         </Grid>
       ))
       ) : (
-      <Grid item xs={11} alignItems='center'>
-          <Typography style= {{fontFamily: 'Reenie Beanie', marginBottom: '150px', padding: '40px'}} variant='h4'>
+      <Grid item xs={11}>
+          <Typography style= {styles.nothing}>
             Nothing to show
           </Typography>
       </Grid>
       )}
-      </InboxCard> 
-      
     </Grid>
   );
 };
 
 export default Inbox;
+
+const styles = {
+  container: {
+    background: '#A1D1B6',
+    paddingBottom: '60px',
+    height: '100%',
+    justifyContent: 'center'
+  },
+  nothing: {
+    fontFamily: 'Rosarivo',
+    marginBottom: '150px',
+    padding: '40px',
+    fontSize: '24px'
+  }
+}
