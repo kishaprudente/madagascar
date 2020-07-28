@@ -11,31 +11,45 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import Buttons from './Button';
 
-const ReplyAccordion = ({ post, input, handleInputChange }) => {
+const ReplyAccordion = ({
+  post,
+  input,
+  handleInputChange,
+  expanded,
+  handleChange,
+}) => {
   return (
-    <Accordion style={styles.container}>
+    <Accordion
+      expanded={expanded === post._id}
+      onChange={handleChange(post._id)}
+      style={styles.container}
+    >
       <AccordionSummary
-        id='reply'
-        aria-controls='reply'
+        id={post._id}
+        aria-controls={`reply${post._id}`}
         expandIcon={<ExpandMoreIcon />}
       >
-        <Typography>{post}</Typography>
+        <Typography>{post.post}</Typography>
       </AccordionSummary>
-      <Divider />
-      <AccordionDetails style={styles.details}>
-        <TextField
-          multiline
-          rows={3}
-          id='reply-input'
-          value={input}
-          variant='outlined'
-          style={styles.textfield}
-          onChange={handleInputChange}
-        />
-      </AccordionDetails>
-      <AccordionActions style={styles.actions}>
-        <Buttons>send</Buttons>
-      </AccordionActions>
+      {expanded === post._id ? (
+        <React.Fragment>
+          <Divider />
+          <AccordionDetails style={styles.details}>
+            <TextField
+              multiline
+              rows={3}
+              id='reply-input'
+              value={input}
+              variant='outlined'
+              style={styles.textfield}
+              onChange={handleInputChange}
+            />
+          </AccordionDetails>
+          <AccordionActions style={styles.actions}>
+            <Buttons>send</Buttons>
+          </AccordionActions>
+        </React.Fragment>
+      ) : null}
     </Accordion>
   );
 };

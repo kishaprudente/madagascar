@@ -27,6 +27,8 @@ const Reply = () => {
   const [loading, setLoading] = useState(true);
   // user reply
   const [reply, setReply] = useState('');
+  // expanded accordion
+  const [expanded, setExpanded] = useState('');
 
   const getUserID = () => {
     const { _id } = JSON.parse(localStorage.getItem('user'));
@@ -55,6 +57,11 @@ const Reply = () => {
     setReply(event.target.value);
   };
 
+  const handleChange = (panel) => (event, newExpanded) => {
+    setReply('');
+    setExpanded(newExpanded ? panel : false);
+  };
+
   useEffect(() => {
     filterPosts();
   }, []);
@@ -73,12 +80,14 @@ const Reply = () => {
           </div>
         </Grid>
       ) : (
-        posts.map((post, index) => (
-          <Grid key={index} item xs={11} sm={10}>
+        posts.map((post) => (
+          <Grid key={post._id} item xs={11} sm={10}>
             <ReplyAccordion
-              post={post.post}
+              post={post}
               input={reply}
               handleInputChange={handleInputChange}
+              expanded={expanded}
+              handleChange={handleChange}
             />
           </Grid>
         ))
