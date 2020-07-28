@@ -1,8 +1,7 @@
 const db = require('../models');
 
-// Defining methods for the postsController
+// Defining methods for the repliesController
 module.exports = {
-  //All post will show up and if there is a reply then it should show as well
   findAll: (req, res) => {
     db.Reply.find({})
       .populate('post')
