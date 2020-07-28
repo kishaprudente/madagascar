@@ -26,7 +26,7 @@ const Reply = () => {
   // loading
   const [loading, setLoading] = useState(true);
   // user reply
-  const [reply, setReply] = useState('');
+  const [reply, setReply] = useState({});
   // expanded accordion
   const [expanded, setExpanded] = useState('');
 
@@ -53,13 +53,31 @@ const Reply = () => {
     }
   };
 
-  const handleInputChange = (event) => {
-    setReply(event.target.value);
+  const handleInputChange = (event, postId) => {
+    setReply({ response: event.target.value, post: postId });
   };
 
   const handleChange = (panel) => (event, newExpanded) => {
     setReply('');
     setExpanded(newExpanded ? panel : false);
+  };
+
+  const handleSendReply = async (postId) => {
+    try {
+      // send reply to db, creates reply & updates post with reply id
+      await API.replyPost({
+        ...reply,
+        post: postId,
+      });
+      // setAlertOpen(true);
+      // remove the post that was just replied to
+      // setPosts(posts.filter((p) => postId !== p._id));
+      setReply({});
+      setLoading(true);
+      await filterPosts();
+    } catch (err) {
+      throw err;
+    }
   };
 
   useEffect(() => {
@@ -84,10 +102,11 @@ const Reply = () => {
           <Grid key={post._id} item xs={11} sm={10}>
             <ReplyAccordion
               post={post}
-              input={reply}
+              input={reply.response}
               handleInputChange={handleInputChange}
               expanded={expanded}
               handleChange={handleChange}
+              handleSendReply={handleSendReply}
             />
           </Grid>
         ))

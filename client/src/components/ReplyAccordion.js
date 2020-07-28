@@ -17,6 +17,7 @@ const ReplyAccordion = ({
   handleInputChange,
   expanded,
   handleChange,
+  handleSendReply,
 }) => {
   return (
     <Accordion
@@ -42,11 +43,11 @@ const ReplyAccordion = ({
               value={input}
               variant='outlined'
               style={styles.textfield}
-              onChange={handleInputChange}
+              onChange={(event) => handleInputChange(event, post._id)}
             />
           </AccordionDetails>
           <AccordionActions style={styles.actions}>
-            <Buttons>send</Buttons>
+            <Buttons onClick={() => handleSendReply(post._id)}>send</Buttons>
           </AccordionActions>
         </React.Fragment>
       ) : null}
