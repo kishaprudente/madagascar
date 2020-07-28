@@ -17,7 +17,7 @@ export default function Signup() {
   const { setAuthTokens, setCurrentUser } = useAuth();
   const history = useHistory();
   const location = useLocation();
-  const { from } = location.state || { from: { pathname: '/dashboard' } };
+  const { from } = location.state || { from: { pathname: '/moodboard' } };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

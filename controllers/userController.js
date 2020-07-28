@@ -22,14 +22,14 @@ module.exports = {
       res.status(422).json(err);
     }
   },
-  getData: async (req, res) => {
-    try {
-      const user = await db.User.findById(req.params.id);
-      user.populate({ path: 'posts', populate: { path: 'reply' }});
-      res.json(user);
-    } catch (err) {
-      res.status(422).json(err);
-    }
+  getData: (req, res) => {
+    db.User.findById(req.params.id)
+      .populate({
+        path: 'posts',
+        populate: { path: 'reply' },
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
   // auth contollers
   // sign up
@@ -54,12 +54,19 @@ module.exports = {
               console.log(err);
               return res.json(err);
             }
+            console.log(savedUser);
+            const { _id, username } = savedUser;
+            const body = {
+              _id: _id,
+              username: username,
+            };
+            console.log('body', body);
             //Sign the JWT token and populate the payload with the user email and id
-            const token = jwt.sign({ user: savedUser }, 'top_secret');
+            const token = jwt.sign({ user: body }, 'top_secret');
             console.log('TOKEN', token);
             // localStorage.setItem('token', token);
             //Send back the token to the user
-            return res.send({ savedUser, token });
+            return res.send({ body, token });
           });
         }
       });
@@ -76,6 +83,7 @@ module.exports = {
         }
         //We don't want to store the sensitive information such as the
         //user password in the token so we pick only the email and id
+        console.log('user', user);
         const { _id, username } = user;
         const body = {
           _id: _id,

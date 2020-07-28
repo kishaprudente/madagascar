@@ -33,13 +33,14 @@ export default function Signin() {
 
   const handleSignin = async () => {
     try {
-      const { username, password } = user;
+      console.log(user);
       const signin = await userAPI.signinUser({
-        username: username,
-        password: password,
+        username: user.username,
+        password: user.password,
       });
+      console.log(signin);
       if (signin.status === 200) {
-        console.log(signin.data);
+        console.log(signin.data)
         setCurrentUser(signin.data.body);
         setAuthTokens(signin.data.token);
         history.replace(from);
