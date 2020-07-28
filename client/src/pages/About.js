@@ -15,7 +15,8 @@ const useStyles = makeStyles({
     minWidth: 275,
     border: '1px solid #000000',
     boxSizing: 'border-box',
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+		boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+		margin: '5px',
   }, 
   title: {
     fontFamily: 'Reenie Beanie'
@@ -67,7 +68,7 @@ const About = () => {
         </CardContent>
       </Card>
     </Grid>
-    <Grid item xs={11} alignItems='center'>
+    <Grid item xs={11} alignItems='center' style={{paddingBottom: '60px'}}>
     <Card className={classes.root} variant="outlined">
     <CardContent>
         <Typography className={classes.title} variant="h5">
@@ -92,7 +93,7 @@ export default About;
 const container = {
   background: '#A1D1B6',
   height: '90vh',
-  justifyContent: 'center',
+	justifyContent: 'center',
 };
 
 const font = {
