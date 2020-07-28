@@ -128,14 +128,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPosts();
-  }, [isMounted, posts]);
+  }, [isMounted, setPosts]);
 
   return (
     <Grid
       container
       style={container}
       alignItems='center'
-      // justifyContent='center'
       direction='column'
     >
       <Grid item style={{ textAlign: 'center' }}>
@@ -278,7 +277,8 @@ const container = {
   height: '100%',
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
-  paddingBottom: '80px'
+  paddingBottom: '80px',
+  overflow: 'auto'
 };
 
 const chirpyStyle = {
