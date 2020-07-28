@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import ReplyAccordion from '../components/ReplyAccordion';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import AlertBar from '../components/AlertBar';
 import API from '../utils/API';
 
 const styles = {
@@ -29,6 +28,8 @@ const Reply = () => {
   const [reply, setReply] = useState({});
   // expanded accordion
   const [expanded, setExpanded] = useState('');
+  // alert
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const getUserID = () => {
     const { _id } = JSON.parse(localStorage.getItem('user'));
@@ -69,7 +70,7 @@ const Reply = () => {
         ...reply,
         post: postId,
       });
-      // setAlertOpen(true);
+      setAlertOpen(true);
       // remove the post that was just replied to
       // setPosts(posts.filter((p) => postId !== p._id));
       setReply({});
@@ -81,38 +82,54 @@ const Reply = () => {
     }
   };
 
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    // close all
+    setAlertOpen(false);
+  };
+
   useEffect(() => {
     filterPosts();
   }, []);
 
   return (
-    <Grid container justify='center' style={styles.container}>
-      <Grid item xs={10} sm={11}>
-        <Typography style={styles.header} variant='h2'>
-          Reply
-        </Typography>
-      </Grid>
-      {loading ? (
-        <Grid item xs={12}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress />
-          </div>
+    <React.Fragment>
+      <Grid container justify='center' style={styles.container}>
+        <Grid item xs={10} sm={11}>
+          <Typography style={styles.header} variant='h2'>
+            Reply
+          </Typography>
         </Grid>
-      ) : (
-        posts.map((post) => (
-          <Grid key={post._id} item xs={11} sm={10}>
-            <ReplyAccordion
-              post={post}
-              input={reply.response}
-              handleInputChange={handleInputChange}
-              expanded={expanded}
-              handleChange={handleChange}
-              handleSendReply={handleSendReply}
-            />
+        {loading ? (
+          <Grid item xs={12}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress />
+            </div>
           </Grid>
-        ))
-      )}
-    </Grid>
+        ) : (
+          posts.map((post) => (
+            <Grid key={post._id} item xs={11} sm={10}>
+              <ReplyAccordion
+                post={post}
+                input={reply.response}
+                handleInputChange={handleInputChange}
+                expanded={expanded}
+                handleChange={handleChange}
+                handleSendReply={handleSendReply}
+              />
+            </Grid>
+          ))
+        )}
+      </Grid>
+      <AlertBar
+        message='Sent~'
+        type='success'
+        openState={alertOpen}
+        onClose={handleCloseAlert}
+      />
+    </React.Fragment>
   );
 };
 
