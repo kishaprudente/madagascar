@@ -146,7 +146,7 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item style={{ textAlign: 'center' }}>
-        <Card>
+        <Card style ={card}>
           <ToggleButtonGroup
             value={mood}
             exclusive
@@ -285,6 +285,11 @@ const chirpyStyle = {
   width: '1em',
   height: '1em',
   marginLeft: '5px',
+};
+
+const card = {
+  border: '1px solid #000000',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 };
 
 const p = {
