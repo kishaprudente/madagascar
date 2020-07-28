@@ -11,6 +11,7 @@ const AlertBar = ({ message, type, openState, onClose }) => {
       onClose={() => {
         onClose();
       }}
+      style={{ bottom: 90 }}
     >
       <Alert
         onClose={() => {
