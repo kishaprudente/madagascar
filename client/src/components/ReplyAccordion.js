@@ -34,15 +34,17 @@ const ReplyAccordion = ({
       </AccordionSummary>
       {expanded === post._id ? (
         <React.Fragment>
-          <Divider />
+          <Divider variant='middle' />
           <AccordionDetails style={styles.details}>
             <TextField
               multiline
               rows={3}
+              margin='none'
+              fullWidth
               id='reply-input'
               value={input}
               variant='outlined'
-              style={styles.textfield}
+              InputProps={styles.textfield}
               onChange={(event) => handleInputChange(event, post._id)}
             />
           </AccordionDetails>
@@ -60,9 +62,13 @@ export default ReplyAccordion;
 const styles = {
   container: {
     margin: '2px 0',
+    borderRadius: 0,
+    border: '1px solid #000000',
   },
   textfield: {
-    width: '100%',
+    style: {
+      borderRadius: 0,
+    },
   },
   details: {
     padding: '8px 16px',
