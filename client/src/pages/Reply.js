@@ -35,8 +35,8 @@ const Reply = () => {
   };
 
   const getUserID = () => {
-    const { id } = JSON.parse(localStorage.getItem('user'));
-    return id;
+    const { _id } = JSON.parse(localStorage.getItem('user'));
+    return _id;
   };
 
   // gets all posts, filtered to include only

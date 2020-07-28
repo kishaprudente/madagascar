@@ -32,8 +32,8 @@ const Dashboard = () => {
   const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
   const getUserID = () => {
-    const { id } = JSON.parse(localStorage.getItem('user'));
-    return id;
+    const { _id } = JSON.parse(localStorage.getItem('user'));
+    return _id;
   };
 
   const handleErrorAlert = (message) => {
@@ -109,20 +109,10 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await userAPI.logoutUser();
-      window.location.replace('/');
-    } catch (err) {
-      throw err;
-    }
-  };
-
   const loadPosts = async () => {
     try {
       console.log('loadPosts');
       const allPosts = await API.getPost();
-      console.log(allPosts);
       const userPosts = allPosts.data.filter(
         (post) => post.user === getUserID()
       );
@@ -140,9 +130,8 @@ const Dashboard = () => {
     <Grid
       container
       style={container}
-      justify='center'
       alignItems='center'
-      justifyContent='center'
+      // justifyContent='center'
       direction='column'
     >
       <Grid item style={{ textAlign: 'center' }}>
@@ -153,7 +142,7 @@ const Dashboard = () => {
         </h4>
       </Grid>
 
-      <Grid item style={{ textAlign: 'center' }}>
+      <Grid item>
         <Card>
           <ToggleButtonGroup
             value={mood}
@@ -235,14 +224,13 @@ const Dashboard = () => {
       </Grid>
 
       {posts.length ? (
-        <Box component='div' style={{ height: '290px' }}>
+        <Box>
           {posts.map((post) => {
             return (
-              <Grid item>
+              <Grid item key={post._id}>
                 <Paper
                   style={{
                     width: '332px',
-
                     fontSize: '14px',
                     fontFamily: 'Rosarivo',
                     borderRadius: '5px',
@@ -284,10 +272,9 @@ const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
   height: '100%',
-  flexGrow: '1',
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
-  flexWrap: 'nowrap',
+  paddingBottom: '80px'
 };
 
 const chirpyStyle = {
