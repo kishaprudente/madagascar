@@ -1,10 +1,8 @@
 import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
 import {
     Card,
     CardContent,
     Typography,
-    Avatar
   } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import chirpy from '../assets/chirpy.svg';
