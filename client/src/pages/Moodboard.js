@@ -21,6 +21,7 @@ import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
 import Buttons from '../components/Button.js';
+import PageTitle from '../components/PageTitle';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
@@ -138,7 +139,7 @@ const Dashboard = () => {
       direction='column'
     >
       <Grid item style={{ textAlign: 'center' }}>
-        <h3>Hello, {username}!</h3>
+        <PageTitle>Hello, {username}!</PageTitle>
         <h4>
           How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
