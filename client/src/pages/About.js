@@ -6,6 +6,7 @@ import AboutCard from '../components/AboutCard.js'
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import ImageAvatars from '../components/Avatars';
 
 
 const useStyles = makeStyles({
@@ -71,7 +72,7 @@ const About = () => {
         The Dream Team
         </Typography>
         {/* We could put the icons here of our GitHub profiles */}
-        
+        <ImageAvatars />
         <img src={chirpy} alt='chirpy the bird' style={chirpyStyle2}/> 
         <Typography className={classes.body} variant="body2" component="p">
         Chirpy The Bird
