@@ -33,25 +33,25 @@ export default function ImageAvatars() {
 
   return (
     <Grid container justify='space-around' style={avatarBlock}>
-      <Grid item style={avatar}>
+      <Grid item xs={6} sm={3} style={avatar}>
         <Avatar alt='Kevin Wu' src={kevinWu} style={avatar} />
         <Typography style={font}>
           <Link to='https://github.com/kevkevwuhoo'>Kevin Wu</Link>
         </Typography>
       </Grid>
-      <Grid item style={avatar}>
+      <Grid item xs={6} sm={3} style={avatar}>
         <Avatar alt='Kisha Prudente' src={kishaPrudente} style={avatar} />
         <Typography style={font}>
           <Link to='https://github.com/kishaprudente'>Kisha Prudente</Link>
         </Typography>
       </Grid>
-      <Grid item style={avatar}>
+      <Grid item xs={6} sm={3} style={avatar}>
         <Avatar alt='Kaitlyn Rodriguez' src={kaitlynRodriguez} style={avatar} />
         <Typography style={font}>
           <Link to='https://github.com/Kaitlyn-Lynette'>Kaitlyn Rodriguez</Link>
         </Typography>
       </Grid>
-      <Grid item style={avatar}>
+      <Grid item xs={6} sm={3} style={avatar}>
         <Avatar alt='Jiyoon Kim' src={jiyoonKim} style={avatar} />
         <Typography style={font}>
           <Link to='https://github.com/jiyoon9886'>Jiyoon Kim</Link>
