@@ -3,16 +3,13 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Menu,
-  MenuItem,
-  IconButton,
-  // Avatar,
+  Button,
+  Avatar,
 } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-// import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/authContext';
 import userAPI from '../utils/userAPI';
+import Chirpy from '../assets/chirpy.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    textAlign: 'center',
     color: 'black',
     fontFamily: 'Reenie Beenie',
+    paddingLeft: '10px'
   },
   link: {
     textDecoration: 'none',
@@ -36,16 +33,6 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = useStyles();
   const { authTokens, setAuthTokens } = useAuth();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const logout = () => {
     userAPI.logoutUser();
@@ -56,45 +43,20 @@ const Header = () => {
     <div className={classes.root}>
       <AppBar style={{ backgroundColor: '#A1D1B6' }} position='fixed'>
         <Toolbar>
-          {/* <Avatar
+          <Avatar
             alt='logo'
-            src={Logo}
+            src={Chirpy}
             variant='square'
             size={100}
             style={{height: '100%'}}
-          /> */}
+          />
           <Typography variant='h6' className={classes.title}>
             Chirrup!
           </Typography>
           {authTokens && (
-            <div>
-              <IconButton
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
-                style={{ color: 'black' }}
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </Menu>
-            </div>
+            <Button onClick={logout}>
+              Logout
+            </Button>
           )}
         </Toolbar>
       </AppBar>

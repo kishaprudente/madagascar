@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 
@@ -19,13 +20,13 @@ import anxious from '../assets/anxious.svg';
 import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
-import userAPI from '../utils/userAPI';
 import Buttons from '../components/Button.js';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
+  const [isMounted, setIsMounted] = useState(true); // note this flag denote mount status
   const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
@@ -116,7 +117,10 @@ const Dashboard = () => {
       const userPosts = allPosts.data.filter(
         (post) => post.user === getUserID()
       );
-      setPosts(userPosts.reverse());
+      if (isMounted) {
+        setPosts(userPosts.reverse());
+      }
+      return setIsMounted(false);
     } catch (err) {
       throw err;
     }
@@ -124,14 +128,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [isMounted, setPosts]);
 
   return (
     <Grid
       container
       style={container}
       alignItems='center'
-      // justifyContent='center'
       direction='column'
     >
       <Grid item style={{ textAlign: 'center' }}>
@@ -275,6 +278,7 @@ const container = {
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
   paddingBottom: '80px',
+  overflow: 'auto',
 };
 
 const chirpyStyle = {
