@@ -31,13 +31,13 @@ export default InboxCard;
 
 const styles = {
   root: {
-    margin: 10,
+    marginTop: 10,
     radius: 4,
     effect: 'Drop Shadow',
   },
   text: {
-    fontSize: '20px',
-    fontFamily: 'Reenie Beanie',
+    fontSize: '18px',
+    fontFamily: 'Rosarivo',
     padding: '10px'
   },
   chirpy: {
