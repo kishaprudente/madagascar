@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import ImageAvatars from '../components/Avatars';
+import PageTitle from '../components/PageTitle';
 
 
 const useStyles = makeStyles({
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
     minWidth: 275,
     border: '1px solid #000000',
     boxSizing: 'border-box',
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   }, 
   title: {
     fontFamily: 'Reenie Beanie'
@@ -28,18 +29,16 @@ const useStyles = makeStyles({
 });
 
 const About = () => {
-   const classes = useStyles();
+	 const classes = useStyles();
+	 
     return (
     <Grid
       container
-      // alignItems='center'
       style={container}
-    >
+			>
     <Grid item xs={10} sm={11}>
-          <Typography style={{ fontFamily: 'Reenie Beanie', display: 'flex'}} variant='h3'>
-            About Us
-          </Typography>
-      </Grid>
+          <PageTitle>About Us</PageTitle>
+    </Grid>
 
     <Grid item xs={11} alignItems='center'>
         <AboutCard
@@ -94,7 +93,10 @@ const container = {
   background: '#A1D1B6',
   height: '90vh',
   justifyContent: 'center',
-  fontFamily: 'Rosarivo',
+};
+
+const font = {
+  fontFamily: 'Reenie Beanie',
 };
 
 const chirpyStyle = {
