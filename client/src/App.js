@@ -8,6 +8,7 @@ import Inbox from './pages/Inbox';
 import Landing from './pages/Landing';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import About from './pages/About';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import PrivateRoute from './components/PrivateRoute';
@@ -45,6 +46,7 @@ function App() {
               <Route exact path='/' component={Landing} />
               <Route exact path='/signin' component={Signin} />
               <Route exact path='/signup' component={Signup} />
+              <Route exact path='/about' component={About} />
               <PrivateRoute path='/moodboard' component={Moodboard} />
               <PrivateRoute path='/reply' component={Reply} />
               <PrivateRoute path='/inbox' component={Inbox} />
