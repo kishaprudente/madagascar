@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button, Box } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import chirpy from '../assets/chirpy.svg';
 import AboutCard from '../components/AboutCard.js'
@@ -33,7 +33,7 @@ const About = () => {
     <Grid
       container
       // alignItems='center'
-      style={{ background: '#A1D1B6', height: '90vh', justifyContent: 'center', fontFamily: 'Rosarivo' }}
+      style={container}
     >
     <Grid item xs={10} sm={11}>
           <Typography style={{ fontFamily: 'Reenie Beanie', display: 'flex'}} variant='h3'>
@@ -89,6 +89,13 @@ const About = () => {
 }
 
 export default About;
+
+const container = {
+  background: '#A1D1B6',
+  height: '90vh',
+  justifyContent: 'center',
+  fontFamily: 'Rosarivo',
+};
 
 const chirpyStyle = {
   width: '5em',
