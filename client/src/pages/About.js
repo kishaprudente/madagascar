@@ -72,14 +72,13 @@ const About = () => {
         </Typography>
         {/* We could put the icons here of our GitHub profiles */}
         
-        <Typography className={classes.body} variant="body2" component="p">
         <img src={chirpy} alt='chirpy the bird' style={chirpyStyle2}/> 
+        <Typography className={classes.body} variant="body2" component="p">
         Chirpy The Bird
         </Typography>
     </CardContent>
     </Card>
     </Grid> 
-
     </Grid>
    
     );
