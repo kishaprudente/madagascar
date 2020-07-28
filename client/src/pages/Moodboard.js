@@ -142,7 +142,7 @@ const Dashboard = () => {
         </h4>
       </Grid>
 
-      <Grid item>
+      <Grid item style={{ textAlign: 'center' }}>
         <Card>
           <ToggleButtonGroup
             value={mood}
@@ -274,7 +274,7 @@ const container = {
   height: '100%',
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
-  paddingBottom: '80px'
+  paddingBottom: '80px',
 };
 
 const chirpyStyle = {
