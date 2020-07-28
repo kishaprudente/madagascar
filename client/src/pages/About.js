@@ -11,6 +11,9 @@ import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    border: '1px solid #000000',
+    boxSizing: 'border-box',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
   }, 
   title: {
     fontFamily: 'Reenie Beanie'
