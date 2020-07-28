@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
@@ -6,6 +7,7 @@ import jiyoonKim from '../assets/avatars/jiyoonKim.jpeg';
 import kaitlynRodriguez from '../assets/avatars/kaitlynRodriguez.jpeg';
 import kevinWu from '../assets/avatars/kevinWu.jpeg';
 import kishaPrudente from '../assets/avatars/kishaPrudente.jpeg';
+import { Typography } from '@material-ui/core';
 
 export default function ImageAvatars() {
 // const axios = require('axios');
@@ -30,13 +32,45 @@ export default function ImageAvatars() {
 // });
 
   return (
-    <Grid container display='flex' flexDirection='row'>
-      <Grid item>
-        <Avatar alt='Kevin Wu' src={kevinWu} />
-        <Avatar alt='Kisha Prudente' src={kishaPrudente} />
-        <Avatar alt='Kaitlyn Rodriguez' src={kaitlynRodriguez} />
-        <Avatar alt='Jiyoon Kim' src={jiyoonKim} />
+    <Grid container justify='space-around' style={avatarBlock}>
+      <Grid item style={avatar}>
+        <Avatar alt='Kevin Wu' src={kevinWu} style={avatar} />
+        <Typography style={font}>
+          <Link to='https://github.com/kevkevwuhoo'>Kevin Wu</Link>
+        </Typography>
+      </Grid>
+      <Grid item style={avatar}>
+        <Avatar alt='Kisha Prudente' src={kishaPrudente} style={avatar} />
+        <Typography style={font}>
+          <Link to='https://github.com/kishaprudente'>Kisha Prudente</Link>
+        </Typography>
+      </Grid>
+      <Grid item style={avatar}>
+        <Avatar alt='Kaitlyn Rodriguez' src={kaitlynRodriguez} style={avatar} />
+        <Typography style={font}>
+          <Link to='https://github.com/Kaitlyn-Lynette'>Kaitlyn Rodriguez</Link>
+        </Typography>
+      </Grid>
+      <Grid item style={avatar}>
+        <Avatar alt='Jiyoon Kim' src={jiyoonKim} style={avatar} />
+        <Typography style={font}>
+          <Link to='https://github.com/jiyoon9886'>Jiyoon Kim</Link>
+        </Typography>
       </Grid>
     </Grid>
   );
 }
+
+const avatarBlock = {
+	paddingTop: '5px',
+};
+
+const avatar = {
+  display: 'inline-block',
+  alignContent: 'center',
+  textAlign: 'center',
+};
+
+const font = {
+  fontFamily: 'Reenie Beanie',
+};
