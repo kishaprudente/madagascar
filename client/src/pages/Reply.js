@@ -74,6 +74,7 @@ const Reply = () => {
       // setPosts(posts.filter((p) => postId !== p._id));
       setReply({});
       setLoading(true);
+      setExpanded('');
       await filterPosts();
     } catch (err) {
       throw err;
