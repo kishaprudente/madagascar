@@ -29,7 +29,7 @@ function App() {
   };
 
   return (
-    <div data-testid='app'>
+    <div data-testid='app' style={container}>
       <AuthContext.Provider
         value={{
           authTokens,
@@ -62,6 +62,6 @@ export default App;
 const container = {
   backgroundColor: '#A1D1B6',
   width: '100vw',
-  height: '100%',
+  height: '100vh',
   overflow: 'auto',
 };
