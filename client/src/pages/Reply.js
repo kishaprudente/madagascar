@@ -1,38 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
-import PostCard from '../components/PostCard';
+import { Grid, Typography } from '@material-ui/core';
+import ReplyAccordion from '../components/ReplyAccordion';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import API from '../utils/API';
-import Buttons from '../components/Button.js';
 
 const styles = {
   container: {
     background: '#A1D1B6',
-    width: '100vw',
-    minHeight: '90vh',
-    justifyContent: 'center',
-    textAlign: 'center',
+    paddingBottom: '60px',
+    height: '100%',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  header: {
+    fontFamily: 'Reenie Beanie',
+    display: 'flex',
+    padding: '0.5em',
   },
 };
 
 const Reply = () => {
-  // post is single rendered post
-  const [post, setPost] = useState({});
   // posts is all posts from db (filtered)
-  const [posts, setPosts] = useState();
-
-  const renderNextPost = () => {
-    console.log('rendernextpost', posts);
-    if (posts) {
-      if (post) {
-        const nextIndex = posts.indexOf(post) + 1;
-        setPost(posts[nextIndex]);
-      } else {
-        setPost(posts[0]);
-      }
-    } else {
-      filterPosts();
-    }
-  };
+  const [posts, setPosts] = useState([]);
+  // loading
+  const [loading, setLoading] = useState(true);
+  // user reply
+  const [reply, setReply] = useState('');
 
   const getUserID = () => {
     const { _id } = JSON.parse(localStorage.getItem('user'));
@@ -51,51 +45,44 @@ const Reply = () => {
         return post.sent && !post.reply && post.user !== userID; // post.sent === true && !post.reply
       });
       setPosts(allPosts);
+      setLoading(false);
     } catch (err) {
       throw err;
     }
   };
 
-  const handleNextButtonClick = () => {
-    renderNextPost();
+  const handleInputChange = (event) => {
+    setReply(event.target.value);
   };
 
-  const handleRefreshButtonClick = () => {
+  useEffect(() => {
     filterPosts();
-  };
+  }, []);
 
   return (
-    <Grid
-      container
-      style={styles.container}
-      justify='center'
-      alignItems='center'
-      direction='column'
-      position='absolute'
-    >
-      <Grid item>
-        <h3
-          style={{
-            fontFamily: 'Reenie Beanie',
-            fontSize: '20px',
-            textAlign: 'center',
-          }}
-        >
-          Send kindness!
-        </h3>
+    <Grid container justify='center' style={styles.container}>
+      <Grid item xs={10} sm={11}>
+        <Typography style={styles.header} variant='h2'>
+          Reply
+        </Typography>
       </Grid>
-      <PostCard
-        post={post}
-        posts={posts}
-        setPost={setPost}
-        setPosts={setPosts}
-        renderNextPost={renderNextPost}
-      />
-      <Buttons
-        onClick={post ? handleNextButtonClick : handleRefreshButtonClick}
-      >
-        {post ? 'next' : 'refresh'}
-      </Buttons>
+      {loading ? (
+        <Grid item xs={12}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
+          </div>
+        </Grid>
+      ) : (
+        posts.map((post, index) => (
+          <Grid key={index} item xs={11} sm={10}>
+            <ReplyAccordion
+              post={post.post}
+              input={reply}
+              handleInputChange={handleInputChange}
+            />
+          </Grid>
+        ))
+      )}
     </Grid>
   );
 };
