@@ -35,8 +35,7 @@ const About = () => {
         title="Who's Chirpy?"
         description="Tellus eu nulla diam ut laoreet feugiat magna quis viverra. Velit ut porta elit mattis nullam sed. Lacus ante nunc mattis eu adipiscing nam in."
         />
-        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle}/>
-        
+        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
     </Grid>
     <Grid item xs={11} alignItems='center'>
         <AboutCard
