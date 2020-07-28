@@ -4,6 +4,7 @@ import {
     Card,
     CardContent,
     Typography,
+    Avatar
   } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import chirpy from '../assets/chirpy.svg';
@@ -17,7 +18,8 @@ const InboxCard = ({ post, response }) => {
         </Typography>
         <Divider variant='middle'/>
         <Typography style={styles.text}>
-        <img src={chirpy} alt='chirpy the bird' style={styles.chirpy}/> A little birdie told me...
+        A little birdie told me...
+        <img src={chirpy} alt='chirpy the bird' style={styles.chirpy}/> 
         </Typography>
         <Typography style={styles.text}>
         {response}
@@ -41,8 +43,7 @@ const styles = {
     padding: '10px'
   },
   chirpy: {
-    width: '1em',
-    height: '1em',
-    marginLeft: '5px',
+    width: '1.5em',
+    height: '1.5em',
   }
 }
