@@ -21,6 +21,7 @@ import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
 import Buttons from '../components/Button.js';
+import PageTitle from '../components/PageTitle';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
@@ -138,15 +139,15 @@ const Dashboard = () => {
       direction='column'
     >
       <Grid item style={{ textAlign: 'center' }}>
-        <h3>Hello, {username}!</h3>
+        <PageTitle>Hello, {username}!</PageTitle>
         <h4>
           How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
         </h4>
       </Grid>
 
-      <Grid item>
-        <Card>
+      <Grid item style={{ textAlign: 'center' }}>
+        <Card style ={card}>
           <ToggleButtonGroup
             value={mood}
             exclusive
@@ -278,13 +279,18 @@ const container = {
   fontFamily: 'Reenie Beanie',
   fontSize: '18px',
   paddingBottom: '80px',
-  overflow: 'auto'
+  overflow: 'auto',
 };
 
 const chirpyStyle = {
   width: '1em',
   height: '1em',
   marginLeft: '5px',
+};
+
+const card = {
+  border: '1px solid #000000',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 };
 
 const p = {

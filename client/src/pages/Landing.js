@@ -26,7 +26,7 @@ export default function Landing() {
       </Grid>
       <Grid item style={{ marginTop: '20px' }}>
         <Buttons>
-          <Link to='/login'>Let's chirp!</Link>
+          <Link to='/signin'>Let's chirp!</Link>
         </Buttons>
       </Grid>
     </Grid>)
