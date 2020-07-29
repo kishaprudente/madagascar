@@ -6,25 +6,28 @@ const JWTstrategy = require('passport-jwt').Strategy;
 //We use this to extract the JWT sent by the user
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
-passport.use('signin', new localStrategy(
-  {
-    usernameField: 'username', // not necessary, DEFAULT
-  },
-  function(username, password, done) {
-    db.User.findOne({ username: username }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username' });
-      }
-      if (!user.checkPassword(password)) {
-        return done(null, false, { message: 'Incorrect password' });
-      }
-      return done(null, user);
-    });
-  }
-));
+passport.use(
+  'signin',
+  new localStrategy(
+    {
+      usernameField: 'username', // not necessary, DEFAULT
+    },
+    function(username, password, done) {
+      db.User.findOne({ username: username }, (err, user) => {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username' });
+        }
+        if (!user.checkPassword(password)) {
+          return done(null, false, { message: 'Incorrect password' });
+        }
+        return done(null, user);
+      });
+    }
+  )
+);
 
 passport.serializeUser((user, done) => {
   done(null, { _id: user._id });
