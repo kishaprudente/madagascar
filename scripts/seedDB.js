@@ -49,13 +49,33 @@ const postSeed = [
   }
 ];
 
-db.Post.remove({})
+const replySeed = [
+  {
+    response: 'You will be ok!',
+    post:'5ee1a85254d653c1078a5932'
+  },
+];
+
+db.Post
+  .remove({})
   .then(() => db.Post.collection.insertMany(postSeed))
   .then((data) => {
     console.log(data.result.n + ' records inserted!');
     process.exit(0);
   })
   .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.Reply
+  .remove({})
+  .then(() => db.Reply.collection.insertMany(replySeed))
+  .then(data => {
+    console.log(data.result.n + ' records inserted!');
+    process.exit(0);
+  })
+  .catch(err => {
     console.error(err);
     process.exit(1);
   });
