@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { select, axisBottom, axisLeft, scaleLinear, scaleBand } from 'd3';
-// import './Chart.css';
 
 const Chart = () => {
   const [data, setData] = useState([
@@ -38,10 +37,7 @@ const Chart = () => {
       .call(xAxis);
 
     const yAxis = axisLeft(yScale);
-    svg
-      .select('.y-axis')
-      // .style('transform', 'translateX(150px)')
-      .call(yAxis);
+    svg.select('.y-axis').call(yAxis);
 
     svg
       .selectAll('.bar')
