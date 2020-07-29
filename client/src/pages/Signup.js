@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Grid, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Buttons from '../components/Button.js';
+import AlertBar from '../components/AlertBar';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
 import { useAuth } from '../utils/authContext';
@@ -18,6 +19,9 @@ export default function Signup() {
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/moodboard' } };
+  // error alert state
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,23 +37,40 @@ export default function Signup() {
     event.preventDefault();
   };
 
+  const handleErrorAlert = (message) => {
+    setAlertMessage({ message, type: 'error' });
+    setAlertOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    // close alert
+    setAlertOpen(false);
+  };
+
   const handleSignup = async () => {
     try {
       if (user.password !== user.confirm) {
-        throw new Error('Confirm Password must match Password');
+        handleErrorAlert('Confirm Password must match Password');
       } else {
         const { username, password } = user;
         const signup = await userAPI.createUser({
           username: username,
           password: password,
         });
-        if (signup.status === 200) {
-          console.log(signup.data);
+        console.log(signup);
+        const { error, errors } = signup.data;
+        if (error) {
+          handleErrorAlert(error);
+        } else if (errors) {
+          const { message } = signup.data.errors.password.properties;
+          handleErrorAlert(message);
+        } else {
           setCurrentUser(signup.data.body);
           setAuthTokens(signup.data.token);
           history.replace(from);
-        } else {
-          throw new Error('Oops. Something went wrong. :(');
         }
       }
     } catch (err) {
@@ -131,6 +152,12 @@ export default function Signup() {
       <Grid item>
         <Buttons onClick={handleSignup}>Sign Up</Buttons>
       </Grid>
+      <AlertBar
+        message={alertMessage.message}
+        type={alertMessage.type}
+        openState={alertOpen}
+        onClose={handleCloseAlert}
+      />
       <Grid item>
         Already have an account? <Link to='/signin'>Sign In</Link>
       </Grid>
