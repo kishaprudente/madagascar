@@ -108,8 +108,10 @@ module.exports = {
   },
   // logout
   logout: (req, res) => {
+    console.log(req.user);
     if (req.user) {
       req.logout();
+      res.redirect('/');
       res.send({ msg: 'logging out' });
     } else {
       res.send({ msg: 'no user to log out' });
