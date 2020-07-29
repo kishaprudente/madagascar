@@ -28,6 +28,7 @@ const styles = {
     marginTop: 10,
     radius: 4,
     effect: 'Drop Shadow',
+    border: '1px solid #000000',
   },
   heading: {
     fontFamily: 'Reenie Beanie',
