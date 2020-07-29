@@ -278,7 +278,7 @@ const container = {
   width: '100vw',
   height: '100%',
   fontFamily: 'Reenie Beanie',
-  fontSize: '18px',
+  fontSize: '16px',
   marginTop: '75px',
   paddingBottom: '80px',
   overflow: 'auto',
@@ -300,7 +300,7 @@ const card = {
 
 const userPosts = {
   minwidth: '332px',
-  fontSize: '14px',
+  fontSize: '16px',
   fontFamily: 'Ruluko',
   borderRadius: '5px',
   minWidth: '332px',
@@ -311,7 +311,6 @@ const userPosts = {
 
 const p = {
   padding: '5px',
-  //margin: '5px',
 };
 
 const buttons = {
