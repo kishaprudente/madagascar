@@ -16,22 +16,22 @@ const useStyles = makeStyles({
     fontFamily: 'Reenie Beanie',
   },
   body: {
-    fontSize: '12px',
+    fontSize: '16px',
     fontFamily: 'Ruluko',
   },
 });
 
-function AboutCard ({title, description}) {
+function AboutCard({ title, description }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} variant='outlined'>
       <CardContent>
-        <Typography className={classes.title} variant="h5">
-        {title}
+        <Typography className={classes.title} variant='h5'>
+          {title}
         </Typography>
-        <Typography className={classes.body} variant="body2" component="p">
-        {description}
+        <Typography className={classes.body} variant='body2' component='p'>
+          {description}
         </Typography>
       </CardContent>
     </Card>
@@ -39,4 +39,3 @@ function AboutCard ({title, description}) {
 }
 
 export default AboutCard;
-
