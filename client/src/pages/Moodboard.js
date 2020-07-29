@@ -215,6 +215,8 @@ const Dashboard = () => {
               id='outlined-multiline-static'
               multiline
               rows={4}
+              margin='none'
+              fullWidth
               variant='outlined'
               onChange={handleInputChange}
               value={post}
