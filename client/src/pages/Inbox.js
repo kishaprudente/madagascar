@@ -34,8 +34,11 @@ const Inbox = () => {
   };
 
   useEffect(() => {
-    getSentPosts();
-  }, [isMounted, setSentPosts]);
+    if (isMounted) {
+      getSentPosts();
+    }
+    return setIsMounted(false);
+  }, []);
 
   return (
     <Grid
