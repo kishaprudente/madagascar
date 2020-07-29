@@ -41,12 +41,12 @@ module.exports = {
       const { username, password } = req.body;
       // ADD VALIDATION
       await db.User.findOne({ username: username }, (err, user) => {
+        console.log('USERNAME', username);
+        console.log('USER SIGNUP', user);
         if (err) {
           console.log('User.js post error: ', err);
         } else if (user) {
-          res.json({
-            error: `Sorry, already a user with the username: ${username}`,
-          });
+          res.json({ error: `Username '${username}' is already taken` });
         } else {
           const newUser = new db.User({
             username: username,
@@ -69,12 +69,12 @@ module.exports = {
             console.log('TOKEN', token);
             // localStorage.setItem('token', token);
             //Send back the token to the user
-            return res.send({ body, token });
+            return res.json({ body, token });
           });
         }
       });
-    } catch (error) {
-      return error;
+    } catch (err) {
+      throw err;
     }
   },
   // signin
