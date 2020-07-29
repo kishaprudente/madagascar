@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, CircularProgress } from '@material-ui/core';
+import { Grid, CircularProgress } from '@material-ui/core';
 import ReplyAccordion from '../components/ReplyAccordion';
 import AlertBar from '../components/AlertBar';
 import PageTitle from '../components/PageTitle';
