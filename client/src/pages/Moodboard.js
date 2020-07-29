@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 import AlertBar from '../components/AlertBar';
@@ -245,6 +246,7 @@ const Dashboard = () => {
                       </Moment>
                       {post.mood}
                     </p>
+                    <Divider variant='middle' />
                     <p style={p}>{post.post}</p>
                   </Paper>
                 </Grid>
@@ -307,6 +309,7 @@ const userPosts = {
   border: '1px solid #000000',
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   margin: '5px',
+  padding: '10px',
 };
 
 const p = {
