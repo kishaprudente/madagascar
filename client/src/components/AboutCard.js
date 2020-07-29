@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
   body: {
     fontSize: '12px',
-    fontFamily: 'Rosarivo',
+    fontFamily: 'Ruluko',
   },
 });
 
