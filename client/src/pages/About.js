@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import chirpy from '../assets/chirpy.svg';
 import AboutCard from '../components/AboutCard.js'
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
