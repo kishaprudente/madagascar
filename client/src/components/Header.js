@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: 'black',
-    fontFamily: 'Reenie Beenie',
-    paddingLeft: '10px'
+    fontFamily: 'Reenie Beanie',
+    paddingLeft: '16px'
   },
   link: {
     textDecoration: 'none',
@@ -50,7 +50,7 @@ const Header = () => {
             size={100}
             style={{height: '100%'}}
           />
-          <Typography variant='h6' className={classes.title}>
+          <Typography variant='h5' className={classes.title}>
             Chirrup!
           </Typography>
           {authTokens && (
