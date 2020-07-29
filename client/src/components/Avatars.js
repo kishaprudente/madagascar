@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import jiyoonKim from '../assets/avatars/jiyoonKim.jpeg';
 import kaitlynRodriguez from '../assets/avatars/kaitlynRodriguez.jpeg';
 import kevinWu from '../assets/avatars/kevinWu.jpeg';
 import kishaPrudente from '../assets/avatars/kishaPrudente.jpeg';
-import { Typography } from '@material-ui/core';
+import chirpy from '../assets/chirpy.svg';
+
+
 
 export default function ImageAvatars() {
 // const axios = require('axios');
@@ -57,6 +60,10 @@ export default function ImageAvatars() {
           <Link to='https://github.com/jiyoon9886'>Jiyoon Kim</Link>
         </Typography>
       </Grid>
+      <Grid item xs={6} sm={3} style={avatar}>
+        <Avatar alt='chirpy the bird' src={chirpy} style={avatar} />
+        <Typography style={font}>Chirpy</Typography>
+      </Grid>
     </Grid>
   );
 }
@@ -68,7 +75,8 @@ const avatarBlock = {
 const avatar = {
   display: 'inline-block',
   alignContent: 'center',
-  textAlign: 'center',
+	textAlign: 'center',
+	paddingBottom: '5px',
 };
 
 const font = {
