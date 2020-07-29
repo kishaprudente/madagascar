@@ -1,14 +1,13 @@
 const router = require('express').Router();
 const repliesController = require('../../controllers/repliesController');
 
-// Matches with "/api/posts"
-// api/routes/id
-// api/post/id/replys
-router.route('/')
+// Matches with "/api/replies/"
+router
+  .route('/')
   .get(repliesController.findAll)
   .post(repliesController.create);
 
-// Matches with "/api/posts/:id"
+// Matches with "/api/replies/:id"
 router
   .route('/:id')
   .get(repliesController.findById)
