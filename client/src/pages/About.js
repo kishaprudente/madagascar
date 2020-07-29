@@ -39,7 +39,7 @@ const About = () => {
       <Grid item xs={11} lg={10}>
         <AboutCard
           title='What is Chirrup?'
-          description='Chirrup! is a mental health application in which users log their emotions or thoughts as personal records or anonymous, public posts to which other users can reply with words of encouragement. The app seeks to provide a space for people to share positive energy without worrying about shame, stigma, or judgements.'
+          description='Chirrup! is a mental health application in which users log their emotions or thoughts as personal records or anonymous, public posts to which other users can reply with words of encouragement. The app seeks to provide a space for people to share positive energy without worrying about shame, stigma, or judgments.'
         />
       </Grid>
 
