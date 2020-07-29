@@ -21,7 +21,7 @@ export default function Signin() {
   const { from } = location.state || { from: { pathname: '/moodboard' } };
   // error alert state
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' })
+  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -39,7 +39,7 @@ export default function Signin() {
   const handleErrorAlert = (message) => {
     setAlertMessage({ message, type: 'error' });
     setAlertOpen(true);
-  }
+  };
 
   const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
@@ -57,13 +57,13 @@ export default function Signin() {
       });
       console.log(signin);
       if (signin.status === 200) {
-        console.log(signin.data)
+        console.log(signin.data);
         setCurrentUser(signin.data.body);
         setAuthTokens(signin.data.token);
         history.replace(from);
       }
     } catch {
-      handleErrorAlert('Username or password did not match')
+      handleErrorAlert('Username or password did not match');
     }
   };
 
