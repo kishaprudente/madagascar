@@ -33,58 +33,60 @@ const About = () => {
 	 const classes = useStyles();
 	 
     return (
-    <Grid
-      container
-      style={container}
-			>
-    <Grid item xs={10} sm={11}>
+      <Grid container style={container}>
+        <Grid item xs={10} sm={11}>
           <PageTitle>About Us</PageTitle>
-    </Grid>
+        </Grid>
 
-    <Grid item xs={11} alignItems='center'>
-        <AboutCard
-        title="Story Behind Chirrup!"
-        description="Chirrup! developed from an observation about friends and family reaching out for emotional support
-        during COVID and from mood journals becoming increasingly popular as people become more self-aware of their emotions."
-        />
-    </Grid>
-    <Grid item xs={11} alignItems='center'>
-        <AboutCard
-        title="What's Chirrup"
-        description="Sed sapien, praesent odio justo. Quam quam mauris blandit dictumst vitae odio. Tortor commodo velit turpis laoreet sed lacus turpis."
-       />
-    </Grid>
-    
-    <Grid item xs={11} alignItems='right'>
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
-        <Typography className={classes.title} variant="h5">
-        Who's Chirpy
-        </Typography>
-        <Typography className={classes.body} variant="body2" component="p">
-        Tellus eu nulla diam ut laoreet feugiat magna quis viverra. Velit ut porta elit mattis nullam sed. Lacus ante nunc mattis eu adipiscing nam in.
-        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle}/> 
-        </Typography>
-        </CardContent>
-      </Card>
-    </Grid>
-    <Grid item xs={11} alignItems='center' style={{paddingBottom: '60px'}}>
-    <Card className={classes.root} variant="outlined">
-    <CardContent>
-        <Typography className={classes.title} variant="h5">
-        The Dream Team
-        </Typography>
-        {/* We could put the icons here of our GitHub profiles */}
-        <ImageAvatars />
-        <img src={chirpy} alt='chirpy the bird' style={chirpyStyle2}/> 
-        <Typography className={classes.body} variant="body2" component="p">
-        Chirpy The Bird
-        </Typography>
-    </CardContent>
-    </Card>
-    </Grid> 
-    </Grid>
-   
+        <Grid item xs={11} alignItems='center'>
+          <AboutCard
+            title='Story Behind Chirrup!'
+            description='Chirrup! developed from an observation about friends and family reaching out for emotional support
+        during COVID and from mood journals becoming increasingly popular as people become more self-aware of their emotions.'
+          />
+        </Grid>
+        <Grid item xs={11} alignItems='center'>
+          <AboutCard
+            title="What's Chirrup"
+            description='Sed sapien, praesent odio justo. Quam quam mauris blandit dictumst vitae odio. Tortor commodo velit turpis laoreet sed lacus turpis.'
+          />
+        </Grid>
+
+        <Grid item xs={11} alignItems='right'>
+          <Card className={classes.root} variant='outlined'>
+            <CardContent>
+              <Typography className={classes.title} variant='h5'>
+                Who's Chirpy
+              </Typography>
+              <Typography
+                className={classes.body}
+                variant='body2'
+                component='p'
+              >
+                Tellus eu nulla diam ut laoreet feugiat magna quis viverra.
+                Velit ut porta elit mattis nullam sed. Lacus ante nunc mattis eu
+                adipiscing nam in.
+                <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid
+          item
+          xs={11}
+          alignItems='center'
+          style={{ paddingBottom: '60px' }}
+        >
+          <Card className={classes.root} variant='outlined'>
+            <CardContent>
+              <Typography className={classes.title} variant='h5'>
+                The Dream Team
+              </Typography>
+              <ImageAvatars />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     );
 }
 
@@ -96,18 +98,9 @@ const container = {
 	justifyContent: 'center',
 };
 
-const font = {
-  fontFamily: 'Reenie Beanie',
-};
-
 const chirpyStyle = {
   width: '5em',
   height: '5em',
   float: 'right'
 };
 
-const chirpyStyle2 = {
-  width: '2em',
-  height: '2em',
-  bottom: '17.09%',
-};
