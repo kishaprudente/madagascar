@@ -40,15 +40,15 @@ const About = () => {
 
         <Grid item xs={11} alignItems='center'>
           <AboutCard
-            title='Story Behind Chirrup!'
-            description='Chirrup! developed from an observation about friends and family reaching out for emotional support
-        during COVID and from mood journals becoming increasingly popular as people become more self-aware of their emotions.'
+            title='What is Chirrup?'
+            description='Chirrup! is a mental health application in which users log their emotions or thoughts as personal records or anonymous, public posts to which other users can reply with words of encouragement. The app seeks to provide a space for people to share positive energy without worrying about shame, stigma, or judgements.'
           />
         </Grid>
+
         <Grid item xs={11} alignItems='center'>
           <AboutCard
-            title="What's Chirrup"
-            description='Sed sapien, praesent odio justo. Quam quam mauris blandit dictumst vitae odio. Tortor commodo velit turpis laoreet sed lacus turpis.'
+            title='Our Inspiration'
+            description="Chirrup! was inspired by current events, especially observations of friends and family expressing distress and need for emotional support during 2020's COVID-19 lockdowns. The app aspires to join the growing league of mental health technologies, which are becoming increasingly mainstream."
           />
         </Grid>
 
