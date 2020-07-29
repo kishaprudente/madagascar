@@ -7,7 +7,10 @@ module.exports = {
   //All post will show up and if there is a reply then it should show as well
   update: async (req, res) => {
     try {
-      const user = await db.User.findOneAndUpdate({ _id: req.params.id }, req.body);
+      const user = await db.User.findOneAndUpdate(
+        { _id: req.params.id },
+        req.body
+      );
       res.json(user);
     } catch (err) {
       res.status(422).json(err);
@@ -38,12 +41,12 @@ module.exports = {
       const { username, password } = req.body;
       // ADD VALIDATION
       await db.User.findOne({ username: username }, (err, user) => {
+        console.log('USERNAME', username);
+        console.log('USER SIGNUP', user);
         if (err) {
           console.log('User.js post error: ', err);
         } else if (user) {
-          res.json({
-            error: `Sorry, already a user with the username: ${username}`,
-          });
+          res.json({ error: `Username '${username}' is already taken` });
         } else {
           const newUser = new db.User({
             username: username,
@@ -66,36 +69,40 @@ module.exports = {
             console.log('TOKEN', token);
             // localStorage.setItem('token', token);
             //Send back the token to the user
-            return res.send({ body, token });
+            return res.json({ body, token });
           });
         }
       });
-    } catch (error) {
-      return error;
+    } catch (err) {
+      throw err;
     }
   },
   // signin
   signin: (req, res, next) => {
+    console.log('REQ', req.body);
     passport.authenticate('signin', (err, user) => {
-      req.login(user, { session: false }, async (error) => {
-        if (error) {
-          return next(error);
+      req.login(user, { session: false }, () => {
+        try {
+          if (!user) {
+            return next('Error logging in');
+          } else {
+            //We don't want to store the sensitive information such as the
+            //user password in the token so we pick only the email and id
+            console.log('user', user);
+            const { _id, username } = user;
+            const body = {
+              _id: _id,
+              username: username,
+            };
+            console.log('body', body);
+            //Sign the JWT token and populate the payload with the user email and id
+            const token = jwt.sign({ user: body }, 'top_secret');
+            console.log('TOKEN', token);
+            return res.send({ body, token });
+          }
+        } catch (err) {
+          throw err;
         }
-        //We don't want to store the sensitive information such as the
-        //user password in the token so we pick only the email and id
-        console.log('user', user);
-        const { _id, username } = user;
-        const body = {
-          _id: _id,
-          username: username,
-        };
-        console.log('body', body);
-        //Sign the JWT token and populate the payload with the user email and id
-        const token = jwt.sign({ user: body }, 'top_secret');
-        console.log('TOKEN', token);
-        // localStorage.setItem('token', token);
-        //Send back the token to the user
-        return res.send({ body, token });
       });
     })(req, res, next);
   },

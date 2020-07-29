@@ -11,11 +11,4 @@ router.use(
   secureRoute
 );
 
-// Route for logging user out
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
-
 module.exports = router;

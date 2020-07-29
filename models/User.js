@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
     trim: true,
     required: 'Password is Required',
-    validate: passwordReg
+    validate: [passwordReg, 'Password must have uppercase, lowercase and numbers']
   },
   userCreated: {
     type: Date,
