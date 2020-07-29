@@ -21,12 +21,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: 'black',
-    fontFamily: 'Reenie Beenie',
-    paddingLeft: '10px'
+    fontFamily: 'Ruluko',
+    paddingLeft: '16px',
   },
   link: {
     textDecoration: 'none',
     color: 'black',
+  },
+  button: {
+    fontFamily: 'Ruluko',
   },
 }));
 
@@ -50,11 +53,11 @@ const Header = () => {
             size={100}
             style={{height: '100%'}}
           />
-          <Typography variant='h6' className={classes.title}>
+          <Typography variant='h5' className={classes.title}>
             Chirrup!
           </Typography>
           {authTokens && (
-            <Button onClick={logout}>
+            <Button onClick={logout} className={classes.button}>
               Logout
             </Button>
           )}
