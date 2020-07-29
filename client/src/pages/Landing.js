@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Button, Box } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import chirpy from '../assets/chirpy.svg';
 import Buttons from '../components/Button.js';
 

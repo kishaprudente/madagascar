@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
@@ -21,7 +22,7 @@ import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
 import Buttons from '../components/Button.js';
-import PageTitle from '../components/PageTitle';
+
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
@@ -132,22 +133,19 @@ const Dashboard = () => {
   }, [isMounted, setPosts]);
 
   return (
-    <Grid
-      container
-      style={container}
-      alignItems='center'
-      direction='column'
-    >
+    <Grid container style={container} alignItems='center' direction='column'>
       <Grid item style={{ textAlign: 'center' }}>
-        <PageTitle>Hello, {username}!</PageTitle>
-        <h4>
+        <Typography variant='h4' style={{ fontFamily: 'Reenie Beanie' }}>
+          Hello, {username}!
+        </Typography>
+        <Typography variant='h6' style={{ fontFamily: 'Ruluko' }}>
           How are you feeling today?
           <img src={chirpy} alt='chirpy the bird' style={chirpyStyle} />
-        </h4>
+        </Typography>
       </Grid>
 
       <Grid item style={{ textAlign: 'center' }}>
-        <Card style ={card}>
+        <Card style={card}>
           <ToggleButtonGroup
             value={mood}
             exclusive
@@ -257,7 +255,12 @@ const Dashboard = () => {
           })}
         </Box>
       ) : (
-        <h3>You don't have any posts yet!</h3>
+        <Typography
+          variant='h6'
+          style={{ fontFamily: 'Ruluko', marginTop: '5px' }}
+        >
+          You don't have any posts yet!
+        </Typography>
       )}
 
       <AlertBar
@@ -277,7 +280,8 @@ const container = {
   width: '100vw',
   height: '100%',
   fontFamily: 'Reenie Beanie',
-  fontSize: '18px',
+	fontSize: '18px',
+	marginTop:'75px',
   paddingBottom: '80px',
   overflow: 'auto',
 };

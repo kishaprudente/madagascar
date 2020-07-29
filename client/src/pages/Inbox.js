@@ -75,9 +75,10 @@ const styles = {
     justifyContent: 'center'
   },
   nothing: {
-    fontFamily: 'Rosarivo',
+    fontFamily: 'Ruluko',
     marginBottom: '150px',
     padding: '40px',
-    fontSize: '24px'
+		fontSize: '24px',
+		textAlign: 'center',
   }
 }
