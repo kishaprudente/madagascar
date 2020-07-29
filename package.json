@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "proxy": "http://localhost:3001",
+  "secure": false,
   "jest": {
     "testURL": "http://localhost:3001",
     "modulePathIgnorePatterns": [
