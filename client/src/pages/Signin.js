@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Grid, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Buttons from '../components/Button.js';
+import AlertBar from '../components/AlertBar';
 import chirpy from '../assets/chirpy.svg';
 import userAPI from '../utils/userAPI';
 import { useAuth } from '../utils/authContext';
@@ -13,10 +14,14 @@ export default function Signin() {
     username: '',
     password: '',
   });
+  // auth state
   const { setAuthTokens, setCurrentUser } = useAuth();
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/moodboard' } };
+  // error alert state
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState({ message: '', type: '' })
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -31,9 +36,21 @@ export default function Signin() {
     event.preventDefault();
   };
 
+  const handleErrorAlert = (message) => {
+    setAlertMessage({ message, type: 'error' });
+    setAlertOpen(true);
+  }
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    // close alert
+    setAlertOpen(false);
+  };
+
   const handleSignin = async () => {
     try {
-      console.log(user);
       const signin = await userAPI.signinUser({
         username: user.username,
         password: user.password,
@@ -44,11 +61,9 @@ export default function Signin() {
         setCurrentUser(signin.data.body);
         setAuthTokens(signin.data.token);
         history.replace(from);
-      } else {
-        throw new Error('Oops. Something went wrong :(');
       }
-    } catch (err) {
-      throw err;
+    } catch {
+      handleErrorAlert('Username or password did not match')
     }
   };
 
@@ -104,7 +119,12 @@ export default function Signin() {
       <Grid item>
         <Buttons onClick={handleSignin}>Sign In</Buttons>
       </Grid>
-
+      <AlertBar
+        message={alertMessage.message}
+        type={alertMessage.type}
+        openState={alertOpen}
+        onClose={handleCloseAlert}
+      />
       <Grid item>
         No account? <Link to='/signup'>Sign Up</Link>
       </Grid>
