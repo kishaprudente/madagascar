@@ -230,34 +230,28 @@ const Dashboard = () => {
       </Grid>
 
       {posts.length ? (
-        <Box>
-          {posts.map((post) => {
-            return (
-              <Grid item xs={11} lg={10} key={post._id}>
-                <Paper
-                  style={{
-                    width: '332px',
-                    fontSize: '14px',
-                    fontFamily: 'Rosarivo',
-                    borderRadius: '5px',
-                  }}
-                  key={post._id}
-                >
-                  <p style={p}>
-                    <Moment
-                      style={{ marginRight: '140px' }}
-                      format='MM/DD/YYYY'
-                    >
-                      {post.date}
-                    </Moment>
-                    {post.mood}
-                  </p>
-                  <p style={p}>{post.post}</p>
-                </Paper>
-              </Grid>
-            );
-          })}
-        </Box>
+        <Grid item xs={11} lg={10}>
+          <Box>
+            {posts.map((post) => {
+              return (
+                <Grid item key={post._id}>
+                  <Paper style={userPosts} key={post._id}>
+                    <p style={p}>
+                      <Moment
+                        style={{ marginRight: '140px' }}
+                        format='MM/DD/YYYY'
+                      >
+                        {post.date}
+                      </Moment>
+                      {post.mood}
+                    </p>
+                    <p style={p}>{post.post}</p>
+                  </Paper>
+                </Grid>
+              );
+            })}
+          </Box>
+        </Grid>
       ) : (
         <Typography
           variant='h6'
@@ -304,9 +298,20 @@ const card = {
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 };
 
+const userPosts = {
+  minwidth: '332px',
+  fontSize: '14px',
+  fontFamily: 'Ruluko',
+  borderRadius: '5px',
+  minWidth: '332px',
+  border: '1px solid #000000',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  margin: '5px',
+};
+
 const p = {
   padding: '5px',
-  margin: '5px',
+  //margin: '5px',
 };
 
 const buttons = {
