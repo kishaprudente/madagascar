@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import ReplyAccordion from '../components/ReplyAccordion';
 import AlertBar from '../components/AlertBar';
+import PageTitle from '../components/PageTitle';
 import API from '../utils/API';
 
 const styles = {
@@ -97,10 +98,8 @@ const Reply = () => {
   return (
     <React.Fragment>
       <Grid container justify='center' style={styles.container}>
-        <Grid item xs={10} sm={11}>
-          <Typography style={styles.header} variant='h2'>
-            Reply
-          </Typography>
+        <Grid item xs={11} lg={10}>
+          <PageTitle>Reply</PageTitle>
         </Grid>
         {loading ? (
           <Grid item xs={12}>
