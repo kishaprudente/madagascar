@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import {
-  Grid,
-  Typography
-} from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import userAPI from '../utils/userAPI';
 import PageTitle from '../components/PageTitle';
-import InboxCard from '../components/InboxCard.js'
+import InboxCard from '../components/InboxCard.js';
 
 const Inbox = () => {
   const [sentPosts, setSentPosts] = useState([]);
@@ -27,7 +24,7 @@ const Inbox = () => {
       if (isMounted) {
         setSentPosts(sentUserPosts);
       }
-      return setIsMounted(false)
+      return setIsMounted(false);
     } catch (err) {
       console.log(err);
     }
@@ -41,28 +38,23 @@ const Inbox = () => {
   }, []);
 
   return (
-    <Grid
-      container
-      style={styles.container}
-    >
-      <Grid item xs={10} sm={11}>
-          <PageTitle>Inbox</PageTitle>
+    <Grid container style={styles.container}>
+      <Grid item xs={11} lg={10}>
+        <PageTitle>Inbox</PageTitle>
       </Grid>
-     {sentPosts.length ? (
-      sentPosts.map((sentPost, index) => (
-        <Grid item xs={11} sm={8} key={sentPost._id}>
-          <InboxCard
-            post={sentPost.post}
-            response={sentPost.reply.response}
-          />
-        </Grid>
-      ))
+      {sentPosts.length ? (
+        sentPosts.map((sentPost, index) => (
+          <Grid item xs={11} sm={8} key={sentPost._id}>
+            <InboxCard
+              post={sentPost.post}
+              response={sentPost.reply.response}
+            />
+          </Grid>
+        ))
       ) : (
-      <Grid item xs={11}>
-          <Typography style= {styles.nothing}>
-            Nothing to show
-          </Typography>
-      </Grid>
+        <Grid item xs={11}>
+          <Typography style={styles.nothing}>Nothing to show</Typography>
+        </Grid>
       )}
     </Grid>
   );
@@ -75,13 +67,13 @@ const styles = {
     background: '#A1D1B6',
     paddingBottom: '60px',
     height: '100%',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   nothing: {
     fontFamily: 'Ruluko',
     marginBottom: '150px',
     padding: '40px',
-		fontSize: '24px',
-		textAlign: 'center',
-  }
-}
+    fontSize: '24px',
+    textAlign: 'center',
+  },
+};

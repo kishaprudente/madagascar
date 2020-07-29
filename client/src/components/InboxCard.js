@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    Card,
-    CardContent,
-    Typography,
-  } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import chirpy from '../assets/chirpy.svg';
 
@@ -14,18 +10,16 @@ const InboxCard = ({ post, response }) => {
         <Typography variant='h5' style={styles.text}>
           {post}
         </Typography>
-        <Divider variant='middle'/>
-        <Typography style={styles.text}>
-        A little birdie told me...
-        <img src={chirpy} alt='chirpy the bird' style={styles.chirpy}/> 
+        <Divider variant='middle' />
+        <Typography variant='h5' style={styles.heading}>
+          A little birdie told me...
+          <img src={chirpy} alt='chirpy the bird' style={styles.chirpy} />
         </Typography>
-        <Typography style={styles.text}>
-        {response}
-        </Typography>
+        <Typography style={styles.text}>{response}</Typography>
       </CardContent>
     </Card>
   );
-}
+};
 
 export default InboxCard;
 
@@ -34,14 +28,19 @@ const styles = {
     marginTop: 10,
     radius: 4,
     effect: 'Drop Shadow',
+    border: '1px solid #000000',
+  },
+  heading: {
+    fontFamily: 'Reenie Beanie',
+    padding: '10px',
   },
   text: {
-    fontSize: '18px',
-    fontFamily: 'Rosarivo',
-    padding: '10px'
+    fontSize: '16px',
+    fontFamily: 'Ruluko',
+    padding: '10px',
   },
   chirpy: {
     width: '1.5em',
     height: '1.5em',
-  }
-}
+  },
+};

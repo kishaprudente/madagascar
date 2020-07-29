@@ -10,7 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-
+import Divider from '@material-ui/core/Divider';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 import AlertBar from '../components/AlertBar';
@@ -22,7 +22,7 @@ import loved from '../assets/loved.svg';
 import sad from '../assets/sad.svg';
 import API from '../utils/API.js';
 import Buttons from '../components/Button.js';
-
+import PageTitle from '../components/PageTitle';
 
 const Dashboard = () => {
   const [post, setPost] = useState('');
@@ -135,7 +135,10 @@ const Dashboard = () => {
   }, [posts]);
 
   return (
-    <Grid container style={container} alignItems='center' direction='column'>
+    <Grid container style={container}>
+      <Grid item xs={11} lg={10}>
+        <PageTitle>Moodboard</PageTitle>
+      </Grid>
       <Grid item style={{ textAlign: 'center' }}>
         <Typography variant='h4' style={{ fontFamily: 'Reenie Beanie' }}>
           Hello, {username}!
@@ -146,7 +149,7 @@ const Dashboard = () => {
         </Typography>
       </Grid>
 
-      <Grid item style={{ textAlign: 'center' }}>
+      <Grid item xs={11} lg={10} style={{ textAlign: 'center' }}>
         <Card style={card}>
           <ToggleButtonGroup
             value={mood}
@@ -209,18 +212,20 @@ const Dashboard = () => {
             <TextField
               style={{
                 backgroundColor: 'white',
-                width: '300px',
+                minWidth: '300px',
                 fontFamily: 'Rosarivo',
               }}
               id='outlined-multiline-static'
               multiline
               rows={4}
+              margin='none'
+              fullWidth
               variant='outlined'
               onChange={handleInputChange}
               value={post}
             ></TextField>
           </CardContent>
-          <CardActions display='inline'>
+          <CardActions style={buttons}>
             <Buttons onClick={handleKeepPost}>Keep</Buttons>
             <Buttons onClick={handleSendPost}>Send</Buttons>
           </CardActions>
@@ -228,34 +233,32 @@ const Dashboard = () => {
       </Grid>
 
       {posts.length ? (
-        <Box>
-          {posts.map((post) => {
-            return (
-              <Grid item key={post._id}>
-                <Paper
-                  style={{
-                    width: '332px',
-                    fontSize: '14px',
-                    fontFamily: 'Rosarivo',
-                    borderRadius: '5px',
-                  }}
-                  key={post._id}
-                >
-                  <p style={p}>
-                    <Moment
-                      style={{ marginRight: '140px' }}
-                      format='MM/DD/YYYY'
-                    >
-                      {post.date}
-                    </Moment>
-                    {post.mood}
-                  </p>
-                  <p style={p}>{post.post}</p>
-                </Paper>
-              </Grid>
-            );
-          })}
-        </Box>
+        <Grid item xs={11} lg={10}>
+          <Box>
+            {posts.map((post) => {
+              return (
+                <Grid item key={post._id}>
+                  <Paper style={userPosts} key={post._id}>
+                    <Grid item style={p}>
+                      <Grid item>
+                        <Moment format='MM/DD/YYYY'>{post.date}</Moment>
+                      </Grid>
+                      <Grid item>
+                        <Typography
+                          style={{ fontFamily: 'Ruluko', marginLeft: '20px' }}
+                        >
+                          {post.mood}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Divider variant='middle' />
+                    <p style={p}>{post.post}</p>
+                  </Paper>
+                </Grid>
+              );
+            })}
+          </Box>
+        </Grid>
       ) : (
         <Typography
           variant='h6'
@@ -282,10 +285,11 @@ const container = {
   width: '100vw',
   height: '100%',
   fontFamily: 'Reenie Beanie',
-	fontSize: '18px',
-	marginTop:'75px',
+  fontSize: '16px',
+  marginTop: '75px',
   paddingBottom: '80px',
   overflow: 'auto',
+  justifyContent: 'center',
 };
 
 const chirpyStyle = {
@@ -295,11 +299,28 @@ const chirpyStyle = {
 };
 
 const card = {
+  minWidth: '332px',
+  margin: '5px',
   border: '1px solid #000000',
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 };
 
-const p = {
-  padding: '5px',
+const userPosts = {
+  minwidth: '332px',
+  fontSize: '16px',
+  fontFamily: 'Ruluko',
+  borderRadius: '5px',
+  minWidth: '332px',
+  border: '1px solid #000000',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   margin: '5px',
+};
+
+const p = {
+  display: 'flex',
+  padding: '10px',
+};
+
+const buttons = {
+  justifyContent: 'flex-end',
 };

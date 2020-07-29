@@ -30,7 +30,7 @@ const ReplyAccordion = ({
         aria-controls={`reply${post._id}`}
         expandIcon={<ExpandMoreIcon />}
       >
-        <Typography>{post.post}</Typography>
+        <Typography style={styles.post}>{post.post}</Typography>
       </AccordionSummary>
       {expanded === post._id ? (
         <React.Fragment>
@@ -62,7 +62,7 @@ export default ReplyAccordion;
 const styles = {
   container: {
     margin: '2px 0',
-    borderRadius: 0,
+    borderRadius: 4,
     border: '1px solid #000000',
   },
   textfield: {
@@ -75,5 +75,9 @@ const styles = {
   },
   actions: {
     paddingTop: 0,
+  },
+  post: {
+    fontFamily: 'Ruluko',
+    fontSize: '16px',
   },
 };
