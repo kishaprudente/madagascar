@@ -237,15 +237,18 @@ const Dashboard = () => {
               return (
                 <Grid item key={post._id}>
                   <Paper style={userPosts} key={post._id}>
-                    <p style={p}>
-                      <Moment
-                        style={{ marginRight: '140px' }}
-                        format='MM/DD/YYYY'
-                      >
-                        {post.date}
-                      </Moment>
-                      {post.mood}
-                    </p>
+                    <Grid item style={p}>
+                      <Grid item>
+                        <Moment format='MM/DD/YYYY'>{post.date}</Moment>
+                      </Grid>
+                      <Grid item>
+                        <Typography
+                          style={{ fontFamily: 'Ruluko', marginLeft: '20px' }}
+                        >
+                          {post.mood}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                     <Divider variant='middle' />
                     <p style={p}>{post.post}</p>
                   </Paper>
@@ -309,11 +312,11 @@ const userPosts = {
   border: '1px solid #000000',
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   margin: '5px',
-  padding: '10px',
 };
 
 const p = {
-  padding: '5px',
+  display: 'flex',
+  padding: '10px',
 };
 
 const buttons = {
