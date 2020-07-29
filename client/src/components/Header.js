@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Avatar,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from '../utils/authContext';
 import userAPI from '../utils/userAPI';
-import Chirpy from '../assets/chirpy.png'
+import Chirpy from '../assets/chirpy.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,11 +29,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
-  const { authTokens, setAuthTokens } = useAuth();
+  const { authTokens, setAuthTokens, setCurrentUser } = useAuth();
 
-  const logout = () => {
-    userAPI.logoutUser();
-    setAuthTokens('');
+  const logout = async () => {
+    try {
+      await userAPI.logoutUser();
+      setAuthTokens('');
+      setCurrentUser('');
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
@@ -51,7 +50,7 @@ const Header = () => {
             src={Chirpy}
             variant='square'
             size={100}
-            style={{height: '100%'}}
+            style={{ height: '100%' }}
           />
           <Typography variant='h5' className={classes.title}>
             Chirrup!

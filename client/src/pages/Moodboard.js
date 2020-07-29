@@ -28,6 +28,7 @@ const Dashboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
+  // const [isSent, setIsSent] = useState(false);
   const [isMounted, setIsMounted] = useState(true); // note this flag denote mount status
   const { username } = JSON.parse(localStorage.getItem('user'));
   // error alert state
@@ -119,18 +120,19 @@ const Dashboard = () => {
       const userPosts = allPosts.data.filter(
         (post) => post.user === getUserID()
       );
-      if (isMounted) {
+
         setPosts(userPosts.reverse());
-      }
-      return setIsMounted(false);
     } catch (err) {
       throw err;
     }
   };
 
   useEffect(() => {
-    loadPosts();
-  }, [isMounted, setPosts]);
+    if (isMounted) {
+      loadPosts();
+    }
+    return setIsMounted(false);
+  }, [posts]);
 
   return (
     <Grid container style={container} alignItems='center' direction='column'>

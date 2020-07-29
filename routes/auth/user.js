@@ -11,7 +11,7 @@ router.route('/signup').post(userController.signup);
 router.route('/signin').post(userController.signin);
 
 // @route POST /auth/logout
-router.route('/auth/logout').post(userController.logout);
+router.route('/logout').post(userController.logout);
 
 // @route GET /user/id
 router
