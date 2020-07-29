@@ -10,15 +10,15 @@ const useStyles = makeStyles({
     margin: 5,
     border: '1px solid #000000',
     boxSizing: 'border-box',
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
   title: {
-    fontFamily: 'Reenie Beanie'
+    fontFamily: 'Reenie Beanie',
   },
   body: {
-    fontSize: '14px', 
-    fontFamily: 'Reenie Beanie'
-  }
+    fontSize: '12px',
+    fontFamily: 'Rosarivo',
+  },
 });
 
 function AboutCard ({title, description}) {
