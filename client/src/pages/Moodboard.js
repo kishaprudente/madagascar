@@ -222,7 +222,7 @@ const Dashboard = () => {
               value={post}
             ></TextField>
           </CardContent>
-          <CardActions>
+          <CardActions style={buttons}>
             <Buttons onClick={handleKeepPost}>Keep</Buttons>
             <Buttons onClick={handleSendPost}>Send</Buttons>
           </CardActions>
@@ -307,4 +307,8 @@ const card = {
 const p = {
   padding: '5px',
   margin: '5px',
+};
+
+const buttons = {
+  justifyContent: 'flex-end',
 };
