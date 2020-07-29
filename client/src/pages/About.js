@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
   body: {
     fontSize: '14px', 
-    fontFamily: 'Reenie Beanie',
+    fontFamily: 'Rosarivo',
     left:'5.81%',
     right: '22.63%',
   }
@@ -38,25 +38,25 @@ const About = () => {
           <PageTitle>About Us</PageTitle>
         </Grid>
 
-        <Grid item xs={11} alignItems='center'>
+        <Grid item xs={11} >
           <AboutCard
             title='What is Chirrup?'
             description='Chirrup! is a mental health application in which users log their emotions or thoughts as personal records or anonymous, public posts to which other users can reply with words of encouragement. The app seeks to provide a space for people to share positive energy without worrying about shame, stigma, or judgements.'
           />
         </Grid>
 
-        <Grid item xs={11} alignItems='center'>
+        <Grid item xs={11} >
           <AboutCard
             title='Our Inspiration'
             description="Chirrup! was inspired by current events, especially observations of friends and family expressing distress and need for emotional support during 2020's COVID-19 lockdowns. The app aspires to join the growing league of mental health technologies, which are becoming increasingly mainstream."
           />
         </Grid>
 
-        <Grid item xs={11} alignItems='right'>
+        <Grid item xs={11} >
           <Card className={classes.root} variant='outlined'>
             <CardContent>
               <Typography className={classes.title} variant='h5'>
-                Who's Chirpy
+                Who is Chirpy?
               </Typography>
               <Typography
                 className={classes.body}
@@ -74,13 +74,12 @@ const About = () => {
         <Grid
           item
           xs={11}
-          alignItems='center'
           style={{ paddingBottom: '60px' }}
         >
           <Card className={classes.root} variant='outlined'>
             <CardContent>
               <Typography className={classes.title} variant='h5'>
-                The Dream Team
+                The Chirrup Team
               </Typography>
               <ImageAvatars />
             </CardContent>
