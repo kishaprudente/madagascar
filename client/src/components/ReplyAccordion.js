@@ -61,7 +61,7 @@ export default ReplyAccordion;
 
 const styles = {
   container: {
-    margin: '2px 0',
+    margin: '5px 0',
     borderRadius: 4,
     border: '1px solid #000000',
   },
