@@ -24,7 +24,7 @@ import API from '../utils/API.js';
 import Buttons from '../components/Button.js';
 import PageTitle from '../components/PageTitle';
 
-const Dashboard = () => {
+const Moodboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
@@ -121,7 +121,7 @@ const Dashboard = () => {
         (post) => post.user === getUserID()
       );
 
-        setPosts(userPosts.reverse());
+      setPosts(userPosts.reverse());
     } catch (err) {
       throw err;
     }
@@ -278,7 +278,7 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Moodboard;
 
 const container = {
   backgroundColor: '#A1D1B6',
@@ -286,7 +286,6 @@ const container = {
   height: '100%',
   fontFamily: 'Reenie Beanie',
   fontSize: '16px',
-  marginTop: '75px',
   paddingBottom: '80px',
   overflow: 'auto',
   justifyContent: 'center',
