@@ -51,7 +51,7 @@ function App() {
               <PrivateRoute path='/moodboard' component={Moodboard} />
               <PrivateRoute path='/reply' component={Reply} />
               <PrivateRoute path='/inbox' component={Inbox} />
-              <Route exact path='/stats' component={Stats} />
+              <PrivateRoute path='/stats' component={Stats} />
             </Switch>
           </div>
           {existingTokens ? <BottomNav /> : null}
