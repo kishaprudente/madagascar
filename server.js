@@ -27,16 +27,17 @@ app
   )
   .use(passport.initialize())
   .use(passport.session());
-// Add routes, both API and view
-app.use(routes);
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../client/build/index.html'));
+  app.use(express.static('client/build'));
 }
 
 app.get('/service-worker.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'service-worker.js'));
 });
+// Add routes, both API and view
+app.use(routes);
 
 // Start the API server
 app.listen(PORT, () => {
