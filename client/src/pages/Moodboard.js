@@ -121,7 +121,7 @@ const Dashboard = () => {
         (post) => post.user === getUserID()
       );
 
-        setPosts(userPosts.reverse());
+      setPosts(userPosts.reverse());
     } catch (err) {
       throw err;
     }
@@ -286,7 +286,6 @@ const container = {
   height: '100%',
   fontFamily: 'Reenie Beanie',
   fontSize: '16px',
-  marginTop: '75px',
   paddingBottom: '80px',
   overflow: 'auto',
   justifyContent: 'center',
