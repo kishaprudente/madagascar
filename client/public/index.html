@@ -13,7 +13,7 @@
       type="application/json"
       rel="manifest"
       crossorigin="use-credentials"
-      href="%PUBLIC_URL%/manifest.json"
+      href="manifest.json"
     />
     <!-- <link
       href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Ruluko&display=swap"
@@ -32,7 +32,7 @@
   <script type="application/json">
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js').then(function(registration) {
+        navigator.serviceWorker.register('service-worker.js').then(function(registration) {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function(err) {
           console.log('ServiceWorker registration failed: ', err);
