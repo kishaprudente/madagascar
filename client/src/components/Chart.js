@@ -1,14 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { select, axisBottom, axisLeft, scaleLinear, scaleBand } from 'd3';
+import {
+  select,
+  axisBottom,
+  axisLeft,
+  scaleLinear,
+  scaleBand,
+  format,
+} from 'd3';
 
-const Chart = () => {
-  const [data, setData] = useState([
-    { mood: 'Happy', value: 5 },
-    { mood: 'Angry', value: 7 },
-    { mood: 'Anxious', value: 5 },
-    { mood: 'Loved', value: 10 },
-    { mood: 'Sad', value: 1 },
-  ]);
+const Chart = ({ data }) => {
+  // const [data, setData] = useState([
+  //   { mood: 'Happy', value: 0 },
+  //   { mood: 'Angry', value: 0 },
+  //   { mood: 'Anxious', value: 0 },
+  //   { mood: 'Loved', value: 0 },
+  //   { mood: 'Sad', value: 0 },
+  // ]);
   const svgRef = useRef();
 
   const maxValue = Math.max(...data.map((d) => d.value));
@@ -26,7 +33,7 @@ const Chart = () => {
       .range([150, 0]);
 
     const colorScale = scaleLinear()
-      .domain([1, 10])
+      .domain([1, maxValue])
       .range(['#F3D068', 'orange'])
       .clamp(true);
 
@@ -34,10 +41,17 @@ const Chart = () => {
     svg
       .select('.x-axis')
       .style('transform', 'translateY(150px)')
+      .style('font-family', 'ruluko')
       .call(xAxis);
 
-    const yAxis = axisLeft(yScale);
-    svg.select('.y-axis').call(yAxis);
+    const yAxisTicks = yScale.ticks().filter((tick) => Number.isInteger(tick));
+    const yAxis = axisLeft(yScale)
+      .tickValues(yAxisTicks)
+      .tickFormat(format('d'));
+    svg
+      .select('.y-axis')
+      .style('font-family', 'ruluko')
+      .call(yAxis);
 
     svg
       .selectAll('.bar')
@@ -46,12 +60,16 @@ const Chart = () => {
       .attr('class', 'bar')
       .style('transform', 'scale(1, -1)')
       .attr('x', (d) => xScale(d.mood))
-      .attr('y', -150)
       .attr('width', xScale.bandwidth())
-      .attr('height', (d) => 150 - yScale(d.value))
-      .transition()
+      .attr('y', -150)
       .attr('fill', (d) => colorScale(d.value))
-      .attr('height', (d) => 150 - yScale(d.value));
+      .transition()
+      .duration(500)
+      .attr('height', (d) => 150 - yScale(d.value))
+      .delay((d, i) => {
+        console.log(i);
+        return i * 100;
+      });
   }, [data]);
 
   return (
