@@ -10,6 +10,7 @@
       content="Web site created using create-react-app"
     />
     <link
+      type="application/json"
       rel="manifest"
       crossorigin="use-credentials"
       href="%PUBLIC_URL%/manifest.json"
@@ -28,14 +29,12 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
-  <script type="text/JavaScript">
+  <script type="application/json">
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js').then(function(registration) {
-          // Registration was successful
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function(err) {
-          // registration failed :(
           console.log('ServiceWorker registration failed: ', err);
         }).catch(function(err) {
           console.log(err)
