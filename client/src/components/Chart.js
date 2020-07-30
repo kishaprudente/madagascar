@@ -44,6 +44,15 @@ const Chart = ({ data }) => {
       .style('font-family', 'ruluko')
       .call(xAxis);
 
+    svg
+      .append('text')
+      .attr('transform', 'translate(' + 300 / 2 + ' ,' + (150 + 40) + ')')
+      .style('text-anchor', 'middle')
+      .style('font-family', 'ruluko')
+      .style('font-weight', 'bold')
+      .style('font-size', 20)
+      .text('Mood');
+
     const yAxisTicks = yScale.ticks().filter((tick) => Number.isInteger(tick));
     const yAxis = axisLeft(yScale)
       .tickValues(yAxisTicks)
@@ -52,6 +61,18 @@ const Chart = ({ data }) => {
       .select('.y-axis')
       .style('font-family', 'ruluko')
       .call(yAxis);
+
+    svg
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', -45)
+      .attr('x', -150 / 2)
+      .attr('dy', '1em')
+      .style('text-anchor', 'middle')
+      .style('font-family', 'ruluko')
+      .style('font-weight', 'bold')
+      .style('font-size', 20)
+      .text('Count');
 
     svg
       .selectAll('.bar')
