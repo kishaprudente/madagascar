@@ -80,7 +80,7 @@ const Stats = () => {
   };
 
   useEffect(() => {
-    // setMoodData();
+    setMoodData();
   }, []);
 
   return (
