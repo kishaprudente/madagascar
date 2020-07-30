@@ -81,7 +81,6 @@ const Chart = ({ data }) => {
       .duration(500)
       .attr('height', (d) => 150 - yScale(d.value))
       .delay((d, i) => {
-        console.log(i);
         return i * 100;
       });
   }, [data]);
