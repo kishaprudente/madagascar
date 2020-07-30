@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 import jiyoonKim from '../assets/avatars/jiyoonKim.jpeg';
 import kaitlynRodriguez from '../assets/avatars/kaitlynRodriguez.jpeg';
@@ -20,27 +21,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ImageAvatars() {
-// const axios = require('axios');
+  // const axios = require('axios');
 
-// const usernames = [
-//   'kishaprudente',
-//   'Kaitlyn-Lynette',
-//   'kevkevwuhoo',
-//   'jiyoon9886',
-// ];
-// let userData = {};
+  // const usernames = [
+  //   'kishaprudente',
+  //   'Kaitlyn-Lynette',
+  //   'kevkevwuhoo',
+  //   'jiyoon9886',
+  // ];
+  // let userData = {};
 
-// const getGithubProfile = (username) => {
-// axios.get('https://api.github.com/users/' + username);
-// }
+  // const getGithubProfile = (username) => {
+  // axios.get('https://api.github.com/users/' + username);
+  // }
 
-// console.log(getGithubProfile('kishaprudente'));
+  // console.log(getGithubProfile('kishaprudente'));
 
-// usernames.forEach((username)=>{	 
-// userData = getGithubProfile(username);
-// console.log(userData);
-// });
-const classes = useStyles();
+  // usernames.forEach((username)=>{
+  // userData = getGithubProfile(username);
+  // console.log(userData);
+  // });
+  const classes = useStyles();
 
   return (
     <Grid container style={avatarBlock}>
@@ -58,6 +59,9 @@ const classes = useStyles();
         >
           <GitHubIcon className='material-icons md-dark' />
         </IconButton>
+        <IconButton href='https://www.linkedin.com/in/kevinwu5389/'>
+          <LinkedInIcon className='material-icons md-dark' />
+        </IconButton>
       </Grid>
 
       <Grid item xs={6} sm={3} style={avatar}>
@@ -73,6 +77,9 @@ const classes = useStyles();
           href='https://github.com/kishaprudente'
         >
           <GitHubIcon className='material-icons md-dark' />
+        </IconButton>
+        <IconButton href='https://www.linkedin.com/in/kishalozada/'>
+          <LinkedInIcon className='material-icons md-dark' />
         </IconButton>
       </Grid>
 
@@ -90,6 +97,9 @@ const classes = useStyles();
         >
           <GitHubIcon className='material-icons md-dark' />
         </IconButton>
+        <IconButton href='https://www.linkedin.com/in/krodriguez93/'>
+          <LinkedInIcon className='material-icons md-dark' />
+        </IconButton>
       </Grid>
 
       <Grid item xs={6} sm={3} style={avatar}>
@@ -106,6 +116,9 @@ const classes = useStyles();
         >
           <GitHubIcon className='material-icons md-dark' />
         </IconButton>
+        <IconButton href='https://www.linkedin.com/in/ji-yoon-kim-161a001a4/'>
+          <LinkedInIcon className='material-icons md-dark' />
+        </IconButton>
       </Grid>
       <Grid item xs={12} style={avatar}>
         <Avatar alt='chirpy the bird' src={chirpy} style={avatar} />
@@ -116,14 +129,14 @@ const classes = useStyles();
 }
 
 const avatarBlock = {
-	paddingTop: '5px',
+  paddingTop: '5px',
 };
 
 const avatar = {
   display: 'inline-block',
   alignContent: 'center',
-	textAlign: 'center',
-	marginBottom: '5px',
+  textAlign: 'center',
+  marginBottom: '5px',
 };
 
 const font = {
