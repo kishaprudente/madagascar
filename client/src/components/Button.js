@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 import React from 'react';
 import { Button } from '@material-ui/core';
 

@@ -25,9 +25,9 @@ export default function Landing() {
         <Box style={{ width: '300px' }}>{quote}</Box>
       </Grid>
       <Grid item style={{ marginTop: '20px' }}>
-        <Buttons>
-          <Link to='/signin'>Let's chirp!</Link>
-        </Buttons>
+        <Link to='/signin' style={link}>
+          <Buttons>Let's chirp!</Buttons>
+        </Link>
       </Grid>
     </Grid>)
 }
@@ -66,3 +66,7 @@ const quoteStyle = {
   fontSize: '2em',
   lineHeight: '141%',
 };
+
+const link = {
+  textDecoration: 'none',
+}
