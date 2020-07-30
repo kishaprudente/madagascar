@@ -80,12 +80,12 @@ const Stats = () => {
   };
 
   useEffect(() => {
-    setMoodData();
+    // setMoodData();
   }, []);
 
   return (
     <Grid container style={styles.container}>
-      <Grid item xs={11} sm={8}>
+      <Grid item xs={11}>
         <PageTitle>Stats</PageTitle>
       </Grid>
       <Grid item>
