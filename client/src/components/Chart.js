@@ -9,13 +9,6 @@ import {
 } from 'd3';
 
 const Chart = ({ data }) => {
-  // const [data, setData] = useState([
-  //   { mood: 'Happy', value: 0 },
-  //   { mood: 'Angry', value: 0 },
-  //   { mood: 'Anxious', value: 0 },
-  //   { mood: 'Loved', value: 0 },
-  //   { mood: 'Sad', value: 0 },
-  // ]);
   const svgRef = useRef();
 
   const maxValue = Math.max(...data.map((d) => d.value));
