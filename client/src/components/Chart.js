@@ -29,7 +29,7 @@ const Chart = ({ data }) => {
       .padding(0.5);
 
     const yScale = scaleLinear()
-      .domain([0, maxValue])
+      .domain([0, Math.max(maxValue, 10)])
       .range([150, 0]);
 
     const colorScale = scaleLinear()
