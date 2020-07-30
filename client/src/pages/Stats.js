@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Chart from '../components/Chart';
+import PageTitle from '../components/PageTitle';
 import userAPI from '../utils/userAPI';
 import Typography from '@material-ui/core/Typography';
+import { Grid } from '@material-ui/core';
 
 const Stats = () => {
   const [data, setData] = useState([
@@ -82,16 +84,21 @@ const Stats = () => {
   }, []);
 
   return (
-    <div className='chart-area' style={styles.container}>
-      {isZeroCount() ? (
-        <Typography style={styles.nodata}>
-          No data! <br />
-          Try logging your mood in the Moodboard!
-        </Typography>
-      ) : (
-        <Chart data={data} />
-      )}
-    </div>
+    <Grid container style={styles.container}>
+      <Grid item xs={11} sm={8}>
+        <PageTitle>Stats</PageTitle>
+      </Grid>
+      <Grid item style={styles.chart}>
+        {isZeroCount() ? (
+          <Typography style={styles.nodata}>
+            No data! <br />
+            Try logging your mood in the Moodboard!
+          </Typography>
+        ) : (
+          <Chart data={data} />
+        )}
+      </Grid>
+    </Grid>
   );
 };
 
@@ -99,11 +106,12 @@ export default Stats;
 
 const styles = {
   container: {
-    height: '80vh',
+    height: '40vh',
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: '15px',
+  },
+  chart: {
+    marginLeft: '20px',
   },
   nodata: {
     fontFamily: 'ruluko',
