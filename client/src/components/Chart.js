@@ -108,5 +108,6 @@ const styles = {
     background: '#eee',
     overflow: 'visible',
     display: 'block',
+    marginLeft: '20px',
   },
 };

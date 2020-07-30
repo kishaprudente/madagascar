@@ -88,7 +88,7 @@ const Stats = () => {
       <Grid item xs={11} sm={8}>
         <PageTitle>Stats</PageTitle>
       </Grid>
-      <Grid item style={styles.chart}>
+      <Grid item>
         {isZeroCount() ? (
           <Typography style={styles.nodata}>
             No data! <br />
@@ -109,9 +109,6 @@ const styles = {
     height: '40vh',
     display: 'flex',
     justifyContent: 'center',
-  },
-  chart: {
-    marginLeft: '20px',
   },
   nodata: {
     fontFamily: 'ruluko',
