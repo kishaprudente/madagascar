@@ -24,7 +24,7 @@ import API from '../utils/API.js';
 import Buttons from '../components/Button.js';
 import PageTitle from '../components/PageTitle';
 
-const Dashboard = () => {
+const Moodboard = () => {
   const [post, setPost] = useState('');
   const [posts, setPosts] = useState([]);
   const [mood, setMood] = useState('');
@@ -278,7 +278,7 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Moodboard;
 
 const container = {
   backgroundColor: '#A1D1B6',
