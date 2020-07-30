@@ -18,7 +18,7 @@
       "sizes": "432x432"
     }
   ],
-  "start_url": "/?utm_source=homescreen",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#A1D1B6"
