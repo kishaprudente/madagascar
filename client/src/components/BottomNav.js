@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ReplyIcon from '@material-ui/icons/Reply';
 import MoodIcon from '@material-ui/icons/Mood';
 import InboxIcon from '@material-ui/icons/Inbox';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
+import BarChartIcon from '@material-ui/icons/BarChart';
 import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles({
@@ -43,7 +43,7 @@ const BottomNav = () => {
       <BottomNavigationAction
         component={Link}
         to='/stats'
-        icon={<ShowChartIcon style={styles.icon} />}
+        icon={<BarChartIcon style={styles.icon} />}
         style={styles.button}
       />
       <BottomNavigationAction
