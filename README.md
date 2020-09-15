@@ -1,11 +1,11 @@
-# chirrup! <img src='./client/src/assets/chirpy.svg' alt='Chirpy' width='35' height='30'> 
+# chirrup! <img src='./client/src/assets/chirpy.svg' alt='Chirpy' width='35' height='30'>
 
 chirrup! provides a means for the user to log and share their emotions while also spreading positive encouragement to others.
 
 ## Build Status
 
-Travis CI:  
-  
+Travis CI:
+
 [![Build Status](https://travis-ci.com/kishaprudente/madagascar.svg?branch=master)](https://travis-ci.com/kishaprudente/madagascar)
 
 ## Table of Contents
@@ -14,7 +14,7 @@ Travis CI:
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Tests](#tests)
-- [Contact](#contact)
+- [Authors](#authors)
 - [License](#license)
 
 ## Installation
@@ -38,12 +38,11 @@ To run development tests, run `npm run test`.
 
 ## Authors
 
- - [Jiyoon Kim](https://github.com/jiyoon9886)
- - [Kisha Prudente](https://github.com/kishaprudente)
- - [Kaitlyn Rodriguez](https://github.com/Kaitlyn-Lynette)
- - [Kevin Wu](https://github.com/kevkevwuhoo)
+- [Jiyoon Kim](https://github.com/jiyoon9886)
+- [Kisha Prudente](https://github.com/kishaprudente)
+- [Kaitlyn Rodriguez](https://github.com/Kaitlyn-Lynette)
+- [Kevin Wu](https://github.com/kevkevwuhoo)
 
-
-## License 
+## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
