@@ -38,6 +38,11 @@ app.get('/service-worker.js', (req, res) => {
 });
 // Add routes, both API and view
 app.use(routes);
+// If no API routes are hit, send the React app
+// app.use('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
+app.use(express.static(__dirname + '/client/build'));
 
 // Start the API server
 app.listen(PORT, () => {
